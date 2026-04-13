@@ -1,0 +1,2609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hyrox Doubles — Partner Training Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0e0f0e;
+    --surface: #161714;
+    --surface2: #1e1f1c;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --text: #e8e6e0;
+    --muted: #7a7870;
+    --accent: #c8f060;
+    --accent2: #8bdfb0;
+    --accent3: #f0c060;
+    --danger: #f07060;
+    --pink: #f080b0;
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --radius: 10px;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 32px 20px 60px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  .header { margin-bottom: 36px; }
+  .header-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--pink);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .header-title {
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .header-title span { color: var(--pink); font-weight: 500; }
+  .header-meta {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .meta-pill {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+  .meta-pill b { color: var(--text); font-weight: 500; }
+
+  /* ── Section label ── */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    margin-top: 28px;
+  }
+  .section-label:first-child { margin-top: 0; }
+
+  /* ── Block tabs ── */
+  .block-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .block-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 7px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.18s;
+    letter-spacing: 0.04em;
+  }
+  .block-btn:hover { border-color: var(--border2); color: var(--text); }
+  .block-btn.b1.active { background: var(--pink); color: #0e0f0e; border-color: var(--pink); font-weight: 500; }
+  .block-btn.b2.active { background: var(--accent2); color: #0e0f0e; border-color: var(--accent2); font-weight: 500; }
+  .block-btn.b3.active { background: var(--accent3); color: #0e0f0e; border-color: var(--accent3); font-weight: 500; }
+  .block-btn.b4.active { background: var(--accent); color: #0e0f0e; border-color: var(--accent); font-weight: 500; }
+
+  /* ── Block banner ── */
+  .block-banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--pink);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .block-banner.b2 { border-left-color: var(--accent2); }
+  .block-banner.b3 { border-left-color: var(--accent3); }
+  .block-banner.b4 { border-left-color: var(--accent); }
+  .bb-title { font-weight: 500; font-size: 13px; color: var(--text); margin-bottom: 3px; }
+  .bb-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .bb-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  /* ── Week selector ── */
+  .week-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .week-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 6px 12px;
+    height: 36px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .week-btn:hover { border-color: var(--border2); color: var(--text); }
+  .week-btn.active { background: var(--surface2); border-color: var(--border2); color: var(--text); }
+
+  /* ── Day tabs ── */
+  .day-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .day-btn {
+    padding: 12px 10px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+  }
+  .day-btn:hover { border-color: var(--border2); }
+  .day-btn.active { border-color: var(--border2); background: var(--surface2); }
+  .day-btn.active .day-label { color: var(--text); }
+  .day-label { font-weight: 500; font-size: 13px; color: var(--text); display: block; margin-bottom: 3px; }
+  .day-type { font-family: var(--mono); font-size: 10px; color: var(--muted); display: block; line-height: 1.3; }
+  .day-dot { width: 6px; height: 6px; border-radius: 50%; margin: 5px auto 0; }
+  .day-btn.run .day-dot { background: var(--accent2); }
+  .day-btn.strength .day-dot { background: var(--pink); }
+  .day-btn.hyrox .day-dot { background: var(--accent3); }
+  .day-btn.combo .day-dot { background: var(--accent); }
+
+  /* ── Session panel ── */
+  .session-panel { animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .session-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .session-title { font-size: 18px; font-weight: 300; letter-spacing: -0.01em; }
+  .session-goal { font-size: 12px; color: var(--muted); margin-top: 4px; max-width: 480px; line-height: 1.5; }
+  .session-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+  .badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 4px 9px;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .badge.hi { border-color: var(--pink); color: var(--pink); }
+  .badge.together { border-color: var(--accent3); color: var(--accent3); }
+
+  /* ── Workout block ── */
+  .workout-section { margin-bottom: 28px; }
+  .ws-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── Exercise list ── */
+  .ex-list { display: flex; flex-direction: column; gap: 0; }
+  .ex-item {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    gap: 0 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+  .ex-item:last-child { border-bottom: none; }
+  .ex-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    padding-top: 1px;
+  }
+  .ex-name { font-weight: 500; font-size: 13px; color: var(--text); margin-bottom: 2px; }
+  .ex-note { font-size: 11px; color: var(--muted); line-height: 1.4; }
+  .ex-note.tip { color: var(--accent2); }
+  .ex-note.warn { color: var(--danger); }
+  .ex-sets {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-align: right;
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+  .ex-sets b { color: var(--text); display: block; font-size: 12px; }
+
+  /* ── Run card ── */
+  .run-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 16px;
+  }
+  .rc-title { font-weight: 500; font-size: 14px; margin-bottom: 4px; }
+  .rc-sub { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
+  .run-specs { display: flex; gap: 10px; flex-wrap: wrap; }
+  .run-spec {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    min-width: 110px;
+  }
+  .rs-label { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-bottom: 3px; }
+  .rs-val { font-size: 14px; font-weight: 500; color: var(--text); }
+  .rs-unit { font-size: 11px; color: var(--muted); }
+
+  /* ── Station card ── */
+  .station-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent3);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    margin-bottom: 10px;
+  }
+  .sc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .sc-name { font-weight: 500; font-size: 13px; }
+  .sc-target {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent3);
+    background: rgba(240,192,96,0.1);
+    border: 1px solid rgba(240,192,96,0.2);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .sc-note { font-size: 12px; color: var(--muted); }
+
+  /* ── Progress note ── */
+  .progress-note {
+    margin-top: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .progress-note b { color: var(--text); font-weight: 500; }
+
+  /* ── Together badge ── */
+  .together-note {
+    background: rgba(240,192,96,0.06);
+    border: 1px solid rgba(240,192,96,0.15);
+    border-radius: var(--radius);
+    padding: 10px 16px;
+    margin-bottom: 18px;
+    font-size: 12px;
+    color: var(--accent3);
+    font-family: var(--mono);
+  }
+
+  /* ── Phase overview table ── */
+  .overview-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .overview-table th {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0 12px 10px 0;
+    text-align: left;
+    font-weight: 400;
+    border-bottom: 1px solid var(--border);
+  }
+  .overview-table td {
+    padding: 10px 12px 10px 0;
+    font-size: 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .overview-table tr:last-child td { border-bottom: none; }
+  .overview-table td:first-child { font-family: var(--mono); font-size: 11px; color: var(--muted); white-space: nowrap; }
+  .overview-table td b { color: var(--text); }
+
+  /* ── Colour dots for overview ── */
+  .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+  .dot.run { background: var(--accent2); }
+  .dot.str { background: var(--pink); }
+  .dot.hyrox { background: var(--accent3); }
+  .dot.combo { background: var(--accent); }
+
+  @media (max-width: 600px) {
+    body { padding: 18px 14px 50px; }
+    .day-row { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ── Top nav tabs ── */
+  .top-nav {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 36px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0;
+  }
+  .top-nav-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 8px 18px;
+    border-radius: 6px 6px 0 0;
+    border: 1px solid transparent;
+    border-bottom: none;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.18s;
+    letter-spacing: 0.06em;
+    margin-bottom: -1px;
+  }
+  .top-nav-btn:hover { color: var(--text); }
+  .top-nav-btn.active {
+    background: var(--surface);
+    border-color: var(--border);
+    border-bottom-color: var(--surface);
+    color: var(--pink);
+    font-weight: 500;
+  }
+
+  /* ── View panels ── */
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* ══════════════════════════════════════════
+     MILESTONE TRACKER STYLES
+  ══════════════════════════════════════════ */
+  .ms-intro {
+    margin-bottom: 32px;
+  }
+  .ms-subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-top: 6px;
+    max-width: 480px;
+  }
+  .ms-progress-wrap {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .ms-progress-track {
+    flex: 1;
+    height: 4px;
+    background: var(--surface2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .ms-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--pink), var(--accent3), var(--accent));
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0%;
+  }
+  .ms-progress-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .ms-progress-label b { color: var(--text); }
+
+  .ms-section { margin-bottom: 32px; }
+  .ms-section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .ms-section-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .ms-section-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .ms-section-count {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    margin-left: auto;
+  }
+  .ms-section-count b { color: var(--text); }
+
+  .milestone-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 13px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin-bottom: 7px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .milestone-item:hover { border-color: var(--border2); transform: translateX(2px); }
+  .milestone-item:active { transform: translateX(2px) scale(0.99); }
+  .milestone-item.ms-done { background: var(--surface2); border-color: var(--border); }
+  .milestone-item.ms-done .mi-name { color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(255,255,255,0.2); }
+  .milestone-item.ms-done .mi-note { opacity: 0.4; }
+
+  .milestone-item.ms-running:hover  { border-color: rgba(139,223,176,0.4); }
+  .milestone-item.ms-running.ms-done  { border-left: 2px solid var(--accent2); }
+  .milestone-item.ms-strength:hover { border-color: rgba(240,128,176,0.4); }
+  .milestone-item.ms-strength.ms-done { border-left: 2px solid var(--pink); }
+  .milestone-item.ms-hyrox:hover    { border-color: rgba(240,192,96,0.4); }
+  .milestone-item.ms-hyrox.ms-done  { border-left: 2px solid var(--accent3); }
+  .milestone-item.ms-heart:hover    { border-color: rgba(200,240,96,0.4); }
+  .milestone-item.ms-heart.ms-done  { border-left: 2px solid var(--accent); }
+
+  .mi-check {
+    width: 20px; height: 20px;
+    border-radius: 5px;
+    border: 1.5px solid var(--border2);
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    background: transparent;
+  }
+  .milestone-item.ms-running  .mi-check { border-color: rgba(139,223,176,0.4); }
+  .milestone-item.ms-strength .mi-check { border-color: rgba(240,128,176,0.4); }
+  .milestone-item.ms-hyrox    .mi-check { border-color: rgba(240,192,96,0.4); }
+  .milestone-item.ms-heart    .mi-check { border-color: rgba(200,240,96,0.4); }
+  .milestone-item.ms-done .mi-check { border-color: transparent; }
+  .milestone-item.ms-running.ms-done  .mi-check { background: var(--accent2); }
+  .milestone-item.ms-strength.ms-done .mi-check { background: var(--pink); }
+  .milestone-item.ms-hyrox.ms-done    .mi-check { background: var(--accent3); }
+  .milestone-item.ms-heart.ms-done    .mi-check { background: var(--accent); }
+
+  .mi-checkmark {
+    opacity: 0;
+    transform: scale(0) rotate(-10deg);
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .milestone-item.ms-done .mi-checkmark { opacity: 1; transform: scale(1) rotate(0deg); }
+
+  .mi-content { flex: 1; min-width: 0; }
+  .mi-name { font-weight: 500; font-size: 13px; color: var(--text); margin-bottom: 2px; transition: color 0.2s; }
+  .mi-note { font-size: 11px; color: var(--muted); line-height: 1.4; transition: opacity 0.2s; }
+  .mi-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+    letter-spacing: 0.05em;
+  }
+  .ms-running  .mi-tag { background: rgba(139,223,176,0.12); color: var(--accent2); }
+  .ms-strength .mi-tag { background: rgba(240,128,176,0.12); color: var(--pink); }
+  .ms-hyrox    .mi-tag { background: rgba(240,192,96,0.12);  color: var(--accent3); }
+  .ms-heart    .mi-tag { background: rgba(200,240,96,0.12);  color: var(--accent); }
+
+  .ms-race-card {
+    margin-top: 36px;
+    border: 1px solid rgba(240,128,176,0.25);
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(240,128,176,0.06), rgba(240,192,96,0.06));
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .ms-race-card:hover { border-color: rgba(240,128,176,0.5); transform: translateY(-1px); }
+  .ms-race-card.ms-done { border-color: var(--accent3); background: linear-gradient(135deg, rgba(240,128,176,0.1), rgba(240,192,96,0.1)); }
+  .ms-race-icon { font-size: 32px; margin-bottom: 8px; display: block; }
+  .ms-race-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 5px; }
+  .ms-race-card.ms-done .ms-race-title { color: var(--accent3); }
+  .ms-race-sub { font-size: 12px; color: var(--muted); }
+
+  .ms-footer {
+    margin-top: 36px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .ms-footer-note { font-family: var(--mono); font-size: 10px; color: var(--muted); }
+  .ms-reset-btn {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: all 0.18s;
+  }
+  .ms-reset-btn:hover { border-color: var(--border2); color: var(--text); }
+
+  /* emoji burst */
+  .ms-burst {
+    position: fixed;
+    pointer-events: none;
+    font-size: 22px;
+    animation: msBurst 0.9s ease forwards;
+    z-index: 999;
+  }
+  @keyframes msBurst {
+    0%   { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-80px) scale(1.4); }
+  }
+
+
+  /* ══════════════════════════════════════════
+     WARM + PLYO TAB STYLES
+  ══════════════════════════════════════════ */
+  .wp-intro { margin-bottom: 28px; }
+  .wp-subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-top: 6px;
+    max-width: 520px;
+  }
+
+  .wp-section-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .wp-section-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .wp-section-note {
+    margin-left: auto;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    text-transform: none;
+    font-family: var(--mono);
+  }
+
+  .wp-cards { display: flex; flex-direction: column; gap: 10px; }
+
+  .wp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+  }
+  .wp-card-plyo {
+    border-left-color: var(--pink);
+  }
+  .wp-card-pulse {
+    border-left-color: var(--accent3);
+  }
+
+  .wp-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .wp-zone {
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .wp-sets {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent2);
+    background: rgba(139,223,176,0.1);
+    border: 1px solid rgba(139,223,176,0.2);
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .wp-card-plyo .wp-sets {
+    color: var(--pink);
+    background: rgba(240,128,176,0.1);
+    border-color: rgba(240,128,176,0.2);
+  }
+  .wp-card-pulse .wp-sets {
+    color: var(--accent3);
+    background: rgba(240,192,96,0.1);
+    border-color: rgba(240,192,96,0.2);
+  }
+
+  .wp-move-list { display: flex; flex-direction: column; gap: 8px; }
+  .wp-move { padding-top: 8px; border-top: 1px solid var(--border); }
+  .wp-move:first-child { padding-top: 0; border-top: none; }
+  .wp-move-name {
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .wp-move-name.wp-tip { color: var(--accent2); }
+  .wp-move-note {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .wp-link { color: var(--accent3); font-style: italic; }
+
+  .wp-plyo-note {
+    background: rgba(240,128,176,0.06);
+    border: 1px solid rgba(240,128,176,0.15);
+    border-radius: var(--radius);
+    padding: 10px 16px;
+    margin-bottom: 14px;
+    font-size: 12px;
+    color: var(--pink);
+    font-family: var(--mono);
+    line-height: 1.5;
+  }
+
+  .wp-footer-note {
+    margin-top: 28px;
+    padding: 14px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+
+  /* ── Warm-up inline rep styles ── */
+  .wp-zone-title {
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .wp-move-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 3px;
+  }
+  .wp-rep-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent2);
+    background: rgba(139,223,176,0.1);
+    border: 1px solid rgba(139,223,176,0.2);
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .wp-rep-plyo {
+    color: var(--pink);
+    background: rgba(240,128,176,0.1);
+    border-color: rgba(240,128,176,0.2);
+  }
+
+
+  /* ── Block and week date ranges ── */
+  .bb-date-range {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent2);
+    margin-top: 8px;
+    letter-spacing: 0.04em;
+  }
+  .week-date-range {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent2);
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+  }
+
+
+  /* ══ Month grouping ══ */
+  .ms-month {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .ms-month-complete {
+    border-color: rgba(200,240,96,0.3);
+  }
+  .ms-month-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+  }
+  .ms-month-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .ms-month-dates {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .ms-month-count {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .ms-count-done {
+    color: var(--accent);
+    border-color: rgba(200,240,96,0.3);
+    background: rgba(200,240,96,0.08);
+  }
+  .ms-month-list {
+    padding: 4px 12px 8px;
+  }
+  .ms-month-list .milestone-item {
+    margin-bottom: 6px;
+  }
+
+  /* ══ Gift box ══ */
+  .ms-gift-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    transition: all 0.4s;
+  }
+  .ms-gift-locked {
+    background: var(--surface);
+    opacity: 0.6;
+  }
+  .ms-gift-unlocked {
+    background: linear-gradient(90deg, rgba(200,240,96,0.08), rgba(240,192,96,0.08));
+    border-bottom-color: rgba(200,240,96,0.2);
+  }
+  .ms-gift-emoji {
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .ms-gift-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .ms-gift-reveal-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-top: 2px;
+  }
+  .ms-gift-locked .ms-gift-emoji {
+    filter: grayscale(1);
+  }
+
+  /* ══ Popup overlay ══ */
+  .ms-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    animation: msFadeIn 0.2s ease;
+  }
+  @keyframes msFadeIn { from { opacity:0; } to { opacity:1; } }
+
+  .ms-popup {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 16px;
+    padding: 32px 28px;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+    animation: msPopIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  @keyframes msPopIn { from { opacity:0; transform:scale(0.85); } to { opacity:1; transform:scale(1); } }
+
+  .ms-cheat-popup { border-color: rgba(240,112,96,0.3); }
+  .ms-gift-popup  { border-color: rgba(200,240,96,0.3); }
+
+  .ms-popup-icon { font-size: 40px; margin-bottom: 12px; }
+  .ms-popup-title {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .ms-popup-msg {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .ms-popup-btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 10px 24px;
+    border-radius: 8px;
+    border: 1px solid var(--border2);
+    background: var(--surface2);
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.18s;
+    letter-spacing: 0.04em;
+  }
+  .ms-popup-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .ms-gift-btn {
+    background: linear-gradient(135deg, rgba(200,240,96,0.15), rgba(240,192,96,0.15));
+    border-color: rgba(200,240,96,0.4);
+    color: var(--accent);
+  }
+
+  .ms-gift-burst {
+    margin-bottom: 12px;
+  }
+  .ms-gift-icon {
+    font-size: 52px;
+    animation: msGiftBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s both;
+  }
+  @keyframes msGiftBounce { from { transform:scale(0) rotate(-10deg); } to { transform:scale(1) rotate(0deg); } }
+  .ms-gift-name {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ── Top nav ── -->
+
+<nav class="top-nav">
+  <button class="top-nav-btn active" data-tab="warmup" onclick="switchView('warmup')">🔥 Warm-Up</button>
+  <button class="top-nav-btn" data-tab="plyo" onclick="switchView('plyo')">⚡ Plyo</button>
+  <button class="top-nav-btn" data-tab="plan" onclick="switchView('plan')">Training Plan</button>
+  <button class="top-nav-btn" data-tab="milestones" onclick="switchView('milestones')">🏅 Milestones</button>
+</nav>
+
+<!-- ── Warm-Up view ── -->
+<div class="view active" id="view-warmup">
+
+  <div class="wp-intro">
+    <div class="header-eyebrow">// before every session</div>
+    <h2 style="font-size:22px;font-weight:300;letter-spacing:-0.02em;line-height:1.2;">Head-to-Toe <span style="color:var(--accent2);font-weight:500;">Warm-Up</span></h2>
+    <p class="wp-subtitle">Complete every exercise in order before each session. Takes 8–10 minutes. Never skip it.</p>
+  </div>
+
+  <div class="wp-cards">
+
+    <!-- Full Body -->
+    <div class="wp-card">
+      <div class="wp-zone-title">Full Body</div>
+      <div class="wp-move-list">
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Jumping Jacks</div>
+            <div class="wp-rep-badge">60 reps</div>
+          </div>
+          <div class="wp-move-note">Feet together, arms at sides. Jump feet out wide as arms swing overhead, then return. Steady rhythm. Raises heart rate and warms the whole body before anything else.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Neck -->
+    <div class="wp-card">
+      <div class="wp-zone-title">Neck Work</div>
+      <div class="wp-move-list">
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Side to Side</div>
+            <div class="wp-rep-badge">12 reps</div>
+          </div>
+          <div class="wp-move-note">Sitting or standing tall. Slowly tilt your right ear toward your right shoulder, return to centre, then left. Never force — let gravity do the work.</div>
+        </div>
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Up and Down</div>
+            <div class="wp-rep-badge">12 reps</div>
+          </div>
+          <div class="wp-move-note">Chin slowly drops to chest, then gently lifts to look up. Controlled movement — this is mobilisation, not a stretch.</div>
+        </div>
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Tilting Side to Side</div>
+            <div class="wp-rep-badge">12 reps</div>
+          </div>
+          <div class="wp-move-note">Keep chin level and tilt the whole head ear to shoulder, pausing briefly at each end. 12 reps total.</div>
+        </div>
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Neck Rotation Clockwise–Anticlockwise</div>
+            <div class="wp-rep-badge">6-6 reps</div>
+          </div>
+          <div class="wp-move-note">Slow full neck circles. 6 clockwise, 6 anticlockwise. If you feel any sharp pain, reduce the range.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shoulders -->
+    <div class="wp-card">
+      <div class="wp-zone-title">Shoulder Work</div>
+      <div class="wp-move-list">
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Arm Swing / Rotation Clockwise–Anticlockwise</div>
+            <div class="wp-rep-badge">6-6 reps</div>
+          </div>
+          <div class="wp-move-note">Arms out to the sides. Big windmill circles forward for 6 reps, then backward for 6. Increase range gradually. Warms the rotator cuff before carries and overhead work.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Torso -->
+    <div class="wp-card">
+      <div class="wp-zone-title">Torso Work</div>
+      <div class="wp-move-list">
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Torso Side to Side Rotation L–R</div>
+            <div class="wp-rep-badge">6-6 reps</div>
+          </div>
+          <div class="wp-move-note">Feet shoulder-width, arms crossed or out. Rotate upper body left then right — hips stay square, only the torso turns. Mobilises the thoracic spine.</div>
+        </div>
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Torso Side to Side Reach L–R</div>
+            <div class="wp-rep-badge">6-6 reps</div>
+          </div>
+          <div class="wp-move-note">Standing tall, reach one arm up and over to the opposite side — a lateral side bend. 6 each side. Stretches the lats and obliques.</div>
+        </div>
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Torso Step and Reach L–R</div>
+            <div class="wp-rep-badge">6-6 reps</div>
+          </div>
+          <div class="wp-move-note">Step to the side with one foot as you reach the opposite arm overhead and across, creating a full lateral stretch through the body. Step back and alternate.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hips -->
+    <div class="wp-card">
+      <div class="wp-zone-title">Hip Work</div>
+      <div class="wp-move-list">
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Hip Rotation Clockwise–Anticlockwise</div>
+            <div class="wp-rep-badge">6-6 reps</div>
+          </div>
+          <div class="wp-move-note">Hands on hips, feet shoulder-width. Draw big slow circles with your hips — like a hula hoop. 6 clockwise, 6 anticlockwise. Mobilises the hip joint before squats and lunges.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Glute + Leg -->
+    <div class="wp-card">
+      <div class="wp-zone-title">Glute + Leg Work</div>
+      <div class="wp-move-list">
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Forward Bending Hamstring Stretch — Forward-Backward</div>
+            <div class="wp-rep-badge">6-6 reps</div>
+          </div>
+          <div class="wp-move-note">Stand hip-width. Hinge at the hips, hands reaching toward the floor, then return. 6 reps forward, 6 as you step slightly back. Keep knees soft. Dynamic hamstring and glute activation.</div>
+        </div>
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Bodyweight Squat (slow + supported)</div>
+            <div class="wp-rep-badge">12 reps</div>
+          </div>
+          <div class="wp-move-note">Hold a wall if needed. Lower slowly (3 seconds down), pause at the bottom, rise. Focus on depth and keeping heels flat — this is mobility work, not strength work.</div>
+        </div>
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Bodyweight Lunge (slow + supported)</div>
+            <div class="wp-rep-badge">12 reps</div>
+          </div>
+          <div class="wp-move-note">Step forward, lower the back knee toward the floor slowly, return. Alternate legs. 12 reps total. Use a wall for balance. Prepares hip flexors and quads for running and lunge stations.</div>
+        </div>
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">World's Greatest Stretch (elbow-to-instep) L–R</div>
+            <div class="wp-rep-badge">6-6 reps</div>
+          </div>
+          <div class="wp-move-note">Step into a deep lunge. Drop your same-side elbow to the inside of your front foot. Hold 2s. Then rotate that arm up to the ceiling, following with your eyes. Return and switch. 6 each side. One of the best full-body mobility moves you can do.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ankle -->
+    <div class="wp-card">
+      <div class="wp-zone-title">Ankle Work</div>
+      <div class="wp-move-list">
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Ankle Circles Clockwise–Anticlockwise</div>
+            <div class="wp-rep-badge">6-6 reps</div>
+          </div>
+          <div class="wp-move-note">Seated or standing on one foot. Draw slow full circles with the ankle. 6 clockwise, 6 anticlockwise per foot. Critical for running mechanics and calf raise form.</div>
+        </div>
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Tip Toe Walks (slow) Forward–Backward</div>
+            <div class="wp-rep-badge">6-6 reps × 2</div>
+          </div>
+          <div class="wp-move-note">Rise onto your toes and walk forward slowly for 6 steps, then backward for 6. 2 lengths. Activates the calves and trains ankle stability.</div>
+        </div>
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Heel Walks (slow) Forward–Backward</div>
+            <div class="wp-rep-badge">6-6 reps × 2</div>
+          </div>
+          <div class="wp-move-note">Lift your toes off the floor and walk forward on your heels for 6 steps, then backward for 6. 2 lengths. Strengthens the tibialis anterior — important for shin splint prevention when running.</div>
+        </div>
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Side Ankle Walks (slow) Forward–Backward</div>
+            <div class="wp-rep-badge">6-6 reps × 2</div>
+          </div>
+          <div class="wp-move-note">Walk sideways on the outer edges of your feet for 6 steps, then inner edges for 6. 2 lengths. Builds lateral ankle stability.</div>
+        </div>
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Heel to Toe Rocks</div>
+            <div class="wp-rep-badge">12 reps</div>
+          </div>
+          <div class="wp-move-note">Standing, rock your weight slowly forward onto your toes, then back onto your heels. Warms the full ankle range of motion before running or plyometrics.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Core + Back -->
+    <div class="wp-card wp-card-pulse">
+      <div class="wp-zone-title">Core + Back Work</div>
+      <div class="wp-move-list">
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Core Engagement Practice</div>
+            <div class="wp-rep-badge">12 reps × 2</div>
+          </div>
+          <div class="wp-move-note">Lie on your back, knees bent. Breathe in to expand your ribcage 360°. As you exhale, brace your core as if bracing for a punch — ribcage down, lower back gently pressing toward the floor. Hold 3–5 seconds. This teaches you how to maintain a stable spine under load — the foundation for every exercise in this programme.</div>
+        </div>
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name wp-tip">Dead Bug</div>
+            <div class="wp-rep-badge">12 reps × 2</div>
+          </div>
+          <div class="wp-move-note">On your back, arms pointing to ceiling, knees at 90°. Maintaining your core brace, slowly lower your right arm and left leg toward the floor — pause just above — return. Alternate sides. Non-negotiable before every session.</div>
+        </div>
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name wp-tip">Glute Bridges</div>
+            <div class="wp-rep-badge">12 reps × 2</div>
+          </div>
+          <div class="wp-move-note">On your back, feet flat, hip-width. Drive through your heels to lift your hips until your body forms a straight line from shoulders to knees. Squeeze hard at the top for 1 second, lower slowly. Activates glutes before squats, lunges and runs.</div>
+        </div>
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">Mountain Climbers (slow)</div>
+            <div class="wp-rep-badge">12 reps × 2</div>
+          </div>
+          <div class="wp-move-note">In a plank position, hands under shoulders. Slowly drive one knee toward your chest, return, then the other. Keep hips level — do not let them rise. This is slow and controlled — not the cardio version.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="wp-footer-note">
+    💡 This warm-up runs head to toe on purpose — ankles and feet last, core last of all, so you are fully warm before the most demanding activation work.
+  </div>
+
+</div>
+
+<!-- ── Plyo view ── -->
+<div class="view" id="view-plyo">
+
+  <div class="wp-intro">
+    <div class="header-eyebrow">// after warm-up only</div>
+    <h2 style="font-size:22px;font-weight:300;letter-spacing:-0.02em;line-height:1.2;">Beginner <span style="color:var(--pink);font-weight:500;">Plyometrics</span></h2>
+    <p class="wp-subtitle">Complete all exercises each session. Optional ones at the bottom if time permits. Rest 60s between sets. Always finish the full warm-up first.</p>
+  </div>
+
+  <div class="wp-plyo-note">
+    ⚡ Never skip the warm-up and jump straight to these. Cold muscles and explosive movement do not mix.
+  </div>
+
+  <div class="wp-cards">
+
+    <div class="wp-card wp-card-plyo">
+      <div class="wp-zone-title" style="color:var(--pink)">Pogo Jumps</div>
+      <div class="wp-move-list">
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">How to</div>
+            <div class="wp-rep-badge wp-rep-plyo">2 × 24 reps</div>
+          </div>
+          <div class="wp-move-note">Stand feet hip-width, arms slightly out for balance. Bounce on the balls of your feet in a rapid, small, rhythmic jump — like a pogo stick. Keep your ankles stiff and ground contact time as short as possible. Land softly through the ball of the foot. Builds ankle stiffness and calf power for running.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wp-card wp-card-plyo">
+      <div class="wp-zone-title" style="color:var(--pink)">Pogo Side to Side Jumps</div>
+      <div class="wp-move-list">
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">How to</div>
+            <div class="wp-rep-badge wp-rep-plyo">2 × 24 reps</div>
+          </div>
+          <div class="wp-move-note">Same pogo bouncing action but lateral — hop side to side over an imaginary line. Both feet land and leave together. Keep hops small and quick. Land with a soft knee and stable ankle. Builds lateral ankle stability and reactive power.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wp-card wp-card-plyo">
+      <div class="wp-zone-title" style="color:var(--pink)">Pogo Front and Back Jumps</div>
+      <div class="wp-move-list">
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">How to</div>
+            <div class="wp-rep-badge wp-rep-plyo">2 × 24 reps</div>
+          </div>
+          <div class="wp-move-note">Pogo bouncing action forward and backward over an imaginary line. Both feet together, quick small hops. Stay on the balls of your feet throughout. Directly relevant to the burpee broad jump push-off and landing.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wp-card wp-card-plyo">
+      <div class="wp-zone-title" style="color:var(--pink)">Single Leg Taps with Weight Plate</div>
+      <div class="wp-move-list">
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">How to</div>
+            <div class="wp-rep-badge wp-rep-plyo">2 × 24 reps</div>
+          </div>
+          <div class="wp-move-note">Place a small weight plate (2.5–5 kg) flat on the floor. Balance on one leg. Tap the top of the plate with the ball of your free foot — quick light taps. Keep a soft bend in the standing knee. Hold something for balance at first. Trains single-leg balance and proprioception under load.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wp-card wp-card-plyo">
+      <div class="wp-zone-title" style="color:var(--pink)">Single Leg Step-Up with Weight Plate</div>
+      <div class="wp-move-list">
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">How to</div>
+            <div class="wp-rep-badge wp-rep-plyo">2 × 24 reps</div>
+          </div>
+          <div class="wp-move-note">Hold a weight plate (5 kg) at chest or sides. Step onto a low box with one foot, drive through that heel to stand tall at the top, step back down. 24 reps per leg or alternating. Builds single-leg strength for running and the sled drive.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wp-card wp-card-plyo">
+      <div class="wp-zone-title" style="color:var(--pink)">Broad Jump</div>
+      <div class="wp-move-list">
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">How to</div>
+            <div class="wp-rep-badge wp-rep-plyo">2 × 12 reps</div>
+          </div>
+          <div class="wp-move-note">Feet hip-width. Bend knees, swing arms back, then explode forward — jump as far as you can. Land with soft knees and hips, absorbing through both legs. Walk back and reset. <span class="wp-link">Direct prep for the Hyrox burpee broad jump station.</span> Focus on the landing — absorb first, distance second.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wp-card wp-card-plyo">
+      <div class="wp-zone-title" style="color:var(--pink)">Calf Raise with Yoga Block</div>
+      <div class="wp-move-list">
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">How to</div>
+            <div class="wp-rep-badge wp-rep-plyo">2 × 12 reps</div>
+          </div>
+          <div class="wp-move-note">Stand with the balls of your feet on the edge of a yoga block (or step), heels hanging off. Lower your heels below the block for a full stretch, then rise onto your toes as high as possible. Hold 1s at the top. Lower slowly (3 seconds). Builds calf strength and Achilles resilience for running.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wp-card wp-card-plyo" style="opacity:0.8;">
+      <div class="wp-zone-title" style="color:var(--pink)">Box Step-Up <span style="font-weight:300;font-size:11px;color:var(--muted);">— optional if time permits</span></div>
+      <div class="wp-move-list">
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">How to</div>
+            <div class="wp-rep-badge wp-rep-plyo">2 × 12 reps</div>
+          </div>
+          <div class="wp-move-note">Step onto a low box with one foot, drive through that heel to bring your full body up, step back down. Alternate legs. Keep torso upright. Builds single-leg power and stability — relevant to running stride and sled push drive.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wp-card wp-card-plyo" style="opacity:0.8;">
+      <div class="wp-zone-title" style="color:var(--pink)">Lateral Bound <span style="font-weight:300;font-size:11px;color:var(--muted);">— optional if time permits</span></div>
+      <div class="wp-move-list">
+        <div class="wp-move">
+          <div class="wp-move-row">
+            <div class="wp-move-name">How to</div>
+            <div class="wp-rep-badge wp-rep-plyo">2 × 12 reps</div>
+          </div>
+          <div class="wp-move-note">Stand on one foot. Push sideways off that foot and land on the opposite foot — like a skater. Pause and balance before the next rep. Focus on a stable landing before increasing width. Builds lateral power and ankle stability.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="wp-footer-note">
+    💡 The pogo jumps train ankle stiffness and reactive power — qualities that directly reduce fatigue when running between Hyrox stations. Do these consistently and you will feel the difference on race day.
+  </div>
+
+</div>
+
+<!-- ── Training plan view ── -->
+<div class="view" id="view-plan">
+<div class="header">
+  <div class="header-eyebrow">// hyrox doubles — partner plan</div>
+  <h1 class="header-title">6-Month Build to<br><span>Hyrox Doubles</span> — October</h1>
+  <div class="header-meta">
+    <div class="meta-pill">Athlete: <b>Partner</b></div>
+    <div class="meta-pill">Start: <b>April 2025</b></div>
+    <div class="meta-pill">Event: <b>October 2025</b></div>
+    <div class="meta-pill">Format: <b>Doubles</b></div>
+    <div class="meta-pill">Days/wk: <b>3</b></div>
+    <div class="meta-pill">Baseline run: <b>1–2 km</b></div>
+  </div>
+</div>
+
+<!-- Block selector -->
+<div class="section-label">Training Block</div>
+<div class="block-row">
+  <button class="block-btn b1 active" onclick="setBlock('b1')">Block 1 — Foundation (Wk 1–6)</button>
+  <button class="block-btn b2" onclick="setBlock('b2')">Block 2 — Build (Wk 7–12)</button>
+  <button class="block-btn b3" onclick="setBlock('b3')">Block 3 — Station Specific (Wk 13–18)</button>
+  <button class="block-btn b4" onclick="setBlock('b4')">Block 4 — Race Prep (Wk 19–24)</button>
+</div>
+
+<div class="block-banner b1" id="blockBanner"></div>
+
+<!-- Week selector -->
+<div class="section-label">Week</div>
+<div class="week-row" id="weekRow"></div>
+
+<!-- Day selector -->
+<div class="section-label">Session</div>
+<div class="day-row" id="dayRow"></div>
+
+<!-- Content -->
+<div id="sessionPanel"></div>
+
+<script>
+
+const BLOCKS = {
+  b1: {
+    name: 'Block 1 — Foundation',
+    weeks: ['Wk 1–2','Wk 3–4','Wk 5–6'],
+    weekKeys: [1,2,3],
+    desc: 'Build aerobic base, learn movement patterns, develop basic strength. Run/walk intervals build to continuous 5 km. No Hyrox stations yet — movement quality first.',
+    badge: 'Wk 1–6',
+    cls: 'b1',
+    focus: 'Base fitness',
+  },
+  b2: {
+    name: 'Block 2 — Build',
+    weeks: ['Wk 7–8','Wk 9–10','Wk 11–12'],
+    weekKeys: [4,5,6],
+    desc: 'Introduce Hyrox-specific movements. Run to 8 km continuous. Add loaded carries, wall balls and sled simulation. Strength sessions add compound lifts.',
+    badge: 'Wk 7–12',
+    cls: 'b2',
+    focus: 'Strength + Station intro',
+  },
+  b3: {
+    name: 'Block 3 — Station Specific',
+    weeks: ['Wk 13–14','Wk 15–16','Wk 17–18'],
+    weekKeys: [7,8,9],
+    desc: 'Train every priority station under fatigue. Combined run + station circuits. Practice splitting reps with your partner. Doubles strategy built in.',
+    badge: 'Wk 13–18',
+    cls: 'b3',
+    focus: 'Race simulation',
+  },
+  b4: {
+    name: 'Block 4 — Race Prep',
+    weeks: ['Wk 19–20','Wk 21–22','Wk 23–24'],
+    weekKeys: [10,11,12],
+    desc: 'Full mock Hyrox doubles run-throughs. Taper in final 2 weeks. Lock in your station split strategy with your partner. Race-week protocol included.',
+    badge: 'Wk 19–24',
+    cls: 'b4',
+    focus: 'Peak + Taper',
+  },
+};
+
+const SESSIONS = {
+  b1: {
+    days: [
+      { key: 'd1', label: 'Day 1', type: 'Run/Walk', cls: 'run' },
+      { key: 'd2', label: 'Day 2', type: 'Strength', cls: 'strength' },
+      { key: 'd3', label: 'Day 3', type: 'Run + Core', cls: 'combo' },
+    ],
+    content: {
+      d1: {
+        title: 'Run / Walk Intervals',
+        goal: 'Build continuous running capacity from 1–2 km up to 5 km by end of Block 1. No pressure on pace — effort and consistency are the only goals.',
+        duration: '30–40 min',
+        together: false,
+        weeks: {
+          1: {
+            run: { title: 'Week 1–2 Protocol', sub: 'Run/walk intervals. Focus on breathing, not speed.', specs: [
+              { label: 'Format', val: '8 × 2 min', unit: 'run / 1 min walk' },
+              { label: 'Total time', val: '~24', unit: 'min moving' },
+              { label: 'Pace', val: 'Conversational', unit: 'can talk easily' },
+            ]},
+            note: 'If 2 min run feels too easy, extend to 3 min. If it\'s too hard, shorten to 90s. The walk breaks are not failure — they are the programme.',
+          },
+          2: {
+            run: { title: 'Week 3–4 Protocol', sub: 'Longer run intervals. Aim for your first 3 km continuous run.', specs: [
+              { label: 'Format', val: '5 × 4 min', unit: 'run / 1 min walk' },
+              { label: 'Target', val: '3 km', unit: 'continuous by Wk 4' },
+              { label: 'Pace', val: 'Zone 2', unit: '~7:00 min/km' },
+            ]},
+            note: 'By end of week 4, attempt one fully continuous 3 km at easy pace. Log the time.',
+          },
+          3: {
+            run: { title: 'Week 5–6 Protocol', sub: 'First 5 km target. Run slow, run continuous.', specs: [
+              { label: 'Format', val: 'Continuous', unit: 'no walk breaks' },
+              { label: 'Target', val: '5 km', unit: 'by end of Wk 6' },
+              { label: 'Pace', val: '~7:30', unit: 'min/km (easy)' },
+            ]},
+            note: 'Run at a pace where you can hold a conversation. Completing 5 km is the milestone — time is irrelevant.',
+          },
+        }
+      },
+      d2: {
+        title: 'Full-Body Strength',
+        goal: 'Build foundational strength for the loaded Hyrox stations. Focus on movement quality. Every rep is a rehearsal for the race.',
+        duration: '45 min',
+        together: false,
+        weeks: {
+          1: {
+            sections: [
+              {
+                label: 'Warm-up (5 min)',
+                exercises: [
+                  { name: 'Dead Bug', note: 'Core activation. Back protocol.', tip: true, sets: '2×10', reps: 'each side' },
+                  { name: 'Glute Bridge', note: 'Hip activation. Pause 1s at top.', sets: '2×15', reps: '' },
+                ]
+              },
+              {
+                label: 'Main Work',
+                exercises: [
+                  { name: 'Goblet Squat', note: 'Dumbbell at chest. Full depth. This is your wall ball prep.', sets: '3×12', reps: '@ 8–10 kg' },
+                  { name: 'Romanian Deadlift', note: 'Light weight, hip hinge pattern. Neutral spine.', sets: '3×12', reps: '@ 10–15 kg' },
+                  { name: 'DB Row (single arm)', note: 'Pull to hip, not shoulder. Farmers carry prep.', sets: '3×10', reps: '@ 8–10 kg / side' },
+                  { name: 'DB Overhead Press', note: 'Wall ball overhead prep. Control the descent.', sets: '3×10', reps: '@ 6–8 kg' },
+                  { name: 'Loaded Carry (dumbbell)', note: 'Walk 20 m holding dumbbells at sides. Farmers carry simulation.', warn: true, sets: '3×20m', reps: '@ 10 kg / hand' },
+                ]
+              },
+              {
+                label: 'Core / Finisher',
+                exercises: [
+                  { name: 'Plank Hold', note: 'Build to 45s. Back safe.', sets: '3×30s', reps: '' },
+                  { name: 'Hollow Body Hold', note: 'Lower back pressed into floor.', sets: '3×20s', reps: '' },
+                ]
+              }
+            ]
+          },
+          2: {
+            sections: [
+              {
+                label: 'Warm-up (5 min)',
+                exercises: [
+                  { name: 'Dead Bug', note: 'Core activation.', tip: true, sets: '2×10', reps: 'each side' },
+                  { name: 'Hip Hinge with PVC/broomstick', note: 'Practice the pattern before loading.', sets: '2×10', reps: '' },
+                ]
+              },
+              {
+                label: 'Main Work (Wk 3–4 — Add Load)',
+                exercises: [
+                  { name: 'Goblet Squat', note: 'Increase to 12–14 kg. Still prioritising depth.', sets: '4×10', reps: '@ 12–14 kg' },
+                  { name: 'Romanian Deadlift', note: 'Step up to barbell 20–30 kg. Belt optional.', sets: '3×10', reps: '@ 20–30 kg' },
+                  { name: 'DB Row (single arm)', note: 'Heavier. Row to hip bone.', sets: '3×10', reps: '@ 12–14 kg' },
+                  { name: 'DB Overhead Press', note: 'Increase load slightly.', sets: '3×10', reps: '@ 8–10 kg' },
+                  { name: 'Sandbag Hug Carry', note: 'Hug a sandbag (15–20 kg) and walk 20 m. Sandbag lunges prep.', warn: true, sets: '3×20m', reps: '@ 15–20 kg bag' },
+                ]
+              },
+              {
+                label: 'Core',
+                exercises: [
+                  { name: 'Plank Hold', note: 'Progress to 45–60s.', sets: '3×45s', reps: '' },
+                  { name: 'Side Plank', note: 'Lateral stability.', sets: '2×25s', reps: 'each side' },
+                ]
+              }
+            ]
+          },
+          3: {
+            sections: [
+              {
+                label: 'Warm-up',
+                exercises: [
+                  { name: 'Dead Bug + Bird Dog', note: 'Full back protocol.', tip: true, sets: '2×10', reps: 'each' },
+                ]
+              },
+              {
+                label: 'Main Work (Wk 5–6 — Build Endurance Strength)',
+                exercises: [
+                  { name: 'Goblet Squat', note: 'Higher reps for muscular endurance. Wall ball will be 4–6 kg in the race.', sets: '3×15', reps: '@ 12 kg' },
+                  { name: 'Romanian Deadlift', note: 'Moderate weight, focus on eccentric control.', sets: '3×12', reps: '@ 30–40 kg' },
+                  { name: 'Dumbbell Lunge (walking)', note: 'Direct sandbag lunge prep. Keep torso upright.', warn: true, sets: '3×12', reps: '@ 8 kg / hand' },
+                  { name: 'Farmers Walk', note: 'Heavier than block start. Grip training.', warn: true, sets: '4×25m', reps: '@ 14 kg / hand' },
+                  { name: 'Push-up', note: 'Burpee prep. On knees if needed — build to full.', sets: '3×10', reps: '' },
+                ]
+              },
+              {
+                label: 'Core',
+                exercises: [
+                  { name: 'Plank Hold', note: '60s target.', sets: '3×60s', reps: '' },
+                  { name: 'Russian Twist', note: 'Rotational strength.', sets: '3×20', reps: '' },
+                ]
+              }
+            ]
+          },
+        }
+      },
+      d3: {
+        title: 'Run + Core Circuit',
+        goal: 'Combine aerobic work with core strength. Teaches you to move well when tired — exactly what Hyrox demands.',
+        duration: '40 min',
+        together: false,
+        weeks: {
+          1: {
+            run: { title: 'Easy Run (Wk 1–2)', sub: 'Short, easy. Emphasis on form.', specs: [
+              { label: 'Distance', val: '2–3', unit: 'km easy' },
+              { label: 'Pace', val: 'Very easy', unit: 'nose-breathe' },
+            ]},
+            sections: [{
+              label: 'Post-Run Core (5 min)',
+              exercises: [
+                { name: 'Plank Hold', note: 'Hold as long as possible. Rest. Repeat.', sets: '3×max', reps: '' },
+                { name: 'Bird Dog', note: '10 reps / side. Slow and controlled.', tip: true, sets: '2×10', reps: '/side' },
+                { name: 'Glute Bridge', note: '15 reps. Squeeze hard at top.', sets: '2×15', reps: '' },
+              ]
+            }],
+            note: 'This session is low stress. The purpose is aerobic consistency — 3 sessions/week is the habit we\'re building.',
+          },
+          2: {
+            run: { title: 'Easy Run (Wk 3–4)', sub: 'Slightly longer. Stay easy.', specs: [
+              { label: 'Distance', val: '3–4', unit: 'km easy' },
+              { label: 'Pace', val: 'Zone 2', unit: '~7:00–7:30/km' },
+            ]},
+            sections: [{
+              label: 'Post-Run Circuit',
+              exercises: [
+                { name: 'Burpee (no jump)', note: 'Burpee broad jump prep. Step out if needed.', warn: true, sets: '3×8', reps: '' },
+                { name: 'Goblet Squat', note: 'Light. Post-run, focus on depth.', sets: '2×12', reps: '@ 8 kg' },
+                { name: 'Plank Hold', note: '45s hold.', sets: '3×45s', reps: '' },
+              ]
+            }],
+            note: 'Introducing burpee movement pattern early — it will become a key station. Step-out burpees are perfectly valid.',
+          },
+          3: {
+            run: { title: 'Easy Run (Wk 5–6)', sub: 'Now building toward 5 km on Day 1 — this session stays easy.', specs: [
+              { label: 'Distance', val: '4–5', unit: 'km easy' },
+              { label: 'Pace', val: 'Zone 2', unit: 'conversational' },
+            ]},
+            sections: [{
+              label: 'Post-Run Circuit',
+              exercises: [
+                { name: 'Burpee Broad Jump', note: 'Full Hyrox standard. Jump forward as far as possible. 6–8 reps at a time.', warn: true, sets: '3×8', reps: '' },
+                { name: 'Walking Lunge', note: 'Bodyweight. Tall torso. Knee not caving.', sets: '3×10', reps: '/leg' },
+                { name: 'Hollow Body Hold', note: '25s. Lower back must stay flat.', sets: '3×25s', reps: '' },
+              ]
+            }],
+            note: 'By end of Block 1 you should be running 4–5 km continuously. Block 2 will introduce the actual Hyrox stations under fatigue.',
+          },
+        }
+      },
+    }
+  },
+
+  b2: {
+    days: [
+      { key: 'd1', label: 'Day 1', type: 'Long Run', cls: 'run' },
+      { key: 'd2', label: 'Day 2', type: 'Strength + Stations', cls: 'strength' },
+      { key: 'd3', label: 'Day 3', type: 'Hyrox Circuit', cls: 'hyrox' },
+    ],
+    content: {
+      d1: {
+        title: 'Long Run',
+        goal: 'Build to 8–10 km continuous by end of Block 2. This is your biggest aerobic development session. Easy pace is non-negotiable.',
+        duration: '50–65 min',
+        together: false,
+        weeks: {
+          4: {
+            run: { title: 'Week 7–8 Long Run', sub: 'First step up from Block 1. Run slow and complete the distance.', specs: [
+              { label: 'Distance', val: '6–7', unit: 'km' },
+              { label: 'Pace', val: '~7:00', unit: 'min/km' },
+              { label: 'HR Zone', val: 'Zone 2', unit: '130–145 bpm' },
+            ]},
+            note: 'If you need to take one 60s walk break, that\'s fine. Goal is completing the distance. Log how you felt.',
+          },
+          5: {
+            run: { title: 'Week 9–10 Long Run', sub: 'Pushing toward 8 km. This is where your Hyrox run base comes from.', specs: [
+              { label: 'Distance', val: '7–8', unit: 'km' },
+              { label: 'Pace', val: '~7:00–7:30', unit: 'min/km' },
+              { label: 'HR Zone', val: 'Zone 2', unit: 'conversational' },
+            ]},
+            note: 'Fuel with a light snack 90 min before. Hydrate well. In Hyrox doubles you\'ll each run ~4 km total — this builds a large buffer above race demand.',
+          },
+          6: {
+            run: { title: 'Week 11–12 Long Run', sub: 'First 10 km milestone. A huge confidence marker.', specs: [
+              { label: 'Distance', val: '9–10', unit: 'km' },
+              { label: 'Pace', val: '~7:00–7:30', unit: 'min/km' },
+              { label: 'HR Zone', val: 'Zone 2', unit: 'easy effort' },
+            ]},
+            note: 'Running 10 km means the Hyrox run (even accounting for station fatigue) is well within range. Celebrate this milestone.',
+          },
+        }
+      },
+      d2: {
+        title: 'Strength + Station Introduction',
+        goal: 'Progress compound strength while introducing Hyrox-specific loaded movements. Learn the movement, then load it.',
+        duration: '55 min',
+        together: false,
+        weeks: {
+          4: {
+            sections: [
+              {
+                label: 'Compound Strength (30 min)',
+                exercises: [
+                  { name: 'Goblet Squat / Box Squat', note: 'Step toward barbell squat. Box squat for depth confidence.', sets: '4×10', reps: '@ 14–16 kg' },
+                  { name: 'Romanian Deadlift', note: 'Building toward sled pull hip hinge pattern.', sets: '4×8', reps: '@ 35–45 kg' },
+                  { name: 'DB Row', note: 'Heavier. Full range.', sets: '3×10', reps: '@ 14–16 kg' },
+                ]
+              },
+              {
+                label: 'Station Work (15 min)',
+                exercises: [
+                  { name: 'Wall Ball', note: '4–6 kg medicine ball. Squat to parallel, throw to 9 ft (2.7 m) target. This IS the Hyrox movement.', warn: true, sets: '4×10', reps: '@ 4–6 kg' },
+                  { name: 'Farmers Carry', note: 'Hyrox standard is 16 kg/hand (women). Build toward it.', warn: true, sets: '3×30m', reps: '@ 12 kg / hand' },
+                ]
+              }
+            ]
+          },
+          5: {
+            sections: [
+              {
+                label: 'Compound Strength',
+                exercises: [
+                  { name: 'Barbell Back Squat (light)', note: 'First time under a bar if new to it. Belt on. 3 warm-up sets.', sets: '4×8', reps: '@ 30–40 kg' },
+                  { name: 'Romanian Deadlift', note: 'Heavier. Belt on top set.', sets: '4×8', reps: '@ 45–55 kg' },
+                  { name: 'DB Overhead Press', note: 'Wall ball throwing strength.', sets: '3×10', reps: '@ 10–12 kg' },
+                ]
+              },
+              {
+                label: 'Station Work',
+                exercises: [
+                  { name: 'Wall Ball', note: 'Same weight, higher reps. Pacing practice — don\'t sprint the first set.', warn: true, sets: '4×15', reps: '@ 4–6 kg' },
+                  { name: 'Sled Push Simulation', note: 'No sled? Heavy bag or loaded prowler. Or push a loaded barbell along the floor. Low hips, drive from legs.', warn: true, sets: '4×15m', reps: 'heavy' },
+                  { name: 'Farmers Carry', note: 'Build toward race weight.', warn: true, sets: '3×30m', reps: '@ 14 kg / hand' },
+                ]
+              }
+            ]
+          },
+          6: {
+            sections: [
+              {
+                label: 'Compound Strength',
+                exercises: [
+                  { name: 'Barbell Back Squat', note: 'Progressive load. Good form first.', sets: '4×6', reps: '@ 40–50 kg' },
+                  { name: 'Romanian Deadlift', note: 'Heaviest yet in the programme.', sets: '4×6', reps: '@ 55–65 kg' },
+                  { name: 'Push-up', note: 'Burpee and upper body strength. Full reps only.', sets: '4×10', reps: '' },
+                ]
+              },
+              {
+                label: 'Station Circuit (timed)',
+                exercises: [
+                  { name: '3 Rounds: Wall Ball × 10', note: 'Minimal rest between movements. Simulates station-to-station fatigue.', warn: true, sets: '→ Walk 30m', reps: '→ Farmers Carry 20m → Rest 90s' },
+                  { name: 'Sandbag Lunge', note: 'Hyrox standard is 10 kg sandbag on shoulder. Start lighter. Lunge forward, alternate legs.', warn: true, sets: '3×10m', reps: '@ 8–10 kg bag' },
+                ]
+              }
+            ]
+          },
+        }
+      },
+      d3: {
+        title: 'Hyrox-Specific Circuit',
+        goal: 'Practise Hyrox movements under cardiovascular fatigue. Run first, then hit the stations. This teaches your body what race day feels like.',
+        duration: '50 min',
+        together: true,
+        weeks: {
+          4: {
+            run: { title: '2 km Run → Stations', sub: 'Run at moderate pace, then go straight into station work.', specs: [
+              { label: 'Run', val: '2 km', unit: 'moderate pace' },
+              { label: 'Then', val: '3 stations', unit: 'below, 2 rounds' },
+            ]},
+            stations: [
+              { name: 'Burpee Broad Jump', target: '10 reps', note: 'Race standard. Jump as far as possible each rep. Rest if needed.' },
+              { name: 'Wall Ball', target: '15 reps', note: '4–6 kg. To a 9 ft mark on wall.' },
+              { name: 'Walking Lunge (no load)', target: '20 m', note: 'Form over speed. Knee soft behind toes.' },
+            ],
+            note: '★ This is a great session to do together — you can push sled for each other, judge wall ball height, and practice doubling up on reps.',
+          },
+          5: {
+            run: { title: '2 × 1 km with Stations', sub: 'Mini Hyrox simulation. Run 1 km, do stations, run 1 km more.', specs: [
+              { label: 'Format', val: '1km run', unit: '→ stations → 1km run' },
+              { label: 'Pace', val: 'Race effort', unit: 'not sprint' },
+            ]},
+            stations: [
+              { name: 'SkiErg (or Row)', target: '250 m', note: 'If no SkiErg, row 250 m instead. Pacing: steady, not sprint.' },
+              { name: 'Burpee Broad Jump', target: '12 reps', note: 'Continuous. Step back instead of jumping back if needed.' },
+              { name: 'Wall Ball', target: '15 reps', note: 'Unbroken if possible. Rest at top position, not bottom.' },
+              { name: 'Sandbag Lunge', target: '10 m', note: '@ 8 kg. Hyrox station practice.' },
+            ],
+            note: '★ Together session. Practice calling rep counts to each other — communication is part of doubles strategy.',
+          },
+          6: {
+            run: { title: '3 × 1 km with Stations', sub: 'Closest to race format in this block. Build race intuition.', specs: [
+              { label: 'Format', val: '3 × 1km', unit: '→ station after each' },
+              { label: 'Rest', val: '2 min', unit: 'between rounds' },
+            ]},
+            stations: [
+              { name: 'Sled Push (or simulation)', target: '15 m', note: 'Low hips. Drive through legs. Your partner can add weight for resistance.' },
+              { name: 'Farmers Carry', target: '30 m', note: '@ 14–16 kg/hand. Race weight for women is 16 kg.' },
+              { name: 'Burpee Broad Jump', target: '15 reps', note: 'Full standard. This is the one that gasses most people — practice pacing.' },
+              { name: 'Wall Ball', target: '20 reps', note: 'After a 1 km run. This is the real test.' },
+            ],
+            note: '★ Together session. Decide now how you want to split the 8 stations — does one of you take all the running while the other leads on stations, or do you alternate?',
+          },
+        }
+      },
+    }
+  },
+
+  b3: {
+    days: [
+      { key: 'd1', label: 'Day 1', type: 'Tempo Run', cls: 'run' },
+      { key: 'd2', label: 'Day 2', type: 'Full Station Day', cls: 'hyrox' },
+      { key: 'd3', label: 'Day 3', type: 'Doubles Sim', cls: 'combo' },
+    ],
+    content: {
+      d1: {
+        title: 'Tempo Run',
+        goal: 'Lift running pace above race effort. Hyrox run pace is not slow — you need a comfortable 6:30–7:00/km under fatigue. Tempo runs build exactly this.',
+        duration: '35–45 min',
+        together: false,
+        weeks: {
+          7: {
+            run: { title: 'Week 13–14 Tempo', sub: 'First tempo efforts. Hard but controlled.', specs: [
+              { label: 'Format', val: '3 × 8 min', unit: 'tempo / 2 min walk' },
+              { label: 'Pace', val: '6:00–6:30', unit: 'min/km' },
+              { label: 'Effort', val: 'Zone 3–4', unit: 'hard to talk' },
+            ]},
+            note: 'Warm up 10 min easy first. If 6:00/km is too fast, run at "comfortably hard" — you should be able to say 3–4 words at most.',
+          },
+          8: {
+            run: { title: 'Week 15–16 Tempo', sub: 'Longer tempo blocks.', specs: [
+              { label: 'Format', val: '2 × 12 min', unit: 'tempo / 3 min walk' },
+              { label: 'Pace', val: '6:00–6:15', unit: 'min/km' },
+              { label: 'Effort', val: 'Zone 4', unit: 'hard' },
+            ]},
+            note: 'This is the hardest run session in the plan. It directly builds your ability to run fast between Hyrox stations.',
+          },
+          9: {
+            run: { title: 'Week 17–18 Tempo', sub: 'Race-pace run. Aim for continuous 5 km at target race pace.', specs: [
+              { label: 'Distance', val: '5 km', unit: 'continuous' },
+              { label: 'Pace', val: '6:15–6:45', unit: 'min/km' },
+              { label: 'Effort', val: 'Race feel', unit: 'sustainable hard' },
+            ]},
+            note: 'This is your benchmark run. If you can run 5 km at 6:30/km, your Hyrox run legs are ready. Log your time.',
+          },
+        }
+      },
+      d2: {
+        title: 'Full Station Day',
+        goal: 'Practise every priority station at or near race standard. Quality over quantity. Rest between sets — this is skill practice, not conditioning.',
+        duration: '55–60 min',
+        together: false,
+        weeks: {
+          7: {
+            sections: [{
+              label: 'Station Practice — Full Circuit',
+              exercises: [
+                { name: 'SkiErg', note: 'Race: 2 × 500 m in doubles. Practice 500 m for time. Record it.', warn: true, sets: '3×500m', reps: 'rest 3 min' },
+                { name: 'Sled Push', note: 'Race: 25 m per person in doubles. Go heavy — heavier than you think.', warn: true, sets: '4×25m', reps: 'heavy load' },
+                { name: 'Sled Pull', note: 'Race: 25 m per person. Backwards drag. Grip the rope firmly.', warn: true, sets: '4×25m', reps: 'heavy load' },
+                { name: 'Burpee Broad Jump', note: 'Race: 40 total (20 each). Practise sets of 10–15. Track your pace per rep.', warn: true, sets: '4×10', reps: 'race standard' },
+                { name: 'Wall Ball', note: 'Race: 150 total (75 each) in doubles. Practice sets of 20. Rest at top.', warn: true, sets: '4×20', reps: '@ race weight 4–6 kg' },
+              ]
+            }]
+          },
+          8: {
+            sections: [{
+              label: 'Station Practice — Loaded Carries Focus',
+              exercises: [
+                { name: 'Farmers Carry', note: 'Race: 80 m per person in doubles. Today: 4 × 40 m at race weight (16 kg/hand).', warn: true, sets: '4×40m', reps: '@ 16 kg / hand' },
+                { name: 'Sandbag Lunges', note: 'Race: 50 m per person in doubles. 10 kg sandbag on shoulder. Today: 3 × 20 m.', warn: true, sets: '3×20m', reps: '@ 10 kg sandbag' },
+                { name: 'Wall Ball', note: 'After carries — legs are tired. This is the key training stress.', warn: true, sets: '3×20', reps: '@ race weight' },
+                { name: 'Burpee Broad Jump', note: 'Post-carry. Gas tank test. How does form hold up?', warn: true, sets: '2×15', reps: '' },
+                { name: 'Rowing', note: 'Race: 2 × 500 m in doubles. Row 500 m for time. Record it.', sets: '3×500m', reps: 'rest 3 min' },
+              ]
+            }]
+          },
+          9: {
+            sections: [{
+              label: 'Full Station Run-Through (race order)',
+              exercises: [
+                { name: 'SkiErg 500 m → Rest 3 min', note: 'Station 1 in Hyrox. Set the tone early — controlled, not sprinting.', sets: '2 rounds', reps: '' },
+                { name: 'Sled Push 25 m → Sled Pull 25 m', note: 'Stations 2 & 3. Back to back with brief changeover.', warn: true, sets: '3 rounds', reps: '' },
+                { name: 'Burpee Broad Jump × 15', note: 'Station 5 in Hyrox. After the sled — lungs will burn. Keep moving.', warn: true, sets: '3 rounds', reps: '' },
+                { name: 'Farmers Carry 40 m → Wall Ball × 20', note: 'Stations 7 & 8. The final two. This is where races are won.', warn: true, sets: '3 rounds', reps: 'race weights' },
+                { name: 'Sandbag Lunge 20 m', note: 'Station 6. Shoulder rack position. Alternate legs.', warn: true, sets: '3 rounds', reps: '@ 10 kg' },
+              ]
+            }]
+          },
+        }
+      },
+      d3: {
+        title: 'Doubles Simulation',
+        goal: 'Train as a team. Practice splitting reps and transitions. Doubles is won by communication and strategy — not just fitness.',
+        duration: '60 min',
+        together: true,
+        weeks: {
+          7: {
+            run: { title: 'Mini Hyrox — 4 stations each (Wk 13–14)', sub: 'Simulate a doubles race by alternating who does each station.', specs: [
+              { label: 'Format', val: '1 km run', unit: '→ split station → swap' },
+              { label: 'Rounds', val: '4', unit: 'stations total' },
+            ]},
+            stations: [
+              { name: 'SkiErg — 250 m each', target: '500 m total', note: 'You do 250 m, partner does 250 m, minimal transition time.' },
+              { name: 'Burpee Broad Jump — 20 each', target: '40 total', note: 'One person goes, counts 20, tags partner who does 20. Practice tagging clean.' },
+              { name: 'Wall Ball — 35 each', target: '70 total', note: 'High rep set. Decide your splitting strategy now — do you go 5 at a time, 10 at a time?' },
+              { name: 'Farmers Carry — 40 m each', target: '80 m total', note: 'Each carry your section, hand off at the cone.' },
+            ],
+            note: '★ After this session: sit down and agree on your station split strategy for race day. Who does what, and in what order.',
+          },
+          8: {
+            run: { title: 'Half Hyrox Sim (Wk 15–16)', sub: 'Half race distance. 4 x 500 m runs (you split the 4 x 1 km loops), 4 stations.', specs: [
+              { label: 'Format', val: '4 × 500m run', unit: '+ 4 stations split' },
+              { label: 'Rest', val: 'None', unit: 'race simulation' },
+            ]},
+            stations: [
+              { name: 'Sled Push / Pull split', target: 'Each 25 m push + 25 m pull', note: 'Person A pushes while B rests. Then swap for the pull.' },
+              { name: 'Burpee Broad Jump split', target: '20 each', note: 'Practice not stopping between the transition. Go immediately when your partner tags you.' },
+              { name: 'Sandbag Lunges split', target: '25 m each', note: 'Set sandbag on shoulder, lunge forward. Partner waits at turnaround.' },
+              { name: 'Wall Ball split', target: '35 + 40 reps', note: 'Stronger partner takes the bigger set today. Try both ways over two weeks.' },
+            ],
+            note: '★ Together session. This is where strategy becomes second nature. Talk through every handoff — the clock keeps running during transitions.',
+          },
+          9: {
+            run: { title: 'Full Hyrox Mock — Doubles (Wk 17–18)', sub: 'Full race simulation at 80% intensity. All 8 stations, 8 x 1 km split.', specs: [
+              { label: 'Format', val: 'Full doubles', unit: 'race order' },
+              { label: 'Intensity', val: '80%', unit: 'not all out' },
+              { label: 'Target', val: 'Complete', unit: 'no skips' },
+            ]},
+            stations: [
+              { name: 'Stn 1: SkiErg — 1000 m total', target: '500 m each', note: 'Stations 1 of 8. Controlled pace.' },
+              { name: 'Stn 2: Sled Push — 50 m total', target: '25 m each', note: 'Go heavy.' },
+              { name: 'Stn 3: Sled Pull — 50 m total', target: '25 m each', note: 'Backward drag.' },
+              { name: 'Stn 4: Burpees — 40 total', target: '20 each', note: 'Pace yourselves.' },
+              { name: 'Stn 5: Row — 1000 m total', target: '500 m each', note: 'Or SkiErg if no rower.' },
+              { name: 'Stn 6: Farmers — 160 m total', target: '80 m each', note: '16 kg/hand target.' },
+              { name: 'Stn 7: Sandbag Lunges — 100 m total', target: '50 m each', note: '10 kg sandbag.' },
+              { name: 'Stn 8: Wall Ball — 150 total', target: '75 each', note: 'Race weight. Finish strong.' },
+            ],
+            note: '★ Log your total time. This is your benchmark. Block 4 will build on this. Celebrate finishing — you\'re ready for race day.',
+          },
+        }
+      },
+    }
+  },
+
+  b4: {
+    days: [
+      { key: 'd1', label: 'Day 1', type: 'Race Run', cls: 'run' },
+      { key: 'd2', label: 'Day 2', type: 'Peak / Taper', cls: 'hyrox' },
+      { key: 'd3', label: 'Day 3', type: 'Mock Race / Rest', cls: 'combo' },
+    ],
+    content: {
+      d1: {
+        title: 'Race Pace Run',
+        goal: 'Maintain run fitness with race-pace efforts. Volume drops but intensity stays. Trust the base you\'ve built.',
+        duration: '35–40 min',
+        together: false,
+        weeks: {
+          10: {
+            run: { title: 'Week 19–20 — Race Pace Run', sub: 'Race pace, lower volume. Confidence-building run.', specs: [
+              { label: 'Distance', val: '5–6', unit: 'km' },
+              { label: 'Pace', val: '6:15–6:45', unit: 'min/km' },
+              { label: 'Feel', val: 'Controlled', unit: 'race effort' },
+            ]},
+            note: 'In doubles Hyrox, each of you will run approximately 4 km total (8 × 1 km loops split between you). This run is well above race demand. You are ready.',
+          },
+          11: {
+            run: { title: 'Week 21–22 — Taper Run', sub: 'Volume reduces. Keep legs moving, don\'t rest too much.', specs: [
+              { label: 'Distance', val: '4–5', unit: 'km' },
+              { label: 'Pace', val: 'Easy to moderate', unit: 'feel good' },
+              { label: 'Feel', val: 'Fresh', unit: 'don\'t push' },
+            ]},
+            note: 'Tapering is hard mentally — you\'ll feel like you should be doing more. Trust the training. Freshness on race day is earned here.',
+          },
+          12: {
+            run: { title: 'Week 23–24 — Race Week', sub: 'Race week protocol. Short shakeout runs only.', specs: [
+              { label: 'Mon / Tue', val: '2–3 km', unit: 'easy shakeout' },
+              { label: 'Wed–Sat', val: 'Rest', unit: 'walk only' },
+              { label: 'Race day', val: 'GO', unit: '🏆' },
+            ]},
+            note: 'Race week: eat well (carbs), hydrate, sleep. No new exercises. No heavy lifting. Your job this week is to arrive on the start line feeling fresh and confident.',
+          },
+        }
+      },
+      d2: {
+        title: 'Peak Station Work / Taper',
+        goal: 'Weeks 19–20: peak station confidence. Weeks 21–22: reduce volume to 60%, maintain sharpness. Weeks 23–24: rest.',
+        duration: '45 min',
+        together: false,
+        weeks: {
+          10: {
+            sections: [{
+              label: 'Peak Station Confidence (Wk 19–20)',
+              exercises: [
+                { name: 'Wall Ball', note: 'Race standard. 3 × 25 unbroken if possible. This is your benchmark.', warn: true, sets: '3×25', reps: '@ race weight' },
+                { name: 'Farmers Carry', note: '@ 16 kg / hand. 3 × 40 m. You know this movement now.', warn: true, sets: '3×40m', reps: '@ 16 kg / hand' },
+                { name: 'Burpee Broad Jump', note: '3 × 15. Race pace. Time a set — target under 90s for 15 reps.', warn: true, sets: '3×15', reps: '' },
+                { name: 'Sandbag Lunge', note: 'Race weight. 2 × 25 m. Smooth rhythm.', warn: true, sets: '2×25m', reps: '@ 10 kg' },
+                { name: 'Sled Push + Pull', note: 'One final heavy sled session. Race weight. Two runs each.', warn: true, sets: '2×25m', reps: 'race weight' },
+              ]
+            }]
+          },
+          11: {
+            sections: [{
+              label: 'Taper — 60% Volume (Wk 21–22)',
+              exercises: [
+                { name: 'Wall Ball', note: 'Keep the movement sharp. Light day.', warn: true, sets: '2×20', reps: '@ race weight' },
+                { name: 'Farmers Carry', note: 'Feel the movement, don\'t crush yourself.', warn: true, sets: '2×30m', reps: '@ 16 kg / hand' },
+                { name: 'Burpee Broad Jump', note: '2 × 10. Stay sharp.', warn: true, sets: '2×10', reps: '' },
+                { name: 'Short row or SkiErg', note: '2 × 250 m. Easy effort. Greasing the groove.', sets: '2×250m', reps: 'easy' },
+              ]
+            }]
+          },
+          12: {
+            sections: [{
+              label: 'Race Week — Rest (Wk 23–24)',
+              exercises: [
+                { name: 'Mobility / Stretching only', note: '20 min gentle mobility. Hip flexors, hamstrings, shoulders. No loading.', tip: true, sets: '20 min', reps: '' },
+                { name: 'Walk 20 min', note: 'Keep blood moving. Don\'t sit completely still.', tip: true, sets: '1×', reps: 'easy walk' },
+              ]
+            }]
+          },
+        }
+      },
+      d3: {
+        title: 'Full Mock Race / Active Rest',
+        goal: 'Weeks 19–20: final full doubles mock race. Weeks 21+: active rest, race-day prep.',
+        duration: '60–75 min then reducing',
+        together: true,
+        weeks: {
+          10: {
+            run: { title: 'Final Mock Doubles Race (Wk 19–20)', sub: 'Go close to race intensity. This is the confidence session.', specs: [
+              { label: 'Format', val: 'Full doubles', unit: 'race order' },
+              { label: 'Intensity', val: '90–95%', unit: 'near race effort' },
+              { label: 'Goal', val: 'Beat', unit: 'Block 3 time' },
+            ]},
+            stations: [
+              { name: 'All 8 Hyrox stations', target: 'Race splits', note: 'Use your agreed doubles split strategy. Execute it cleanly.' },
+              { name: 'Run split: 4 × 1km each', target: 'Race pace', note: 'Your partner runs alternate loops. Both push pace.' },
+              { name: 'Transitions', target: 'Practice', note: 'Time your handoffs. Every wasted second in transition is free time to cut.' },
+            ],
+            note: '★ After this session: review your split sheet. Finalise who does what for race day. No more changes — lock it in.',
+          },
+          11: {
+            run: { title: 'Taper Week — Light Doubles Check-in (Wk 21–22)', sub: 'Stay sharp. Not a full sim — just keeping the feel.', specs: [
+              { label: 'Format', val: 'Half sim', unit: '4 stations only' },
+              { label: 'Intensity', val: '70%', unit: 'easy/moderate' },
+            ]},
+            stations: [
+              { name: 'Wall Ball × 30 (15 each)', target: 'Sharp reps', note: 'Light and controlled. Stay sharp.' },
+              { name: 'Burpee Broad Jump × 20 (10 each)', target: 'Good form', note: 'Technique focus. Don\'t sprint.' },
+              { name: 'Farmers Carry 40 m each', target: 'Race weight', note: 'Light warm-up carry. Keep grip strong.' },
+              { name: '500 m Run together', target: 'Easy pace', note: 'Finish with a relaxed 500 m together.' },
+            ],
+            note: '★ This is your last doubles session. Go easy. Talk through race day logistics — warm-up plan, fuelling, kit, who carries what.',
+          },
+          12: {
+            run: { title: 'Race Week — Rest (Wk 23–24)', sub: 'No structured session. Active recovery only.', specs: [
+              { label: 'Activity', val: 'Walk', unit: '20–30 min only' },
+              { label: 'Lifting', val: 'None', unit: 'zero loading' },
+              { label: 'Priority', val: 'Sleep', unit: 'and eat' },
+            ]},
+            stations: [],
+            note: '🏆 Race day checklist: packed kit bag, race nutrition (gels + water), arrive 90 min early for warm-up, agree final station splits with your partner, and go have fun. You\'ve done the work.',
+          },
+        }
+      },
+    }
+  },
+};
+
+// ── State ──
+let state = { block: 'b1', weekIdx: 0, day: 'd1' };
+
+// ── Helpers ──
+function blockData() { return BLOCKS[state.block]; }
+function sessionData() { return SESSIONS[state.block].content[state.day]; }
+function weekKey() { return blockData().weekKeys[state.weekIdx]; }
+
+// ── Setters ──
+function setBlock(b) {
+  state.block = b;
+  state.weekIdx = 0;
+  state.day = 'd1';
+  document.querySelectorAll('.block-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelector(`.block-btn.${b}`).classList.add('active');
+  renderAll();
+}
+
+function setWeekIdx(i) {
+  state.weekIdx = i;
+  document.querySelectorAll('.week-btn').forEach(b => b.classList.toggle('active', +b.dataset.i === i));
+  const dr = document.getElementById('weekDateRange');
+  if (dr) dr.textContent = '📅 ' + weekDateRange(i, state.block);
+  renderSession();
+}
+
+function setDay(d) {
+  state.day = d;
+  document.querySelectorAll('.day-btn').forEach(b => b.classList.toggle('active', b.dataset.d === d));
+  renderSession();
+}
+
+// ── Render ──
+function renderAll() {
+  renderBlockBanner();
+  renderWeeks();
+  renderDays();
+  renderSession();
+}
+
+// Date helpers — programme starts Monday 21 Apr 2025
+const PROG_START = new Date(2025, 3, 21); // months are 0-indexed
+function weekStartDate(weekNumber) {
+  const d = new Date(PROG_START);
+  d.setDate(d.getDate() + (weekNumber - 1) * 7);
+  return d;
+}
+function weekEndDate(weekNumber) {
+  const d = weekStartDate(weekNumber);
+  d.setDate(d.getDate() + 6);
+  return d;
+}
+function fmtDate(d) {
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+}
+function blockDateRange(blockKey) {
+  const weekMap = { b1:[1,6], b2:[4,8], b3:[7,12], b4:[10,15] };
+  // actual week numbers covered by each block
+  const blockWeeks = { b1:[1,2,3,4,5,6], b2:[4,5,6,7,8], b3:[7,8,9,10,11,12], b4:[10,11,12,13,14,15] };
+  // Use BLOCKS weekKeys
+  const wks = BLOCKS[blockKey].weekKeys;
+  // weekKeys are indices, convert to actual programme weeks
+  const weekNums = { b1:[1,2,3,4,5,6], b2:[7,8,9,10,11,12], b3:[13,14,15,16,17,18], b4:[19,20,21,22,23,24] };
+  const wkList = weekNums[blockKey];
+  const start = weekStartDate(wkList[0]);
+  const end = weekEndDate(wkList[wkList.length-1]);
+  return fmtDate(start) + ' – ' + fmtDate(end);
+}
+function weekDateRange(weekIdx, blockKey) {
+  const weekNums = { b1:[1,2,3,4,5,6], b2:[7,8,9,10,11,12], b3:[13,14,15,16,17,18], b4:[19,20,21,22,23,24] };
+  // weekIdx is 0-based index into the block's weeks array (groups of 2 weeks)
+  // Each weekIdx covers 2 actual programme weeks
+  const wkList = weekNums[blockKey];
+  // weekIdx 0 = first 2 weeks, 1 = next 2, 2 = last 2
+  const firstWk = wkList[weekIdx * 2];
+  const lastWk = wkList[weekIdx * 2 + 1] || firstWk;
+  const start = weekStartDate(firstWk);
+  const end = weekEndDate(lastWk);
+  return fmtDate(start) + ' – ' + fmtDate(end);
+}
+
+function renderBlockBanner() {
+  const bd = blockData();
+  const el = document.getElementById('blockBanner');
+  el.className = 'block-banner ' + state.block;
+  el.innerHTML = `
+    <div style="flex:1">
+      <div class="bb-title">${bd.name}</div>
+      <div class="bb-desc">${bd.desc}</div>
+      <div class="bb-date-range">📅 ${blockDateRange(state.block)}</div>
+    </div>
+    <div class="bb-badge">${bd.badge} · ${bd.focus}</div>
+  `;
+}
+
+function renderWeeks() {
+  const bd = blockData();
+  const btns = bd.weeks.map((w, i) =>
+    `<button class="week-btn ${i===state.weekIdx?'active':''}" data-i="${i}" onclick="setWeekIdx(${i})">${w}</button>`
+  ).join('');
+  const dateRange = weekDateRange(state.weekIdx, state.block);
+  document.getElementById('weekRow').innerHTML = btns +
+    `<div class="week-date-range" id="weekDateRange">📅 ${dateRange}</div>`;
+}
+
+function renderDays() {
+  const days = SESSIONS[state.block].days;
+  document.getElementById('dayRow').innerHTML = days.map(d =>
+    `<div class="day-btn ${d.cls} ${d.key===state.day?'active':''}" data-d="${d.key}" onclick="setDay('${d.key}')">
+      <span class="day-label">${d.label}</span>
+      <span class="day-type">${d.type}</span>
+      <div class="day-dot"></div>
+    </div>`
+  ).join('');
+}
+
+function renderSession() {
+  const sd = sessionData();
+  const wk = weekKey();
+  const wdata = sd.weeks[wk];
+  const panel = document.getElementById('sessionPanel');
+
+  let html = `<div class="session-panel">`;
+  html += `<div class="session-header">
+    <div>
+      <div class="session-title">${sd.title}</div>
+      <div class="session-goal">${sd.goal}</div>
+    </div>
+    <div class="session-badges">
+      <div class="badge hi">${sd.duration}</div>
+      ${sd.together ? '<div class="badge together">★ Together</div>' : ''}
+    </div>
+  </div>`;
+
+  if (sd.together) {
+    html += `<div class="together-note">★ Together session — do this with your partner when schedules align. Communication and rep-splitting practice built in.</div>`;
+  }
+
+  // Run card
+  if (wdata.run) {
+    const r = wdata.run;
+    html += `<div class="run-card">
+      <div class="rc-title">${r.title}</div>
+      <div class="rc-sub">${r.sub}</div>
+      <div class="run-specs">${r.specs.map(s => `
+        <div class="run-spec">
+          <div class="rs-label">${s.label}</div>
+          <div class="rs-val">${s.val} <span class="rs-unit">${s.unit}</span></div>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  // Stations
+  if (wdata.stations && wdata.stations.length > 0) {
+    html += `<div class="workout-section"><div class="ws-label">Hyrox Stations</div>`;
+    wdata.stations.forEach(st => {
+      html += `<div class="station-card">
+        <div class="sc-header">
+          <div class="sc-name">${st.name}</div>
+          <div class="sc-target">${st.target}</div>
+        </div>
+        <div class="sc-note">${st.note}</div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  // Exercise sections
+  if (wdata.sections) {
+    wdata.sections.forEach(sec => {
+      html += `<div class="workout-section"><div class="ws-label">${sec.label}</div><div class="ex-list">`;
+      sec.exercises.forEach((ex, i) => {
+        html += `<div class="ex-item">
+          <div class="ex-num">${String(i+1).padStart(2,'0')}</div>
+          <div>
+            <div class="ex-name">${ex.name}</div>
+            <div class="ex-note ${ex.tip?'tip':''} ${ex.warn?'warn':''}">${ex.note}</div>
+          </div>
+          <div class="ex-sets"><b>${ex.sets}</b>${ex.reps ? ex.reps : ''}</div>
+        </div>`;
+      });
+      html += `</div></div>`;
+    });
+  }
+
+  // Note
+  if (wdata.note) {
+    html += `<div class="progress-note">${wdata.note}</div>`;
+  }
+
+  html += `</div>`;
+  panel.innerHTML = html;
+}
+
+renderAll();
+
+// ══════════════════════════════════════════
+// MILESTONE TRACKER
+// ══════════════════════════════════════════
+const MS_SECTIONS = [
+  {
+    id: 'running', cls: 'ms-running', dot: '#8bdfb0', color: '#8bdfb0', title: 'Running',
+    milestones: [
+      { id: 'r1', name: 'First continuous run — no stopping (15 mins)', note: '15 continuous minutes counts. This is where it begins.', tag: 'Wk 1–2', month: 1 },
+      { id: 'r2', name: 'First 3 km continuous run', note: 'End of Block 1 target. Slow is fine — continuous is everything.', tag: 'Wk 4', month: 1 },
+      { id: 'r3', name: 'First 5 km continuous run', note: 'This one changes how you see yourself. No walk breaks.', tag: 'Wk 5', month: 2 },
+      { id: 'r4', name: 'Continuous running — 30 min no stopping', note: 'Steady Zone 2 effort. No walk breaks. This is the aerobic foundation.', tag: 'Wk 6', month: 2 },
+      { id: 'r5', name: 'First 10 km run', note: 'Block 2 midpoint peak. You are now a runner. No asterisks.', tag: 'Wk 11–12', month: 3 },
+      { id: 'r6', name: 'First 12 km run', note: 'You are strong and pushing the limits. Almost half-marathon territory.', tag: 'Wk 13', month: 4 },
+      { id: 'r7', name: '5 km at race pace (sub 6:45/km)', note: 'Block 3 tempo benchmark. Your Hyrox run legs are ready.', tag: 'Wk 17–18', month: 5 },
+      { id: 'r8', name: 'First 15 km run', note: "Block 4 summit. You're almost at half-marathon distance. Race day is ready for you.", tag: 'Wk 23', month: 6 },
+    ]
+  },
+  {
+    id: 'strength', cls: 'ms-strength', dot: '#f080b0', color: '#f080b0', title: 'Strength',
+    milestones: [
+      { id: 's1', name: 'First 10 sandbag lunges without putting it down', note: '20 kg on shoulder, 10 m non-stop. Tall torso throughout.', tag: 'Wk 4', month: 1 },
+      { id: 's2', name: 'First 20 m farmers carry at race weight (women)', note: '16 kg per hand, 20 m non-stop. Grip strong, shoulders back.', tag: 'Wk 4', month: 1 },
+      { id: 's3', name: 'First farmers carry at mixed race weight', note: '24 kg per hand, 40 m non-stop. Grip strong, shoulders back.', tag: 'Block 2', month: 2 },
+      { id: 's4', name: 'First 20 wall balls unbroken at race weight', note: '6 kg to a 9 ft mark. Rest at the top, not the bottom.', tag: 'Block 2', month: 2 },
+      { id: 's5', name: 'First 10 burpee broad jumps — no step-backs', note: 'Full jump standard on every rep. The moment it becomes a real Hyrox movement.', tag: 'Block 2', month: 2 },
+      { id: 's6', name: 'First 20 sandbag lunges without putting it down', note: '20 kg on shoulder, 20 m non-stop. Tall torso throughout.', tag: 'Block 3', month: 3 },
+    ]
+  },
+  {
+    id: 'hyrox', cls: 'ms-hyrox', dot: '#f0c060', color: '#f0c060', title: 'Hyrox',
+    milestones: [
+      { id: 'h1', name: 'First Hyrox stations trial run (under 20 min)', note: '200 m SkiErg + 200 m Row + 20 m Farmers Carry (16 kg) + 20 m Sandbag Lunge (15 kg). One shot, under 20 min.', tag: 'Wk 4', month: 1 },
+      { id: 'h2', name: 'First half-Hyrox — stations 1 (ski, row, carry, lunge)', note: '4 × 1 km with: 400 m SkiErg, 400 m Row, 20 m Farmers Carry, 20 m Sandbag Lunge between each km. The first time the race feels real.', tag: 'Wk 7', month: 2 },
+      { id: 'h3', name: 'First half-Hyrox — stations 2 (sled, burpee, wall ball)', note: '4 × 1 km with: 40 m Sled Push (80 kg), 40 m Sled Pull (60 kg), 20 m Burpees, 20 Wall Balls between each km.', tag: 'Wk 8', month: 2 },
+      { id: 'h4', name: 'Half-Hyrox (sled + burpee + wall ball) under 45 min', note: '4 × 1 km with: 40 m Sled Push (80 kg), 40 m Sled Pull (60 kg), 20 m Burpees, 20 Wall Balls between each km.', tag: 'Wk 10', month: 3 },
+      { id: 'h5', name: 'Half-Hyrox (ski + row + carry + lunge) under 45 min', note: '4 × 1 km with: 400 m SkiErg, 400 m Row, 20 m Farmers Carry, 20 m Sandbag Lunge between each km.', tag: 'Wk 11', month: 3 },
+      { id: 'h6', name: 'First doubles simulation completed in under 2:30', note: 'Team mission unlocked. Run the full doubles format together — both of you, all stations, sub 2:30.', tag: 'Wk 14', month: 4 },
+      { id: 'h7', name: 'Full mock Hyrox doubles completed', note: 'All 8 stations, full doubles format. Log your time — this is your benchmark.', tag: 'Wk 17–18', month: 5 },
+      { id: 'h8', name: 'Beat your Month 4 mock time', note: 'Block 4 peak session. Proof that the taper is working.', tag: 'Wk 19–20', month: 5 },
+      { id: 'h9', name: 'Station split strategy locked in with partner', note: 'Agree exactly who does what and in what order. No more changes after this.', tag: 'Wk 19–20', month: 5 },
+    ]
+  },
+  {
+    id: 'heart', cls: 'ms-heart', dot: '#c8f060', color: '#c8f060', title: 'Mindset',
+    milestones: [
+      { id: 'm1', name: 'Three consecutive weeks of 3× training', note: 'The habit is the hardest part. Three weeks in, it sticks.', tag: 'Wk 1–3', month: 1 },
+      { id: 'm2', name: 'Sled session — Pull 60 kg × 20 m + Push 80 kg × 20 m', note: 'Complete both in a single session. This one counts double.', tag: 'Wk 6', month: 2 },
+      { id: 'm3', name: "Looked back at week 1 and couldn't believe the gap", note: "The moment you realise how far you've come. Check your workout history — count every session you've completed.", tag: 'Block 3–4', month: 3 },
+      { id: 'm4', name: "Counted every km you've run since week 1", note: 'Check your workout history and total up the kilometres. Screenshot it. The number will surprise you.', tag: 'Block 3–4', month: 4 },
+    ]
+  },
+];
+
+const MONTH_META = [
+  { month: 1, label: 'Month 1', dates: '21 Apr – 18 May', gift: '🤿', giftName: 'A Full Day of Diving', giftDesc: 'Your reward for showing up every session in Month 1. One full day of diving — earned.' },
+  { month: 2, label: 'Month 2', dates: '19 May – 15 Jun', gift: '🍽️', giftName: 'A Dinner Date', giftDesc: 'Seven weeks of training done. Time to celebrate over a proper dinner — just the two of you.' },
+  { month: 3, label: 'Month 3', dates: '16 Jun – 13 Jul', gift: '🕶️', giftName: 'New Sunglasses', giftDesc: 'Halfway through the programme. Halfway to race day. You deserve something new to run in.' },
+  { month: 4, label: 'Month 4', dates: '14 Jul – 10 Aug', gift: '🌸', giftName: 'New Perfume', giftDesc: 'You have been showing up for months. Now something that is just for you.' },
+  { month: 5, label: 'Month 5', dates: '11 Aug – 7 Sep', gift: '👜', giftName: 'New Bag', giftDesc: 'The hardest month of training is done. Race day is close. You have earned this.' },
+  { month: 6, label: 'Month 6', dates: '8 Sep – 5 Oct', gift: '📿', giftName: 'New Necklace', giftDesc: 'You made it to race week. Every session, every mile, every station — this is what it was all for.' },
+];
+
+
+const MS_EMOJIS = ['🎉','⚡','🔥','✨','💪','🌟','🏃‍♀️','🙌'];
+const MS_KEY = 'hyrox_milestones_v1';
+
+function msLoadState() { try { return JSON.parse(localStorage.getItem(MS_KEY)) || {}; } catch(e) { return {}; } }
+function msSaveState(s) { try { localStorage.setItem(MS_KEY, JSON.stringify(s)); } catch(e) {} }
+let msState = msLoadState();
+
+function msAllMilestones() { return MS_SECTIONS.flatMap(s => s.milestones); }
+
+// Returns true if today's date is within the month's date window
+// Months are sequential 4-week blocks starting from programme start
+function msIsMonthUnlocked(monthNum) {
+  const PROG_START_MS = new Date(2025, 3, 21); // 21 Apr 2025
+  const monthStart = new Date(PROG_START_MS);
+  monthStart.setDate(monthStart.getDate() + (monthNum - 1) * 28);
+  const monthEnd = new Date(monthStart);
+  monthEnd.setDate(monthEnd.getDate() + 27);
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  return today >= monthStart;
+}
+
+function msIsCurrentMonth(monthNum) {
+  const PROG_START_MS = new Date(2025, 3, 21);
+  const monthStart = new Date(PROG_START_MS);
+  monthStart.setDate(monthStart.getDate() + (monthNum - 1) * 28);
+  const monthEnd = new Date(monthStart);
+  monthEnd.setDate(monthEnd.getDate() + 27);
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  return today >= monthStart && today <= monthEnd;
+}
+
+function msMonthMilestones(monthNum) {
+  if (monthNum === 6) return []; // race day only
+  return msAllMilestones().filter(m => m.month === monthNum);
+}
+
+function msMonthComplete(monthNum) {
+  if (monthNum === 6) return !!msState['__race__'];
+  return msMonthMilestones(monthNum).every(m => !!msState[m.id]);
+}
+
+function msUpdateProgress() {
+  const all = msAllMilestones();
+  const total = all.length + 1;
+  const done = all.filter(m => msState[m.id]).length + (msState['__race__'] ? 1 : 0);
+  const pct = Math.round((done / total) * 100);
+  const fill = document.getElementById('msProgressFill');
+  const lbl = document.getElementById('msDoneCount');
+  const tot = document.getElementById('msTotalCount');
+  if (fill) fill.style.width = pct + '%';
+  if (lbl) lbl.textContent = done;
+  if (tot) tot.textContent = total;
+}
+
+function msSpawnBurst(x, y) {
+  const emojis = ['🎉','⚡','🔥','✨','💪','🌟','🏃‍♀️','🙌'];
+  const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+  const el = document.createElement('div');
+  el.className = 'ms-burst';
+  el.textContent = emoji;
+  el.style.left = (x - 12) + 'px';
+  el.style.top = (y - 12) + 'px';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 900);
+}
+
+function msToggle(id, monthNum, event) {
+  msState[id] = !msState[id];
+  msSaveState(msState);
+  msRender();
+  msUpdateProgress();
+  if (msState[id] && event) {
+    msSpawnBurst(event.clientX, event.clientY);
+    // Check if this completion finishes the month
+    setTimeout(() => msCheckMonthComplete(monthNum), 300);
+  }
+}
+
+function msCheckMonthComplete(monthNum) {
+  if (!msMonthComplete(monthNum)) return;
+  if (!msIsMonthUnlocked(monthNum)) return;
+  // Check it's actually the right time (not cheating ahead)
+  const PROG_START_MS = new Date(2025, 3, 21);
+  const monthStart = new Date(PROG_START_MS);
+  monthStart.setDate(monthStart.getDate() + (monthNum - 1) * 28);
+  const monthEnd = new Date(monthStart);
+  monthEnd.setDate(monthEnd.getDate() + 27);
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  // If they are completing a future month's milestones
+  if (today < monthStart) {
+    msShowCheatPopup();
+    return;
+  }
+  msShowGift(monthNum);
+}
+
+function msShowCheatPopup() {
+  const overlay = document.createElement('div');
+  overlay.className = 'ms-overlay';
+  overlay.innerHTML = `
+    <div class="ms-popup ms-cheat-popup">
+      <div class="ms-popup-icon">🙈</div>
+      <div class="ms-popup-title">Not so fast!</div>
+      <div class="ms-popup-msg">Do not cheat to find your gift, have some patience!</div>
+      <button class="ms-popup-btn" onclick="this.closest('.ms-overlay').remove()">OK, I'll wait 😅</button>
+    </div>`;
+  document.body.appendChild(overlay);
+}
+
+function msShowGift(monthNum) {
+  // Only show if not already shown this session
+  const giftKey = '__gift_shown_' + monthNum + '__';
+  if (msState[giftKey]) return;
+  msState[giftKey] = true;
+  msSaveState(msState);
+
+  const meta = MONTH_META.find(m => m.month === monthNum);
+  if (!meta) return;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'ms-overlay';
+  overlay.innerHTML = `
+    <div class="ms-popup ms-gift-popup">
+      <div class="ms-gift-burst">
+        <div class="ms-gift-icon">${meta.gift}</div>
+      </div>
+      <div class="ms-popup-title">Month ${monthNum} Complete! 🎉</div>
+      <div class="ms-gift-name">${meta.giftName}</div>
+      <div class="ms-popup-msg">${meta.giftDesc}</div>
+      <button class="ms-popup-btn ms-gift-btn" onclick="this.closest('.ms-overlay').remove()">Thank you! 🥹</button>
+    </div>`;
+  document.body.appendChild(overlay);
+
+  // Big burst
+  for (let i = 0; i < 10; i++) {
+    setTimeout(() => {
+      msSpawnBurst(
+        window.innerWidth * 0.2 + Math.random() * window.innerWidth * 0.6,
+        window.innerHeight * 0.3 + Math.random() * 200
+      );
+    }, i * 100);
+  }
+}
+
+function msToggleRace() {
+  const was = !!msState['__race__'];
+  // Check if trying to complete race before month 6 starts
+  if (!was) {
+    const PROG_START_MS = new Date(2025, 3, 21);
+    const month6Start = new Date(PROG_START_MS);
+    month6Start.setDate(month6Start.getDate() + 5 * 28);
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    if (today < month6Start) {
+      msShowCheatPopup();
+      return;
+    }
+  }
+  msState['__race__'] = !was;
+  msSaveState(msState);
+  const card = document.getElementById('msRaceCard');
+  card.classList.toggle('ms-done', !!msState['__race__']);
+  card.querySelector('.ms-race-title').textContent = msState['__race__']
+    ? '✓ Race Day Complete — You Did It.'
+    : 'Race Day — Hyrox Doubles Finish Line';
+  if (msState['__race__']) {
+    for (let i = 0; i < 8; i++) {
+      setTimeout(() => msSpawnBurst(
+        window.innerWidth * 0.2 + Math.random() * window.innerWidth * 0.6,
+        window.innerHeight * 0.3 + Math.random() * 200
+      ), i * 120);
+    }
+    setTimeout(() => msShowGift(6), 800);
+  }
+  msUpdateProgress();
+}
+
+function msReset() {
+  if (!confirm('Reset all milestones?')) return;
+  msState = {};
+  msSaveState(msState);
+  msRender();
+  msUpdateProgress();
+}
+
+function msRender() {
+  const container = document.getElementById('msContainer');
+  if (!container) return;
+  container.innerHTML = '';
+
+  // Group milestones by month
+  for (let monthNum = 1; monthNum <= 6; monthNum++) {
+    const meta = MONTH_META.find(m => m.month === monthNum);
+    const monthMs = monthNum < 6
+      ? msAllMilestones().filter(m => m.month === monthNum)
+      : []; // month 6 is race day only
+    const doneMsCount = monthMs.filter(m => msState[m.id]).length + (monthNum === 6 && msState['__race__'] ? 1 : 0);
+    const totalMs = monthNum < 6 ? monthMs.length : 1;
+    const allDone = msMonthComplete(monthNum);
+    const unlocked = msIsMonthUnlocked(monthNum);
+
+    const monthEl = document.createElement('div');
+    monthEl.className = 'ms-month' + (allDone && unlocked ? ' ms-month-complete' : '');
+
+    // Month header
+    monthEl.innerHTML = `
+      <div class="ms-month-header">
+        <div class="ms-month-info">
+          <div class="ms-month-label">${meta.label}</div>
+          <div class="ms-month-dates">${meta.dates}</div>
+        </div>
+        <div class="ms-month-count ${allDone && unlocked ? 'ms-count-done' : ''}">
+          ${doneMsCount} / ${totalMs}
+        </div>
+      </div>`;
+
+    // Gift reveal box
+    const giftEl = document.createElement('div');
+    if (allDone && unlocked) {
+      giftEl.className = 'ms-gift-box ms-gift-unlocked';
+      giftEl.innerHTML = `
+        <span class="ms-gift-emoji">${meta.gift}</span>
+        <div>
+          <div class="ms-gift-label">Gift Unlocked</div>
+          <div class="ms-gift-reveal-name">${meta.giftName}</div>
+        </div>`;
+    } else {
+      giftEl.className = 'ms-gift-box ms-gift-locked';
+      giftEl.innerHTML = `<span class="ms-gift-emoji">🎁</span><div class="ms-gift-label">${allDone && !unlocked ? 'Complete all milestones in time to unlock' : 'Complete all ' + totalMs + ' milestones to unlock'}</div>`;
+    }
+    monthEl.appendChild(giftEl);
+
+    // Milestones for this month
+    if (monthNum < 6) {
+      const listEl = document.createElement('div');
+      listEl.className = 'ms-month-list';
+
+      // Group by section type within the month
+      const sectionGroups = {};
+      MS_SECTIONS.forEach(sec => {
+        const secMs = sec.milestones.filter(m => m.month === monthNum);
+        if (secMs.length > 0) sectionGroups[sec.id] = { sec, ms: secMs };
+      });
+
+      Object.values(sectionGroups).forEach(({ sec, ms }) => {
+        ms.forEach(m => {
+          const done = !!msState[m.id];
+          const item = document.createElement('div');
+          item.className = 'milestone-item ' + sec.cls + (done ? ' ms-done' : '');
+          item.innerHTML = `
+            <div class="mi-check">
+              <svg class="mi-checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none">
+                <path d="M1 4L4 7.5L10 1" stroke="#0e0f0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="mi-content">
+              <div class="mi-name">${m.name}</div>
+              <div class="mi-note">${m.note}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;">
+              <div class="mi-tag">${m.tag}</div>
+              <div class="mi-type-dot" style="width:6px;height:6px;border-radius:50%;background:${sec.dot};align-self:flex-end;"></div>
+            </div>`;
+          item.addEventListener('click', (e) => msToggle(m.id, monthNum, e));
+          listEl.appendChild(item);
+        });
+      });
+
+      monthEl.appendChild(listEl);
+    } else {
+      // Month 6 — race day card inline
+      const raceInline = document.createElement('div');
+      raceInline.className = 'ms-race-card' + (msState['__race__'] ? ' ms-done' : '');
+      raceInline.id = 'msRaceCard';
+      raceInline.onclick = msToggleRace;
+      raceInline.innerHTML = `
+        <span class="ms-race-icon">🏆</span>
+        <div class="ms-race-title">${msState['__race__'] ? '✓ Race Day Complete — You Did It.' : 'Race Day — Hyrox Doubles Finish Line'}</div>
+        <div class="ms-race-sub">October 2025 · The one that makes everything worth it</div>`;
+      monthEl.appendChild(raceInline);
+    }
+
+    container.appendChild(monthEl);
+  }
+}
+
+function switchView(tab) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.top-nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('view-' + tab).classList.add('active');
+  document.querySelector('.top-nav-btn[data-tab="' + tab + '"]').classList.add('active');
+  if (tab === 'milestones') { msRender(); msUpdateProgress(); }
+  if (tab === 'warmup' || tab === 'plyo') { /* no extra init needed */ }
+}
+
+</script>
+</div>
+
+<!-- ── Milestones view ── -->
+<div class="view" id="view-milestones">
+  <div class="ms-intro">
+    <div class="header-eyebrow">// your journey</div>
+    <h2 style="font-size:22px;font-weight:300;letter-spacing:-0.02em;line-height:1.2;">Milestone <span style="color:var(--pink);font-weight:500;">Tracker</span></h2>
+    <p class="ms-subtitle">Tap each milestone when you've earned it. Every tick is proof of what you're becoming.</p>
+    <div class="ms-progress-wrap">
+      <div class="ms-progress-track">
+        <div class="ms-progress-fill" id="msProgressFill"></div>
+      </div>
+      <div class="ms-progress-label"><b id="msDoneCount">0</b> / <span id="msTotalCount">0</span> achieved</div>
+    </div>
+  </div>
+
+  <div id="msContainer"></div>
+
+  <div class="ms-footer">
+    <div class="ms-footer-note">Progress saves automatically in your browser</div>
+    <button class="ms-reset-btn" onclick="msReset()">Reset all</button>
+  </div>
+</div>
+
+
+</body>
+</html>
