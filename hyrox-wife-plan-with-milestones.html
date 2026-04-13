@@ -2294,14 +2294,15 @@ function msAllMilestones() { return MS_SECTIONS.flatMap(s => s.milestones); }
 // Returns true if today's date is within the month's date window
 // Months are sequential 4-week blocks starting from programme start
 function msIsMonthUnlocked(monthNum) {
-  const PROG_START_MS = new Date(2025, 3, 14); // 21 Apr 2025
+  // Returns true only if today falls WITHIN the month's training window
+  const PROG_START_MS = new Date(2025, 3, 14);
   const monthStart = new Date(PROG_START_MS);
   monthStart.setDate(monthStart.getDate() + (monthNum - 1) * 28);
   const monthEnd = new Date(monthStart);
   monthEnd.setDate(monthEnd.getDate() + 27);
   const today = new Date();
   today.setHours(0,0,0,0);
-  return today >= monthStart;
+  return today >= monthStart && today <= monthEnd;
 }
 
 function msIsCurrentMonth(monthNum) {
@@ -2364,17 +2365,9 @@ function msToggle(id, monthNum, event) {
 
 function msCheckMonthComplete(monthNum) {
   if (!msMonthComplete(monthNum)) return;
-  if (!msIsMonthUnlocked(monthNum)) return;
-  // Check it's actually the right time (not cheating ahead)
-  const PROG_START_MS = new Date(2025, 3, 14);
-  const monthStart = new Date(PROG_START_MS);
-  monthStart.setDate(monthStart.getDate() + (monthNum - 1) * 28);
-  const monthEnd = new Date(monthStart);
-  monthEnd.setDate(monthEnd.getDate() + 27);
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  // If they are completing a future month's milestones
-  if (today < monthStart) {
+  // msIsMonthUnlocked now correctly returns true ONLY if today is within the month window
+  if (!msIsMonthUnlocked(monthNum)) {
+    // Month is complete but today is not within that month — they're cheating
     msShowCheatPopup();
     return;
   }
@@ -2513,7 +2506,20 @@ function msRender() {
         </div>`;
     } else {
       giftEl.className = 'ms-gift-box ms-gift-locked';
-      giftEl.innerHTML = `<span class="ms-gift-emoji">🎁</span><div class="ms-gift-label">${allDone && !unlocked ? 'Complete all milestones in time to unlock' : 'Complete all ' + totalMs + ' milestones to unlock'}</div>`;
+      const PROG_START_RENDER = new Date(2025, 3, 14);
+      const mStart = new Date(PROG_START_RENDER);
+      mStart.setDate(mStart.getDate() + (monthNum - 1) * 28);
+      const today_r = new Date(); today_r.setHours(0,0,0,0);
+      const monthStarted = today_r >= mStart;
+      let lockMsg;
+      if (!monthStarted) {
+        lockMsg = 'Your gift will unlock when this month begins';
+      } else if (allDone && !unlocked) {
+        lockMsg = 'You completed this too early — gifts must be earned within the month!';
+      } else {
+        lockMsg = 'Complete all ' + totalMs + ' milestones this month to unlock';
+      }
+      giftEl.innerHTML = `<span class="ms-gift-emoji">🎁</span><div class="ms-gift-label">\${lockMsg}</div>`;
     }
     monthEl.appendChild(giftEl);
 
