@@ -1345,7 +1345,7 @@
   <h1 class="header-title">6-Month Build to<br><span>Hyrox Doubles</span> — October</h1>
   <div class="header-meta">
     <div class="meta-pill">Athlete: <b>Partner</b></div>
-    <div class="meta-pill">Start: <b>April 2025</b></div>
+    <div class="meta-pill">Start: <b>13 Apr 2025</b></div>
     <div class="meta-pill">Event: <b>October 2025</b></div>
     <div class="meta-pill">Format: <b>Doubles</b></div>
     <div class="meta-pill">Days/wk: <b>3</b></div>
@@ -2062,7 +2062,7 @@ function renderAll() {
 }
 
 // Date helpers — programme starts Monday 21 Apr 2025
-const PROG_START = new Date(2025, 3, 21); // months are 0-indexed
+const PROG_START = new Date(2025, 3, 14); // months are 0-indexed
 function weekStartDate(weekNumber) {
   const d = new Date(PROG_START);
   d.setDate(d.getDate() + (weekNumber - 1) * 7);
@@ -2225,13 +2225,14 @@ const MS_SECTIONS = [
   {
     id: 'running', cls: 'ms-running', dot: '#8bdfb0', color: '#8bdfb0', title: 'Running',
     milestones: [
-      { id: 'r1', name: 'First continuous run — no stopping (15 mins)', note: '15 continuous minutes counts. This is where it begins.', tag: 'Wk 1–2', month: 1 },
-      { id: 'r2', name: 'First 3 km continuous run', note: 'End of Block 1 target. Slow is fine — continuous is everything.', tag: 'Wk 4', month: 1 },
-      { id: 'r3', name: 'First 5 km continuous run', note: 'This one changes how you see yourself. No walk breaks.', tag: 'Wk 5', month: 2 },
+      { id: 'r1', name: 'First 5 km continuous run', note: 'End of Block 1 target. Slow is fine — continuous is everything.', tag: 'Wk 1–2', month: 1 },
+      { id: 'r2', name: 'First 8 km continuous run', note: 'End of Block 1 target. Slow is fine — continuous is everything.', tag: 'Wk 4', month: 1 },
+      { id: 'r3', name: 'First 10 km continuous run', note: 'This one changes how you see yourself. No walk breaks.', tag: 'Wk 5', month: 2 },
       { id: 'r4', name: 'Continuous running — 30 min no stopping', note: 'Steady Zone 2 effort. No walk breaks. This is the aerobic foundation.', tag: 'Wk 6', month: 2 },
-      { id: 'r5', name: 'First 10 km run', note: 'Block 2 midpoint peak. You are now a runner. No asterisks.', tag: 'Wk 11–12', month: 3 },
-      { id: 'r6', name: 'First 12 km run', note: 'You are strong and pushing the limits. Almost half-marathon territory.', tag: 'Wk 13', month: 4 },
-      { id: 'r7', name: '5 km at race pace (sub 6:45/km)', note: 'Block 3 tempo benchmark. Your Hyrox run legs are ready.', tag: 'Wk 17–18', month: 5 },
+      { id: 'r5', name: 'First 12 km continuous run', note: 'You are strong and pushing the limits. Almost half-marathon territory.', tag: 'Wk 11–12', month: 3 },
+      { id: 'r6', name: 'Run like an influencer — 10 km at 6:45/km pace', note: 'Getting your 10 km locked in!', tag: 'Wk 13', month: 4 },
+      { id: 'r6b', name: 'Run like a BOSS — 5 km at 6:15/km pace', note: 'Getting your 5 km locked in!', tag: 'Wk 14', month: 4 },
+      { id: 'r7', name: '5 km at race pace (sub 6:00/km)', note: 'Block 3 tempo benchmark. Your Hyrox run legs are ready.', tag: 'Wk 17–18', month: 5 },
       { id: 'r8', name: 'First 15 km run', note: "Block 4 summit. You're almost at half-marathon distance. Race day is ready for you.", tag: 'Wk 23', month: 6 },
     ]
   },
@@ -2250,11 +2251,11 @@ const MS_SECTIONS = [
     id: 'hyrox', cls: 'ms-hyrox', dot: '#f0c060', color: '#f0c060', title: 'Hyrox',
     milestones: [
       { id: 'h1', name: 'First Hyrox stations trial run (under 20 min)', note: '200 m SkiErg + 200 m Row + 20 m Farmers Carry (16 kg) + 20 m Sandbag Lunge (15 kg). One shot, under 20 min.', tag: 'Wk 4', month: 1 },
-      { id: 'h2', name: 'First half-Hyrox — stations 1 (ski, row, carry, lunge)', note: '4 × 1 km with: 400 m SkiErg, 400 m Row, 20 m Farmers Carry, 20 m Sandbag Lunge between each km. The first time the race feels real.', tag: 'Wk 7', month: 2 },
+      { id: 'h2', name: 'First half-Hyrox — stations 1 (ski, row, carry, lunge)', note: '4 × 1 km with: 400 m SkiErg, 400 m Row, 20 m Farmers Carry, 20 m Sandbag Lunge between each km.', tag: 'Wk 7', month: 2 },
       { id: 'h3', name: 'First half-Hyrox — stations 2 (sled, burpee, wall ball)', note: '4 × 1 km with: 40 m Sled Push (80 kg), 40 m Sled Pull (60 kg), 20 m Burpees, 20 Wall Balls between each km.', tag: 'Wk 8', month: 2 },
       { id: 'h4', name: 'Half-Hyrox (sled + burpee + wall ball) under 45 min', note: '4 × 1 km with: 40 m Sled Push (80 kg), 40 m Sled Pull (60 kg), 20 m Burpees, 20 Wall Balls between each km.', tag: 'Wk 10', month: 3 },
       { id: 'h5', name: 'Half-Hyrox (ski + row + carry + lunge) under 45 min', note: '4 × 1 km with: 400 m SkiErg, 400 m Row, 20 m Farmers Carry, 20 m Sandbag Lunge between each km.', tag: 'Wk 11', month: 3 },
-      { id: 'h6', name: 'First doubles simulation completed in under 2:30', note: 'Team mission unlocked. Run the full doubles format together — both of you, all stations, sub 2:30.', tag: 'Wk 14', month: 4 },
+      { id: 'h6', name: 'First doubles simulation completed in under 2:30', note: 'Team mission unlocked. Run the full doubles format together — both of you, all stations, sub 2:30.', tag: 'Wk 15', month: 4 },
       { id: 'h7', name: 'Full mock Hyrox doubles completed', note: 'All 8 stations, full doubles format. Log your time — this is your benchmark.', tag: 'Wk 17–18', month: 5 },
       { id: 'h8', name: 'Beat your Month 4 mock time', note: 'Block 4 peak session. Proof that the taper is working.', tag: 'Wk 19–20', month: 5 },
       { id: 'h9', name: 'Station split strategy locked in with partner', note: 'Agree exactly who does what and in what order. No more changes after this.', tag: 'Wk 19–20', month: 5 },
@@ -2272,12 +2273,12 @@ const MS_SECTIONS = [
 ];
 
 const MONTH_META = [
-  { month: 1, label: 'Month 1', dates: '21 Apr – 18 May', gift: '🤿', giftName: 'A Full Day of Diving', giftDesc: 'Your reward for showing up every session in Month 1. One full day of diving — earned.' },
-  { month: 2, label: 'Month 2', dates: '19 May – 15 Jun', gift: '🍽️', giftName: 'A Dinner Date', giftDesc: 'Seven weeks of training done. Time to celebrate over a proper dinner — just the two of you.' },
-  { month: 3, label: 'Month 3', dates: '16 Jun – 13 Jul', gift: '🕶️', giftName: 'New Sunglasses', giftDesc: 'Halfway through the programme. Halfway to race day. You deserve something new to run in.' },
-  { month: 4, label: 'Month 4', dates: '14 Jul – 10 Aug', gift: '🌸', giftName: 'New Perfume', giftDesc: 'You have been showing up for months. Now something that is just for you.' },
-  { month: 5, label: 'Month 5', dates: '11 Aug – 7 Sep', gift: '👜', giftName: 'New Bag', giftDesc: 'The hardest month of training is done. Race day is close. You have earned this.' },
-  { month: 6, label: 'Month 6', dates: '8 Sep – 5 Oct', gift: '📿', giftName: 'New Necklace', giftDesc: 'You made it to race week. Every session, every mile, every station — this is what it was all for.' },
+  { month: 1, label: 'Month 1', dates: '14 Apr – 11 May', gift: '🤿', giftName: 'A Full Day of Diving', giftDesc: 'Your reward for showing up every session in Month 1. One full day of diving — earned.' },
+  { month: 2, label: 'Month 2', dates: '12 May – 8 Jun', gift: '🍽️', giftName: 'A Dinner Date', giftDesc: 'Seven weeks of training done. Time to celebrate over a proper dinner — just the two of you.' },
+  { month: 3, label: 'Month 3', dates: '9 Jun – 6 Jul', gift: '🕶️', giftName: 'New Sunglasses', giftDesc: 'Halfway through the programme. Halfway to race day. You deserve something new to run in.' },
+  { month: 4, label: 'Month 4', dates: '7 Jul – 3 Aug', gift: '🌸', giftName: 'New Perfume', giftDesc: 'You have been showing up for months. Now something that is just for you.' },
+  { month: 5, label: 'Month 5', dates: '4 Aug – 31 Aug', gift: '👜', giftName: 'New Bag', giftDesc: 'The hardest month of training is done. Race day is close. You have earned this.' },
+  { month: 6, label: 'Month 6', dates: '1 Sep – 28 Sep', gift: '📿', giftName: 'New Necklace', giftDesc: 'You made it to race week. Every session, every mile, every station — this is what it was all for.' },
 ];
 
 
@@ -2293,7 +2294,7 @@ function msAllMilestones() { return MS_SECTIONS.flatMap(s => s.milestones); }
 // Returns true if today's date is within the month's date window
 // Months are sequential 4-week blocks starting from programme start
 function msIsMonthUnlocked(monthNum) {
-  const PROG_START_MS = new Date(2025, 3, 21); // 21 Apr 2025
+  const PROG_START_MS = new Date(2025, 3, 14); // 21 Apr 2025
   const monthStart = new Date(PROG_START_MS);
   monthStart.setDate(monthStart.getDate() + (monthNum - 1) * 28);
   const monthEnd = new Date(monthStart);
@@ -2304,7 +2305,7 @@ function msIsMonthUnlocked(monthNum) {
 }
 
 function msIsCurrentMonth(monthNum) {
-  const PROG_START_MS = new Date(2025, 3, 21);
+  const PROG_START_MS = new Date(2025, 3, 14);
   const monthStart = new Date(PROG_START_MS);
   monthStart.setDate(monthStart.getDate() + (monthNum - 1) * 28);
   const monthEnd = new Date(monthStart);
@@ -2365,7 +2366,7 @@ function msCheckMonthComplete(monthNum) {
   if (!msMonthComplete(monthNum)) return;
   if (!msIsMonthUnlocked(monthNum)) return;
   // Check it's actually the right time (not cheating ahead)
-  const PROG_START_MS = new Date(2025, 3, 21);
+  const PROG_START_MS = new Date(2025, 3, 14);
   const monthStart = new Date(PROG_START_MS);
   monthStart.setDate(monthStart.getDate() + (monthNum - 1) * 28);
   const monthEnd = new Date(monthStart);
@@ -2432,7 +2433,7 @@ function msToggleRace() {
   const was = !!msState['__race__'];
   // Check if trying to complete race before month 6 starts
   if (!was) {
-    const PROG_START_MS = new Date(2025, 3, 21);
+    const PROG_START_MS = new Date(2025, 3, 14);
     const month6Start = new Date(PROG_START_MS);
     month6Start.setDate(month6Start.getDate() + 5 * 28);
     const today = new Date();
