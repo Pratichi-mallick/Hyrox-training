@@ -966,10 +966,9 @@
 <div class="view active" id="view-warmup">
 
   <div class="wp-intro">
-   <div class="header-eyebrow">// You are now an ATHLETE for the next 2hrs!</div>
-   <div class="header-eyebrow">// before your session</div>
+    <div class="header-eyebrow">// before every session</div>
     <h2 style="font-size:22px;font-weight:300;letter-spacing:-0.02em;line-height:1.2;">Head-to-Toe <span style="color:var(--accent2);font-weight:500;">Warm-Up</span></h2>
-    <p class="wp-subtitle"> Growth starts with a good warm-up! Complete every exercise in order before each session. Takes 8–10 minutes. Never skip it.</p>
+    <p class="wp-subtitle">Complete every exercise in order before each session. Takes 8–10 minutes. Never skip it.</p>
   </div>
 
   <div class="wp-cards">
@@ -997,7 +996,7 @@
             <div class="wp-move-name">Side to Side</div>
             <div class="wp-rep-badge">12 reps</div>
           </div>
-          <div class="wp-move-note">Sitting or standing tall. Slowly move your head from centre to the right side, return to centre, then left. Never force - maintain a level head position.</div>
+          <div class="wp-move-note">Sitting or standing tall. Slowly tilt your right ear toward your right shoulder, return to centre, then left. Never force — let gravity do the work.</div>
         </div>
         <div class="wp-move">
           <div class="wp-move-row">
@@ -1088,21 +1087,21 @@
             <div class="wp-move-name">Forward Bending Hamstring Stretch — Forward-Backward</div>
             <div class="wp-rep-badge">6-6 reps</div>
           </div>
-          <div class="wp-move-note">Stand hip-width. Move 1 leg forward, hinge at the hips, hands reaching toward the floor, then return. 6 reps forward, 6 as you step slightly back. Keep knees soft. Dynamic hamstring and glute activation.</div>
+          <div class="wp-move-note">Stand hip-width. Hinge at the hips, hands reaching toward the floor, then return. 6 reps forward, 6 as you step slightly back. Keep knees soft. Dynamic hamstring and glute activation.</div>
         </div>
         <div class="wp-move">
           <div class="wp-move-row">
             <div class="wp-move-name">Bodyweight Squat (slow + supported)</div>
             <div class="wp-rep-badge">12 reps</div>
           </div>
-          <div class="wp-move-note">Hold a wall or stick if needed. Lower slowly (3 seconds down), pause at the bottom, rise. Focus on depth and keeping heels flat — this is mobility work, not strength work.</div>
+          <div class="wp-move-note">Hold a wall if needed. Lower slowly (3 seconds down), pause at the bottom, rise. Focus on depth and keeping heels flat — this is mobility work, not strength work.</div>
         </div>
         <div class="wp-move">
           <div class="wp-move-row">
             <div class="wp-move-name">Bodyweight Lunge (slow + supported)</div>
             <div class="wp-rep-badge">12 reps</div>
           </div>
-          <div class="wp-move-note">Step forward, lower the back knee toward the floor slowly, return. Alternate legs. 12 reps total. Use a wall or stick for balance. Prepares hip flexors and quads for running and lunge stations.</div>
+          <div class="wp-move-note">Step forward, lower the back knee toward the floor slowly, return. Alternate legs. 12 reps total. Use a wall for balance. Prepares hip flexors and quads for running and lunge stations.</div>
         </div>
         <div class="wp-move">
           <div class="wp-move-row">
@@ -1194,7 +1193,7 @@
   </div>
 
   <div class="wp-footer-note">
-    💡 This warm-up runs head to toe on purpose — ankles and feet last, core last of all, so you are fully warm before the most demanding activation work. Add any other exercise depending on stiffness in different part of the body
+    💡 This warm-up runs head to toe on purpose — ankles and feet last, core last of all, so you are fully warm before the most demanding activation work.
   </div>
 
 </div>
@@ -1346,7 +1345,7 @@
   <h1 class="header-title">6-Month Build to<br><span>Hyrox Doubles</span> — October</h1>
   <div class="header-meta">
     <div class="meta-pill">Athlete: <b>Partner</b></div>
-    <div class="meta-pill">Start: <b>13 Apr 2025</b></div>
+    <div class="meta-pill">Start: <b>14 Apr 2026</b></div>
     <div class="meta-pill">Event: <b>October 2025</b></div>
     <div class="meta-pill">Format: <b>Doubles</b></div>
     <div class="meta-pill">Days/wk: <b>3</b></div>
@@ -2063,7 +2062,7 @@ function renderAll() {
 }
 
 // Date helpers — programme starts Monday 21 Apr 2025
-const PROG_START = new Date(2025, 3, 14); // months are 0-indexed
+const PROG_START = new Date(2026, 3, 14); // 14 Apr 2026
 function weekStartDate(weekNumber) {
   const d = new Date(PROG_START);
   d.setDate(d.getDate() + (weekNumber - 1) * 7);
@@ -2274,12 +2273,12 @@ const MS_SECTIONS = [
 ];
 
 const MONTH_META = [
-  { month: 1, label: 'Month 1', dates: '14 Apr – 11 May', gift: '🤿', giftName: 'A Full Day of Diving', giftDesc: 'Your reward for showing up every session in Month 1. One full day of diving paid by Prat! Enjoy the ocean!' },
-  { month: 2, label: 'Month 2', dates: '12 May – 8 Jun', gift: '🍽️', giftName: 'A Dinner Date', giftDesc: 'Seven weeks of training done. Time to celebrate over a Fancy dinner — just the two of you.' },
-  { month: 3, label: 'Month 3', dates: '9 Jun – 6 Jul', gift: '🕶️', giftName: 'New Sunglasses', giftDesc: 'Halfway through the programme. Halfway to race day. You deserve something new to run in.' },
-  { month: 4, label: 'Month 4', dates: '7 Jul – 3 Aug', gift: '🌸', giftName: 'New Perfume', giftDesc: 'You have been showing up for months. Now something that is just for you.' },
-  { month: 5, label: 'Month 5', dates: '4 Aug – 31 Aug', gift: '👜', giftName: 'New Bag', giftDesc: 'The hardest month of training is done. Race day is close. You have earned this.' },
-  { month: 6, label: 'Month 6', dates: '1 Sep – 28 Sep', gift: '📿', giftName: 'New Necklace', giftDesc: 'You made it to race week. Every session, every mile, every station — this is what it was all for.' },
+  { month: 1, label: 'Month 1', dates: '14 Apr – 11 May 2026', gift: '🤿', giftName: 'A Full Day of Diving', giftDesc: 'Your reward for showing up every session in Month 1. One full day of diving — earned.' },
+  { month: 2, label: 'Month 2', dates: '12 May – 8 Jun 2026', gift: '🍽️', giftName: 'A Dinner Date', giftDesc: 'Seven weeks of training done. Time to celebrate over a proper dinner — just the two of you.' },
+  { month: 3, label: 'Month 3', dates: '9 Jun – 6 Jul 2026', gift: '🕶️', giftName: 'New Sunglasses', giftDesc: 'Halfway through the programme. Halfway to race day. You deserve something new to run in.' },
+  { month: 4, label: 'Month 4', dates: '7 Jul – 3 Aug 2026', gift: '🌸', giftName: 'New Perfume', giftDesc: 'You have been showing up for months. Now something that is just for you.' },
+  { month: 5, label: 'Month 5', dates: '4 Aug – 31 Aug 2026', gift: '👜', giftName: 'New Bag', giftDesc: 'The hardest month of training is done. Race day is close. You have earned this.' },
+  { month: 6, label: 'Month 6', dates: '1 Sep – 28 Sep 2026', gift: '📿', giftName: 'New Necklace', giftDesc: 'You made it to race week. Every session, every mile, every station — this is what it was all for.' },
 ];
 
 
@@ -2296,18 +2295,20 @@ function msAllMilestones() { return MS_SECTIONS.flatMap(s => s.milestones); }
 // Months are sequential 4-week blocks starting from programme start
 function msIsMonthUnlocked(monthNum) {
   // Returns true only if today falls WITHIN the month's training window
-  const PROG_START_MS = new Date(2025, 3, 14);
+  // Use date-only strings to avoid timezone/time-component issues
+  const PROG_START_MS = new Date(2026, 3, 14);
   const monthStart = new Date(PROG_START_MS);
   monthStart.setDate(monthStart.getDate() + (monthNum - 1) * 28);
+  monthStart.setHours(0, 0, 0, 0);
   const monthEnd = new Date(monthStart);
   monthEnd.setDate(monthEnd.getDate() + 27);
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  return today >= monthStart && today <= monthEnd;
+  monthEnd.setHours(23, 59, 59, 999); // end of the last day, not start
+  const now = Date.now();
+  return now >= monthStart.getTime() && now <= monthEnd.getTime();
 }
 
 function msIsCurrentMonth(monthNum) {
-  const PROG_START_MS = new Date(2025, 3, 14);
+  const PROG_START_MS = new Date(2026, 3, 14);
   const monthStart = new Date(PROG_START_MS);
   monthStart.setDate(monthStart.getDate() + (monthNum - 1) * 28);
   const monthEnd = new Date(monthStart);
@@ -2353,14 +2354,16 @@ function msSpawnBurst(x, y) {
 }
 
 function msToggle(id, monthNum, event) {
-  msState[id] = !msState[id];
+  const nowChecked = !msState[id]; // capture BEFORE mutation
+  msState[id] = nowChecked;
   msSaveState(msState);
   msRender();
   msUpdateProgress();
-  if (msState[id] && event) {
+  if (nowChecked && event) {
     msSpawnBurst(event.clientX, event.clientY);
-    // Check if this completion finishes the month
-    setTimeout(() => msCheckMonthComplete(monthNum), 300);
+    // Check if this completion finishes the month — use captured monthNum
+    const capturedMonth = monthNum;
+    setTimeout(() => msCheckMonthComplete(capturedMonth), 400);
   }
 }
 
@@ -2427,7 +2430,7 @@ function msToggleRace() {
   const was = !!msState['__race__'];
   // Check if trying to complete race before month 6 starts
   if (!was) {
-    const PROG_START_MS = new Date(2025, 3, 14);
+    const PROG_START_MS = new Date(2026, 3, 14);
     const month6Start = new Date(PROG_START_MS);
     month6Start.setDate(month6Start.getDate() + 5 * 28);
     const today = new Date();
@@ -2507,7 +2510,7 @@ function msRender() {
         </div>`;
     } else {
       giftEl.className = 'ms-gift-box ms-gift-locked';
-      const PROG_START_RENDER = new Date(2025, 3, 14);
+      const PROG_START_RENDER = new Date(2026, 3, 14);
       const mStart = new Date(PROG_START_RENDER);
       mStart.setDate(mStart.getDate() + (monthNum - 1) * 28);
       const today_r = new Date(); today_r.setHours(0,0,0,0);
@@ -2520,7 +2523,7 @@ function msRender() {
       } else {
         lockMsg = 'Complete all ' + totalMs + ' milestones this month to unlock';
       }
-      giftEl.innerHTML = `<span class="ms-gift-emoji">🎁</span><div class="ms-gift-label">\${lockMsg}</div>`;
+      giftEl.innerHTML = `<span class="ms-gift-emoji">🎁</span><div class="ms-gift-label">WAITING TO BE UNLOCKED!</div>`;
     }
     monthEl.appendChild(giftEl);
 
