@@ -949,11 +949,61 @@
     margin-bottom: 8px;
   }
 
+
+  /* ── Weekly quote banner ── */
+  .quote-banner {
+    margin-bottom: 28px;
+    padding: 18px 22px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent2);
+    border-radius: var(--radius);
+    position: relative;
+    animation: fadeIn 0.4s ease;
+  }
+  .quote-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent2);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .quote-text {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.65;
+    letter-spacing: -0.01em;
+  }
+  .quote-week {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+  /* Block colour accent per phase */
+  .quote-b1 { border-left-color: var(--pink); }
+  .quote-b1 .quote-eyebrow { color: var(--pink); }
+  .quote-b2 { border-left-color: var(--accent2); }
+  .quote-b2 .quote-eyebrow { color: var(--accent2); }
+  .quote-b3 { border-left-color: var(--accent3); }
+  .quote-b3 .quote-eyebrow { color: var(--accent3); }
+  .quote-b4 { border-left-color: var(--accent); }
+  .quote-b4 .quote-eyebrow { color: var(--accent); }
+
 </style>
 </head>
 <body>
 
 <!-- ── Top nav ── -->
+
+<!-- ── Weekly quote banner ── -->
+<div class="quote-banner" id="quoteBanner">
+  <div class="quote-eyebrow" id="quoteEyebrow"></div>
+  <div class="quote-text" id="quoteText"></div>
+  <div class="quote-week" id="quoteWeek"></div>
+</div>
 
 <nav class="top-nav">
   <button class="top-nav-btn active" data-tab="warmup" onclick="switchView('warmup')">🔥 Warm-Up</button>
@@ -996,7 +1046,7 @@
             <div class="wp-move-name">Side to Side</div>
             <div class="wp-rep-badge">12 reps</div>
           </div>
-          <div class="wp-move-note">Sitting or standing tall. Slowly tilt your right ear toward your right shoulder, return to centre, then left. Never force — let gravity do the work.</div>
+          <div class="wp-move-note">Sitting or standing tall. Slowly keeping your head straight and steady, move from centre to the right, looking over your shoulder, return to centre, then left. Never force.</div>
         </div>
         <div class="wp-move">
           <div class="wp-move-row">
@@ -1193,7 +1243,7 @@
   </div>
 
   <div class="wp-footer-note">
-    💡 This warm-up runs head to toe on purpose — ankles and feet last, core last of all, so you are fully warm before the most demanding activation work.
+    💡 This warm-up runs head to toe on purpose — ankles and feet last, core last of all, so you are fully warm before the most demanding activation work. Feel your body and do any other stretching as necessary! Soreness is just your body's way of saying it's growing!
   </div>
 
 </div>
@@ -2216,6 +2266,59 @@ function renderSession() {
   panel.innerHTML = html;
 }
 
+// ── Weekly Quote System ───────────────────────────────────────────
+const WEEKLY_QUOTES = [
+  { week: 1,  block: 'b1', label: 'Block 1 — Foundation', text: "Every rep today is a vote for the woman you're becoming. You don't need to be perfect. You just need to show up." },
+  { week: 2,  block: 'b1', label: 'Block 1 — Foundation', text: "We are cheering for each of your workouts, each night you didn't drink. But remember, success is built in these invisible, ordinary choices stacked over time." },
+  { week: 3,  block: 'b1', label: 'Block 1 — Foundation', text: "Action does not wait for self-esteem. It creates it." },
+  { week: 4,  block: 'b1', label: 'Block 1 — Foundation', text: "You ran when you didn't want to. You lifted when you were tired. You are already the person you're trying to become — you just haven't caught up to that truth yet." },
+  { week: 5,  block: 'b1', label: 'Block 1 — Foundation', text: "Fit, focused, and unstoppable — not someday. Look at what you've already done in five weeks." },
+  { week: 6,  block: 'b1', label: 'Block 1 — Foundation', text: "Six weeks in. The old version of you would have stopped by now. This version doesn't." },
+  { week: 7,  block: 'b2', label: 'Block 2 — Build', text: "Consistency is even rarer than talent and enthusiasm. You have all three." },
+  { week: 8,  block: 'b2', label: 'Block 2 — Build', text: "You are not training for a race. You are training for a life where hard things don't scare you." },
+  { week: 9,  block: 'b2', label: 'Block 2 — Build', text: "The woman who carries 24 kg without flinching carries everything else in her life the same way." },
+  { week: 10, block: 'b2', label: 'Block 2 — Build', text: "Consistency never looks impressive in the moment — only in the end." },
+  { week: 11, block: 'b2', label: 'Block 2 — Build', text: "Halfway there. And you look like someone who was never going to stop anyway." },
+  { week: 12, block: 'b2', label: 'Block 2 — Build', text: "Three months of showing up. That's not motivation. That's discipline. That's identity. That's you." },
+  { week: 13, block: 'b3', label: 'Block 3 — Station Specific', text: "Most people don't fail because they lack talent — they fail because they stop. Endurance in the small things nobody claps for. That's what you've been building." },
+  { week: 14, block: 'b3', label: 'Block 3 — Station Specific', text: "You run, you lift, you show up for your family, your work, your goals — all at once. That's not ordinary. Don't let anyone treat it like it is." },
+  { week: 15, block: 'b3', label: 'Block 3 — Station Specific', text: "The sled doesn't care about your mood. And neither do you anymore — you push it anyway. That's power." },
+  { week: 16, block: 'b3', label: 'Block 3 — Station Specific', text: "You are four months into doing something most people quit in week two. Let that sink in." },
+  { week: 17, block: 'b3', label: 'Block 3 — Station Specific', text: "Physically strong. Mentally sharp. Emotionally grounded. You are building all three at once — and it shows." },
+  { week: 18, block: 'b3', label: 'Block 3 — Station Specific', text: "You didn't just get fit. You got fearless." },
+  { week: 19, block: 'b4', label: 'Block 4 — Race Prep', text: "You've earned the right to believe in yourself completely. Do it." },
+  { week: 20, block: 'b4', label: 'Block 4 — Race Prep', text: "The race doesn't make you strong. It just gets to witness what you already are." },
+  { week: 21, block: 'b4', label: 'Block 4 — Race Prep', text: "One month out. You've run the kilometres, carried the weight, done the work. The rest is just showing up — which you've been doing for five months straight." },
+  { week: 22, block: 'b4', label: 'Block 4 — Race Prep', text: "You are ready. Not almost ready. Not nearly ready. Ready." },
+  { week: 23, block: 'b4', label: 'Block 4 — Race Prep', text: "Race week. You trained for this. You lived for this. All those early mornings and heavy sleds — they were always pointing here." },
+  { week: 24, block: 'b4', label: 'Block 4 — Race Prep', text: "Whatever happens on race day, this is already one of the best things you have ever done for yourself. We are so proud of you." },
+];
+
+function getCurrentQuote() {
+  const progStart = new Date(2026, 3, 14); // 14 Apr 2026
+  progStart.setHours(0, 0, 0, 0);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const daysDiff = Math.floor((today - progStart) / (1000 * 60 * 60 * 24));
+  const weekNum = Math.min(Math.max(Math.floor(daysDiff / 7) + 1, 1), 24);
+  return WEEKLY_QUOTES.find(q => q.week === weekNum) || WEEKLY_QUOTES[0];
+}
+
+function renderQuoteBanner() {
+  const q = getCurrentQuote();
+  const banner = document.getElementById('quoteBanner');
+  const eyebrow = document.getElementById('quoteEyebrow');
+  const text = document.getElementById('quoteText');
+  const week = document.getElementById('quoteWeek');
+  if (!banner) return;
+  banner.className = 'quote-banner quote-' + q.block;
+  eyebrow.textContent = q.label;
+  text.textContent = q.text;
+  week.textContent = 'Week ' + q.week + ' of 24';
+}
+
+
+renderQuoteBanner();
 renderAll();
 
 // ══════════════════════════════════════════
