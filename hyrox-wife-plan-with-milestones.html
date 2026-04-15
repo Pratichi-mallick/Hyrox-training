@@ -992,6 +992,168 @@
   .quote-b4 { border-left-color: var(--accent); }
   .quote-b4 .quote-eyebrow { color: var(--accent); }
 
+
+  /* ══ Check-in counter strip ══ */
+  .ci-strip {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .ci-strip-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .ci-strip-count {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent2);
+    white-space: nowrap;
+  }
+  .ci-strip-bar-track {
+    flex: 1;
+    height: 4px;
+    background: var(--surface2);
+    border-radius: 2px;
+    min-width: 80px;
+    overflow: hidden;
+  }
+  .ci-strip-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+  .ci-strip-pct {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* ══ Block grid ══ */
+  .ci-block-grid {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .ci-block-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ci-block-name {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    width: 72px;
+    flex-shrink: 0;
+  }
+  .ci-dots {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+  .ci-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    flex-shrink: 0;
+    position: relative;
+    cursor: default;
+    transition: all 0.15s;
+  }
+  .ci-dot.done {
+    background: var(--accent2);
+    border-color: var(--accent2);
+  }
+  .ci-dot.missed {
+    background: rgba(240,112,96,0.15);
+    border-color: rgba(240,112,96,0.3);
+  }
+  .ci-dot-label {
+    position: absolute;
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--muted);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .ci-block-count {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* ══ Check-in button ══ */
+  .ci-btn-wrap {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .ci-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border2);
+    background: var(--surface2);
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ci-btn:hover { border-color: var(--accent2); color: var(--accent2); }
+  .ci-btn.logged {
+    background: rgba(139,223,176,0.12);
+    border-color: var(--accent2);
+    color: var(--accent2);
+  }
+  .ci-btn.logged:hover {
+    background: rgba(240,112,96,0.08);
+    border-color: rgba(240,112,96,0.4);
+    color: var(--danger);
+  }
+  .ci-btn-status {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .ci-btn-status.logged { color: var(--accent2); }
+
+  /* ══ Week pair dots ══ */
+  .ci-week-pair {
+    display: flex;
+    gap: 2px;
+  }
+  .ci-week-pair .ci-dot:first-child { border-radius: 3px 1px 1px 3px; }
+  .ci-week-pair .ci-dot:last-child  { border-radius: 1px 3px 3px 1px; }
+
 </style>
 </head>
 <body>
@@ -1390,6 +1552,14 @@
 
 <!-- ── Training plan view ── -->
 <div class="view" id="view-plan">
+
+<div class="ci-strip" id="ciStrip">
+  <div class="ci-strip-label">Sessions</div>
+  <div class="ci-strip-count" id="ciCount">0 / 72</div>
+  <div class="ci-strip-bar-track"><div class="ci-strip-bar-fill" id="ciBar" style="width:0%"></div></div>
+  <div class="ci-strip-pct" id="ciPct">0%</div>
+</div>
+
 <div class="header">
   <div class="header-eyebrow">// hyrox doubles — partner plan</div>
   <h1 class="header-title">6-Month Build to<br><span>Hyrox Doubles</span> — October</h1>
@@ -2262,8 +2432,12 @@ function renderSession() {
     html += `<div class="progress-note">${wdata.note}</div>`;
   }
 
+  // Check-in button + block grid
+  html += ciRenderCheckin();
+
   html += `</div>`;
   panel.innerHTML = html;
+  ciUpdateStrip();
 }
 
 // ── Weekly Quote System ───────────────────────────────────────────
@@ -2318,8 +2492,155 @@ function renderQuoteBanner() {
 }
 
 
+// ── Check-in System ───────────────────────────────────────────────────────
+const CI_KEY = 'hyrox_checkin_v1';
+const CI_BLOCKS = ['b1','b2','b3','b4'];
+const CI_DAYS   = ['d1','d2','d3'];
+const CI_PAIRS  = [0,1,2]; // 3 week-pairs per block
+// Each pair has 2 week slots: w0 and w1
+
+function ciKey(block, pairIdx, day, weekSlot) {
+  return `ci_${block}_${pairIdx}_${day}_w${weekSlot}`;
+}
+
+function ciLoadState() {
+  try { return JSON.parse(localStorage.getItem(CI_KEY)) || {}; } catch(e) { return {}; }
+}
+function ciSaveState(s) {
+  try { localStorage.setItem(CI_KEY, JSON.stringify(s)); } catch(e) {} 
+}
+let ciState = ciLoadState();
+
+// Map SESSIONS block weekKeys to week-pair indices and actual programme week numbers
+// Block weekKeys: b1=[1,2,3], b2=[4,5,6], b3=[7,8,9], b4=[10,11,12]
+// Each weekKey index = one pair of 2 actual weeks
+// Actual programme weeks: b1 covers wk1-6, b2 wk7-12, b3 wk13-18, b4 wk19-24
+const CI_PROG_WEEKS = {
+  b1: { 0:[1,2], 1:[3,4], 2:[5,6] },
+  b2: { 0:[7,8], 1:[9,10], 2:[11,12] },
+  b3: { 0:[13,14], 1:[15,16], 2:[17,18] },
+  b4: { 0:[19,20], 1:[21,22], 2:[23,24] },
+};
+
+// Is a given programme week in the past relative to today?
+function ciWeekIsPast(weekNum) {
+  const progStart = new Date(2026, 3, 14);
+  progStart.setHours(0,0,0,0);
+  const weekStart = new Date(progStart);
+  weekStart.setDate(weekStart.getDate() + (weekNum - 1) * 7);
+  const weekEnd = new Date(weekStart);
+  weekEnd.setDate(weekEnd.getDate() + 6);
+  weekEnd.setHours(23,59,59,999);
+  return Date.now() > weekEnd.getTime();
+}
+
+function ciTotalDone() {
+  return Object.values(ciState).filter(Boolean).length;
+}
+
+function ciBlockDone(block) {
+  let done = 0;
+  CI_PAIRS.forEach(p => CI_DAYS.forEach(d => [0,1].forEach(w => {
+    if (ciState[ciKey(block,p,d,w)]) done++;
+  })));
+  return done;
+}
+
+function ciUpdateStrip() {
+  const done = ciTotalDone();
+  const total = 72;
+  const pct = Math.round((done/total)*100);
+  const el = document.getElementById('ciCount');
+  const bar = document.getElementById('ciBar');
+  const pctEl = document.getElementById('ciPct');
+  if(el) el.textContent = done + ' / ' + total;
+  if(bar) bar.style.width = pct + '%';
+  if(pctEl) pctEl.textContent = pct + '%';
+}
+
+// Render the check-in button + block overview grid at the bottom of the session panel
+function ciRenderCheckin() {
+  const b = state.block;
+  const p = state.weekIdx;   // pair index 0,1,2
+  const d = state.day;
+
+  // Get the two programme week numbers for this pair
+  const weekNums = CI_PROG_WEEKS[b][p];
+
+  // Build the two week-slot buttons
+  const slots = [0,1].map(w => {
+    const key  = ciKey(b, p, d, w);
+    const done = !!ciState[key];
+    const wkNum = weekNums[w];
+    const past = ciWeekIsPast(wkNum);
+    const progStart = new Date(2026, 3, 14);
+    const wkStart = new Date(progStart);
+    wkStart.setDate(wkStart.getDate() + (wkNum-1)*7);
+    const wkLabel = wkStart.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+    return { key, done, past, wkNum, wkLabel };
+  });
+
+  let html = `<div class="ci-btn-wrap">`;
+  html += `<div style="flex:1">`;
+  html += `<div style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;">Log this session</div>`;
+  html += `<div style="display:flex;gap:10px;flex-wrap:wrap;">`;
+
+  slots.forEach(slot => {
+    const btnCls = slot.done ? 'ci-btn logged' : 'ci-btn';
+    const icon   = slot.done ? '✓' : '○';
+    const label  = slot.done ? 'Logged · Wk ' + slot.wkNum : 'Wk ' + slot.wkNum + ' · ' + slot.wkLabel;
+    const hover  = slot.done ? 'Tap to undo' : '';
+    html += `<button class="${btnCls}" onclick="ciToggle('${slot.key}')" title="${hover}">
+      <span>${icon}</span> ${label}
+    </button>`;
+  });
+
+  html += `</div></div>`;
+
+  // Mini block overview dots
+  html += `<div class="ci-block-grid">`;
+  CI_BLOCKS.forEach(blk => {
+    const blkLabels = {b1:'Block 1',b2:'Block 2',b3:'Block 3',b4:'Block 4'};
+    const done = ciBlockDone(blk);
+    html += `<div class="ci-block-row">`;
+    html += `<div class="ci-block-name">${blkLabels[blk]}</div>`;
+    html += `<div class="ci-dots">`;
+    CI_PAIRS.forEach(pairIdx => {
+      const weekNums = CI_PROG_WEEKS[blk][pairIdx];
+      html += `<div class="ci-week-pair">`;
+      [0,1].forEach(w => {
+        const key = ciKey(blk, pairIdx, 'd1', w); // use d1 as proxy — we show per-pair
+        // Actually show if ANY day in this block+pair+weekSlot is done
+        const anyDone = CI_DAYS.some(dd => !!ciState[ciKey(blk, pairIdx, dd, w)]);
+        const wkNum = weekNums[w];
+        const past = ciWeekIsPast(wkNum);
+        let dotCls = 'ci-dot';
+        if (anyDone) dotCls += ' done';
+        else if (past) dotCls += ' missed';
+        html += `<div class="${dotCls}" title="Wk ${wkNum}"></div>`;
+      });
+      html += `</div>`;
+      if (pairIdx < 2) html += `<div style="width:4px;"></div>`;
+    });
+    html += `</div>`;
+    html += `<div class="ci-block-count">${done}/18</div>`;
+    html += `</div>`;
+  });
+  html += `</div>`;
+  html += `</div>`;
+  return html;
+}
+
+function ciToggle(key) {
+  ciState[key] = !ciState[key];
+  ciSaveState(ciState);
+  ciUpdateStrip();
+  renderSession(); // re-render to update button state
+}
+
 renderQuoteBanner();
 renderAll();
+ciUpdateStrip();
 
 // ══════════════════════════════════════════
 // MILESTONE TRACKER
