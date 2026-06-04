@@ -1565,8 +1565,8 @@
   <h1 class="header-title">6-Month Build to<br><span>Hyrox Doubles</span> — October</h1>
   <div class="header-meta">
     <div class="meta-pill">Athlete: <b>Partner</b></div>
-    <div class="meta-pill">Start: <b>14 Apr 2026</b></div>
-    <div class="meta-pill">Event: <b>October 2025</b></div>
+    <div class="meta-pill">Start: <b>1 Jun 2026</b></div>
+    <div class="meta-pill">Event: <b>November 28, 2026</b></div>
     <div class="meta-pill">Format: <b>Doubles</b></div>
     <div class="meta-pill">Days/wk: <b>3</b></div>
     <div class="meta-pill">Baseline run: <b>1–2 km</b></div>
@@ -1602,25 +1602,25 @@ const BLOCKS = {
     name: 'Block 1 — Foundation',
     weeks: ['Wk 1–2','Wk 3–4','Wk 5–6'],
     weekKeys: [1,2,3],
-    desc: 'Build aerobic base, learn movement patterns, develop basic strength. Run/walk intervals build to continuous 5 km. No Hyrox stations yet — movement quality first.',
+    desc: 'You start ahead of most beginners — 3 km running, event-weight carries and lunges already in the bag. Block 1 pushes running to 8 km, introduces wall balls, sled and burpee broad jumps, and builds the aerobic engine for race day. Rest 60–90s between sets.',
     badge: 'Wk 1–6',
     cls: 'b1',
-    focus: 'Base fitness',
+    focus: 'Accelerated base',
   },
   b2: {
     name: 'Block 2 — Build',
     weeks: ['Wk 7–8','Wk 9–10','Wk 11–12'],
     weekKeys: [4,5,6],
-    desc: 'Introduce Hyrox-specific movements. Run to 8 km continuous. Add loaded carries, wall balls and sled simulation. Strength sessions add compound lifts.',
+    desc: 'Running climbs to 12 km. All 8 Hyrox stations introduced at or near race weight. Half-Hyrox simulations begin. SkiErg and row targets tighten — 400 m under 2:00, 500 m row under 2:30. Strength sessions get heavier.',
     badge: 'Wk 7–12',
     cls: 'b2',
-    focus: 'Strength + Station intro',
+    focus: 'Station mastery',
   },
   b3: {
     name: 'Block 3 — Station Specific',
     weeks: ['Wk 13–14','Wk 15–16','Wk 17–18'],
     weekKeys: [7,8,9],
-    desc: 'Train every priority station under fatigue. Combined run + station circuits. Practice splitting reps with your partner. Doubles strategy built in.',
+    desc: 'Full Hyrox simulation sessions under race fatigue. Doubles strategy locked in with your partner. Running pace targets tighten to sub-6:30/km. Peak training load — this is where the race is won.',
     badge: 'Wk 13–18',
     cls: 'b3',
     focus: 'Race simulation',
@@ -1629,7 +1629,7 @@ const BLOCKS = {
     name: 'Block 4 — Race Prep',
     weeks: ['Wk 19–20','Wk 21–22','Wk 23–24'],
     weekKeys: [10,11,12],
-    desc: 'Full mock Hyrox doubles run-throughs. Taper in final 2 weeks. Lock in your station split strategy with your partner. Race-week protocol included.',
+    desc: 'Full mock doubles run-throughs in weeks 19–20. Taper begins week 21 — volume drops 40%, intensity stays. Race week is rest, sleep and nutrition only. Nov 28 is the target.',
     badge: 'Wk 19–24',
     cls: 'b4',
     focus: 'Peak + Taper',
@@ -1645,41 +1645,41 @@ const SESSIONS = {
     ],
     content: {
       d1: {
-        title: 'Run / Walk Intervals',
-        goal: 'Build continuous running capacity from 1–2 km up to 5 km by end of Block 1. No pressure on pace — effort and consistency are the only goals.',
-        duration: '30–40 min',
+        title: 'Run — Build Endurance',
+        goal: 'You already run 3 km. Block 1 pushes this to 8 km continuous by week 6. Each session adds distance — not speed. Zone 2 pace, conversational effort throughout.',
+        duration: '35–55 min',
         together: false,
         weeks: {
           1: {
-            run: { title: 'Week 1–2 Protocol', sub: 'Run/walk intervals. Focus on breathing, not speed.', specs: [
-              { label: 'Format', val: '8 × 2 min', unit: 'run / 1 min walk' },
-              { label: 'Total time', val: '~24', unit: 'min moving' },
-              { label: 'Pace', val: 'Conversational', unit: 'can talk easily' },
+            run: { title: 'Week 1–2 Protocol', sub: 'You can run 3 km already — push to 5 km continuous. Easy Zone 2 pace.', specs: [
+              { label: 'Distance', val: '4–5', unit: 'km continuous' },
+              { label: 'Pace', val: 'Zone 2', unit: 'conversational' },
+              { label: 'Target', val: '5 km', unit: 'by end Wk 2' },
             ]},
-            note: 'If 2 min run feels too easy, extend to 3 min. If it\'s too hard, shorten to 90s. The walk breaks are not failure — they are the programme.',
+            note: 'No walk breaks from session 1. You have the base. Just slow the pace right down — you should be able to hold a full conversation. Distance over speed.',
           },
           2: {
-            run: { title: 'Week 3–4 Protocol', sub: 'Longer run intervals. Aim for your first 3 km continuous run.', specs: [
-              { label: 'Format', val: '5 × 4 min', unit: 'run / 1 min walk' },
-              { label: 'Target', val: '3 km', unit: 'continuous by Wk 4' },
-              { label: 'Pace', val: 'Zone 2', unit: '~7:00 min/km' },
+            run: { title: 'Week 3–4 Protocol', sub: 'Build from 5 to 7 km. Still Zone 2 — pace is secondary to distance.', specs: [
+              { label: 'Distance', val: '6–7', unit: 'km continuous' },
+              { label: 'Pace', val: 'Zone 2', unit: '~6:45–7:15/km' },
+              { label: 'Target', val: '7 km', unit: 'by end Wk 4' },
             ]},
-            note: 'By end of week 4, attempt one fully continuous 3 km at easy pace. Log the time.',
+            note: 'Add 1–1.5 km per session. If you feel strong, go further — there is no upper limit. Log your distance and how you felt after each run.',
           },
           3: {
-            run: { title: 'Week 5–6 Protocol', sub: 'First 5 km target. Run slow, run continuous.', specs: [
-              { label: 'Format', val: 'Continuous', unit: 'no walk breaks' },
-              { label: 'Target', val: '5 km', unit: 'by end of Wk 6' },
-              { label: 'Pace', val: '~7:30', unit: 'min/km (easy)' },
+            run: { title: 'Week 5–6 Protocol', sub: 'Push to 8 km. Block 1 summit — your biggest aerobic leap.', specs: [
+              { label: 'Distance', val: '7–8', unit: 'km continuous' },
+              { label: 'Pace', val: 'Zone 2', unit: '~6:45/km' },
+              { label: 'Target', val: '8 km', unit: 'by end Wk 6' },
             ]},
-            note: 'Run at a pace where you can hold a conversation. Completing 5 km is the milestone — time is irrelevant.',
+            note: 'This is the Block 1 milestone run. Slow and continuous. Running 8 km means the Hyrox run distance is firmly within your range. Log your time.',
           },
         }
       },
       d2: {
-        title: 'Full-Body Strength',
-        goal: 'Build foundational strength for the loaded Hyrox stations. Focus on movement quality. Every rep is a rehearsal for the race.',
-        duration: '45 min',
+        title: 'Strength + Station Intro',
+        goal: 'You have the carry and lunge base. Block 1 introduces wall balls, burpee broad jumps and sled mechanics — the stations you have not yet trained. Movement quality first, then load.',
+        duration: '50 min',
         together: false,
         weeks: {
           1: {
@@ -1768,9 +1768,9 @@ const SESSIONS = {
         }
       },
       d3: {
-        title: 'Run + Core Circuit',
-        goal: 'Combine aerobic work with core strength. Teaches you to move well when tired — exactly what Hyrox demands.',
-        duration: '40 min',
+        title: 'Run + Hyrox Stations',
+        goal: 'Run first, then hit the stations while fatigued. Teaches your body to execute technique when tired — exactly what race day demands. SkiErg and row targets build each week.',
+        duration: '45 min',
         together: false,
         weeks: {
           1: {
@@ -2282,7 +2282,7 @@ function renderAll() {
 }
 
 // Date helpers — programme starts Monday 21 Apr 2025
-const PROG_START = new Date(2026, 3, 14); // 14 Apr 2026
+const PROG_START = new Date(2026, 5, 1); // 14 Apr 2026
 function weekStartDate(weekNumber) {
   const d = new Date(PROG_START);
   d.setDate(d.getDate() + (weekNumber - 1) * 7);
@@ -2469,7 +2469,7 @@ const WEEKLY_QUOTES = [
 ];
 
 function getCurrentQuote() {
-  const progStart = new Date(2026, 3, 14); // 14 Apr 2026
+  const progStart = new Date(2026, 5, 1); // 1 Jun 2026
   progStart.setHours(0, 0, 0, 0);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -2524,7 +2524,7 @@ const CI_PROG_WEEKS = {
 
 // Is a given programme week in the past relative to today?
 function ciWeekIsPast(weekNum) {
-  const progStart = new Date(2026, 3, 14);
+  const progStart = new Date(2026, 5, 1);
   progStart.setHours(0,0,0,0);
   const weekStart = new Date(progStart);
   weekStart.setDate(weekStart.getDate() + (weekNum - 1) * 7);
@@ -2573,7 +2573,7 @@ function ciRenderCheckin() {
     const done = !!ciState[key];
     const wkNum = weekNums[w];
     const past = ciWeekIsPast(wkNum);
-    const progStart = new Date(2026, 3, 14);
+    const progStart = new Date(2026, 5, 1);
     const wkStart = new Date(progStart);
     wkStart.setDate(wkStart.getDate() + (wkNum-1)*7);
     const wkLabel = wkStart.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
@@ -2649,62 +2649,62 @@ const MS_SECTIONS = [
   {
     id: 'running', cls: 'ms-running', dot: '#8bdfb0', color: '#8bdfb0', title: 'Running',
     milestones: [
-      { id: 'r1', name: 'First 5 km continuous run', note: 'End of Block 1 target. Slow is fine — continuous is everything.', tag: 'Wk 1–2', month: 1 },
-      { id: 'r2', name: 'First 8 km continuous run', note: 'End of Block 1 target. Slow is fine — continuous is everything.', tag: 'Wk 4', month: 1 },
-      { id: 'r3', name: 'First 10 km continuous run', note: 'This one changes how you see yourself. No walk breaks.', tag: 'Wk 5', month: 2 },
-      { id: 'r4', name: 'Continuous running — 30 min no stopping', note: 'Steady Zone 2 effort. No walk breaks. This is the aerobic foundation.', tag: 'Wk 6', month: 2 },
-      { id: 'r5', name: 'First 12 km continuous run', note: 'You are strong and pushing the limits. Almost half-marathon territory.', tag: 'Wk 11–12', month: 3 },
-      { id: 'r6', name: 'Run like an influencer — 10 km at 6:45/km pace', note: 'Getting your 10 km locked in!', tag: 'Wk 13', month: 4 },
-      { id: 'r6b', name: 'Run like a BOSS — 5 km at 6:15/km pace', note: 'Getting your 5 km locked in!', tag: 'Wk 14', month: 4 },
-      { id: 'r7', name: '5 km at race pace (sub 6:00/km)', note: 'Block 3 tempo benchmark. Your Hyrox run legs are ready.', tag: 'Wk 17–18', month: 5 },
-      { id: 'r8', name: 'First 15 km run', note: "Block 4 summit. You're almost at half-marathon distance. Race day is ready for you.", tag: 'Wk 23', month: 6 },
+      { id: 'r1', name: 'First 5 km continuous run', note: 'You can already do 3 km — this is your first big step up. Easy pace, no stopping.', tag: 'Wk 2', month: 1 },
+      { id: 'r2', name: 'First 8 km continuous run', note: 'Block 1 summit. Zone 2 pace throughout. This is where the aerobic engine really opens up.', tag: 'Wk 5–6', month: 1 },
+      { id: 'r3', name: 'First 10 km continuous run', note: 'Block 2 entry. You are now a runner. No asterisks.', tag: 'Wk 8', month: 2 },
+      { id: 'r4', name: '5 km at sub 6:30/km pace', note: 'Not a jog — a proper tempo effort. This is Hyrox run pace. Lock it in.', tag: 'Wk 10', month: 2 },
+      { id: 'r5', name: 'First 12 km continuous run', note: 'Almost half-marathon distance. Your Hyrox run endurance is now well above race demand.', tag: 'Wk 12', month: 3 },
+      { id: 'r6', name: '10 km at sub 6:45/km pace', note: 'Sustained race pace for 10 km. This is the aerobic benchmark that means race day running is no longer a worry.', tag: 'Wk 14', month: 3 },
+      { id: 'r7', name: '5 km at sub 6:00/km — run like a BOSS', note: 'Fast and controlled. This pace in training means race pace feels comfortable on the day.', tag: 'Wk 17', month: 4 },
+      { id: 'r8', name: 'First 15 km run', note: 'Block 4 peak. You are carrying a large buffer above race demand. Taper starts now.', tag: 'Wk 20', month: 5 },
     ]
   },
   {
     id: 'strength', cls: 'ms-strength', dot: '#f080b0', color: '#f080b0', title: 'Strength',
     milestones: [
-      { id: 's1', name: 'First 10 sandbag lunges without putting it down', note: '20 kg on shoulder, 10 m non-stop. Tall torso throughout.', tag: 'Wk 4', month: 1 },
-      { id: 's2', name: 'First 20 m farmers carry at race weight (women)', note: '16 kg per hand, 20 m non-stop. Grip strong, shoulders back.', tag: 'Wk 4', month: 1 },
-      { id: 's3', name: 'First farmers carry at mixed race weight', note: '24 kg per hand, 40 m non-stop. Grip strong, shoulders back.', tag: 'Block 2', month: 2 },
-      { id: 's4', name: 'First 20 wall balls unbroken at race weight', note: '6 kg to a 9 ft mark. Rest at the top, not the bottom.', tag: 'Block 2', month: 2 },
-      { id: 's5', name: 'First 10 burpee broad jumps — no step-backs', note: 'Full jump standard on every rep. The moment it becomes a real Hyrox movement.', tag: 'Block 2', month: 2 },
-      { id: 's6', name: 'First 20 sandbag lunges without putting it down', note: '20 kg on shoulder, 20 m non-stop. Tall torso throughout.', tag: 'Block 3', month: 3 },
+      { id: 's1', name: 'First 20 wall balls unbroken at race weight (6 kg)', note: 'To a 9 ft mark. Rest at the top, not the bottom. This is the one that gasses most people — own it early.', tag: 'Wk 3', month: 1 },
+      { id: 's2', name: 'First 15 burpee broad jumps — full standard', note: 'No step-backs, full jump on every rep. The most exhausting Hyrox station for most athletes — start here.', tag: 'Wk 4', month: 1 },
+      { id: 's3', name: '40 m farmers carry at race weight (16 kg/hand)', note: 'You have 20 m already — double it. Grip strong, shoulders packed, chin up.', tag: 'Wk 5', month: 1 },
+      { id: 's4', name: 'Farmers carry at 24 kg/hand for 30 m', note: 'Above race weight. If you can carry heavy in training, race weight feels easy on the day.', tag: 'Wk 9', month: 2 },
+      { id: 's5', name: '30 sandbag lunges without putting it down', note: 'Race is 50 m per person in doubles. 30 reps non-stop is your training benchmark — event weight sandbag.', tag: 'Wk 11', month: 3 },
+      { id: 's6', name: '3 × 20 wall balls unbroken — back to back sets', note: 'Race standard is 75 wall balls per person in doubles. 3 sets of 20 with 60s rest proves you are ready.', tag: 'Wk 15', month: 4 },
     ]
   },
   {
     id: 'hyrox', cls: 'ms-hyrox', dot: '#f0c060', color: '#f0c060', title: 'Hyrox',
     milestones: [
-      { id: 'h1', name: 'First Hyrox stations trial run (under 20 min)', note: '200 m SkiErg + 200 m Row + 20 m Farmers Carry (16 kg) + 20 m Sandbag Lunge (15 kg). One shot, under 20 min.', tag: 'Wk 4', month: 1 },
-      { id: 'h2', name: 'First half-Hyrox — stations 1 (ski, row, carry, lunge)', note: '4 × 1 km with: 400 m SkiErg, 400 m Row, 20 m Farmers Carry, 20 m Sandbag Lunge between each km.', tag: 'Wk 7', month: 2 },
-      { id: 'h3', name: 'First half-Hyrox — stations 2 (sled, burpee, wall ball)', note: '4 × 1 km with: 40 m Sled Push (80 kg), 40 m Sled Pull (60 kg), 20 m Burpees, 20 Wall Balls between each km.', tag: 'Wk 8', month: 2 },
-      { id: 'h4', name: 'Half-Hyrox (sled + burpee + wall ball) under 45 min', note: '4 × 1 km with: 40 m Sled Push (80 kg), 40 m Sled Pull (60 kg), 20 m Burpees, 20 Wall Balls between each km.', tag: 'Wk 10', month: 3 },
-      { id: 'h5', name: 'Half-Hyrox (ski + row + carry + lunge) under 45 min', note: '4 × 1 km with: 400 m SkiErg, 400 m Row, 20 m Farmers Carry, 20 m Sandbag Lunge between each km.', tag: 'Wk 11', month: 3 },
-      { id: 'h6', name: 'First doubles simulation completed in under 2:30', note: 'Team mission unlocked. Run the full doubles format together — both of you, all stations, sub 2:30.', tag: 'Wk 15', month: 4 },
-      { id: 'h7', name: 'Full mock Hyrox doubles completed', note: 'All 8 stations, full doubles format. Log your time — this is your benchmark.', tag: 'Wk 17–18', month: 5 },
-      { id: 'h8', name: 'Beat your Month 4 mock time', note: 'Block 4 peak session. Proof that the taper is working.', tag: 'Wk 19–20', month: 5 },
-      { id: 'h9', name: 'Station split strategy locked in with partner', note: 'Agree exactly who does what and in what order. No more changes after this.', tag: 'Wk 19–20', month: 5 },
+      { id: 'h1', name: 'SkiErg 400 m under 2:00', note: 'You can do 400 m in 2:30 already — sub 2:00 is the race-competitive target. 30 seconds off your current time.', tag: 'Wk 4', month: 1 },
+      { id: 'h2', name: 'Row 500 m under 2:30', note: 'You can row 200 m in 2:30 — now extend to 500 m at the same effort. Race split for doubles is 500 m each.', tag: 'Wk 6', month: 1 },
+      { id: 'h3', name: 'First half-Hyrox completed — carry + lunge stations', note: '4 × 1 km: 400 m SkiErg, 400 m Row, 40 m Farmers Carry (16 kg), 25 m Sandbag Lunge between each run.', tag: 'Wk 7', month: 2 },
+      { id: 'h4', name: 'First half-Hyrox completed — sled + burpee + wall ball', note: '4 × 1 km: Sled Push 40 m (80 kg), Sled Pull 40 m (60 kg), 15 Burpee Broad Jumps, 20 Wall Balls between each run.', tag: 'Wk 8', month: 2 },
+      { id: 'h5', name: 'Both half-Hyrox formats under 45 min each', note: 'Timed benchmarks. Log both times — these are your Block 2 anchors to beat in Block 3.', tag: 'Wk 11–12', month: 3 },
+      { id: 'h6', name: 'First full doubles simulation — all 8 stations', note: 'Full race format with your partner. Log your time. This is the most important training session of the programme.', tag: 'Wk 14', month: 3 },
+      { id: 'h7', name: 'Doubles simulation in under 2:15', note: 'Competitive doubles target for Singapore. Sub 2:15 means you are racing, not surviving.', tag: 'Wk 17', month: 4 },
+      { id: 'h8', name: 'Beat your Month 3 doubles time', note: 'Block 4 peak session. Proof that the taper is working and fitness has peaked.', tag: 'Wk 19–20', month: 5 },
+      { id: 'h9', name: 'Station split strategy locked in', note: 'Final decision — who does what, in what order. Written down. No more changes.', tag: 'Wk 20', month: 5 },
     ]
   },
   {
     id: 'heart', cls: 'ms-heart', dot: '#c8f060', color: '#c8f060', title: 'Mindset',
     milestones: [
-      { id: 'm1', name: 'Three consecutive weeks of 3× training', note: 'The habit is the hardest part. Three weeks in, it sticks.', tag: 'Wk 1–3', month: 1 },
-      { id: 'm2', name: 'Sled session — Pull 60 kg × 20 m + Push 80 kg × 20 m', note: 'Complete both in a single session. This one counts double.', tag: 'Wk 6', month: 2 },
-      { id: 'm3', name: "Looked back at week 1 and couldn't believe the gap", note: "The moment you realise how far you've come. Check your workout history — count every session you've completed.", tag: 'Block 3–4', month: 3 },
-      { id: 'm4', name: "Counted every km you've run since week 1", note: 'Check your workout history and total up the kilometres. Screenshot it. The number will surprise you.', tag: 'Block 3–4', month: 4 },
+      { id: 'm1', name: 'Three consecutive weeks of 3× training', note: 'The habit is the hardest part. Three weeks in, it becomes who you are.', tag: 'Wk 1–3', month: 1 },
+      { id: 'm2', name: 'Sled session — Pull 60 kg × 20 m + Push 80 kg × 20 m', note: 'Complete both in a single session without failing a set. Sled is the great humbler — own it.', tag: 'Wk 6', month: 2 },
+      { id: 'm3', name: "Looked back at week 1 and couldn't believe the gap", note: "Count your sessions. Add up the kilometres. Screenshot it. The number will surprise you.", tag: 'Wk 14–16', month: 3 },
+      { id: 'm4', name: 'A session completed the week of a hard life moment', note: 'Work stress, bad sleep, a difficult week — and you still showed up. That is the one that counts most.', tag: 'Any time', month: 4 },
+      { id: 'm5', name: "Standing on the start line of Hyrox Singapore", note: "Six months ago this was a goal. Today it is real. You earned this start line.", tag: 'Nov 28', month: 6 },
     ]
   },
 ];
 
-const MONTH_META = [
-  { month: 1, label: 'Month 1', dates: '14 Apr – 11 May 2026', gift: '🤿', giftName: 'A Full Day of Diving', giftDesc: 'Your reward for showing up every session in Month 1. One full day of diving — earned.' },
-  { month: 2, label: 'Month 2', dates: '12 May – 8 Jun 2026', gift: '🍽️', giftName: 'A Dinner Date', giftDesc: 'Seven weeks of training done. Time to celebrate over a proper dinner — just the two of you.' },
-  { month: 3, label: 'Month 3', dates: '9 Jun – 6 Jul 2026', gift: '🕶️', giftName: 'New Sunglasses', giftDesc: 'Halfway through the programme. Halfway to race day. You deserve something new to run in.' },
-  { month: 4, label: 'Month 4', dates: '7 Jul – 3 Aug 2026', gift: '🌸', giftName: 'New Perfume', giftDesc: 'You have been showing up for months. Now something that is just for you.' },
-  { month: 5, label: 'Month 5', dates: '4 Aug – 31 Aug 2026', gift: '👜', giftName: 'New Bag', giftDesc: 'The hardest month of training is done. Race day is close. You have earned this.' },
-  { month: 6, label: 'Month 6', dates: '1 Sep – 28 Sep 2026', gift: '📿', giftName: 'New Necklace', giftDesc: 'You made it to race week. Every session, every mile, every station — this is what it was all for.' },
-];
 
+const MONTH_META = [
+  { month: 1, label: 'Month 1', dates: '1 Jun – 28 Jun 2026', gift: '🤿', giftName: 'A Full Day of Diving', giftDesc: 'Your reward for showing up every session in Month 1. One full day of diving — earned.' },
+  { month: 2, label: 'Month 2', dates: '29 Jun – 26 Jul 2026', gift: '🍽️', giftName: 'A Dinner Date', giftDesc: 'Seven weeks of training done. Time to celebrate over a proper dinner — just the two of you.' },
+  { month: 3, label: 'Month 3', dates: '27 Jul – 23 Aug 2026', gift: '🕶️', giftName: 'New Sunglasses', giftDesc: 'Halfway through the programme. Halfway to race day. You deserve something new to run in.' },
+  { month: 4, label: 'Month 4', dates: '24 Aug – 20 Sep 2026', gift: '🌸', giftName: 'New Perfume', giftDesc: 'You have been showing up for months. Now something that is just for you.' },
+  { month: 5, label: 'Month 5', dates: '21 Sep – 18 Oct 2026', gift: '👜', giftName: 'New Bag', giftDesc: 'The hardest month of training is done. Race day is close. You have earned this.' },
+  { month: 6, label: 'Month 6', dates: '19 Oct – 15 Nov 2026', gift: '📿', giftName: 'New Necklace', giftDesc: 'You made it to race week. Every session, every mile, every station — this is what it was all for.' },
+];
 
 const MS_EMOJIS = ['🎉','⚡','🔥','✨','💪','🌟','🏃‍♀️','🙌'];
 const MS_KEY = 'hyrox_milestones_v1';
@@ -2720,7 +2720,7 @@ function msAllMilestones() { return MS_SECTIONS.flatMap(s => s.milestones); }
 function msIsMonthUnlocked(monthNum) {
   // Returns true only if today falls WITHIN the month's training window
   // Use date-only strings to avoid timezone/time-component issues
-  const PROG_START_MS = new Date(2026, 3, 14);
+  const PROG_START_MS = new Date(2026, 5, 1);
   const monthStart = new Date(PROG_START_MS);
   monthStart.setDate(monthStart.getDate() + (monthNum - 1) * 28);
   monthStart.setHours(0, 0, 0, 0);
@@ -2732,7 +2732,7 @@ function msIsMonthUnlocked(monthNum) {
 }
 
 function msIsCurrentMonth(monthNum) {
-  const PROG_START_MS = new Date(2026, 3, 14);
+  const PROG_START_MS = new Date(2026, 5, 1);
   const monthStart = new Date(PROG_START_MS);
   monthStart.setDate(monthStart.getDate() + (monthNum - 1) * 28);
   const monthEnd = new Date(monthStart);
@@ -2854,7 +2854,7 @@ function msToggleRace() {
   const was = !!msState['__race__'];
   // Check if trying to complete race before month 6 starts
   if (!was) {
-    const PROG_START_MS = new Date(2026, 3, 14);
+    const PROG_START_MS = new Date(2026, 5, 1);
     const month6Start = new Date(PROG_START_MS);
     month6Start.setDate(month6Start.getDate() + 5 * 28);
     const today = new Date();
@@ -2934,7 +2934,7 @@ function msRender() {
         </div>`;
     } else {
       giftEl.className = 'ms-gift-box ms-gift-locked';
-      const PROG_START_RENDER = new Date(2026, 3, 14);
+      const PROG_START_RENDER = new Date(2026, 5, 1);
       const mStart = new Date(PROG_START_RENDER);
       mStart.setDate(mStart.getDate() + (monthNum - 1) * 28);
       const today_r = new Date(); today_r.setHours(0,0,0,0);
@@ -2997,7 +2997,7 @@ function msRender() {
       raceInline.innerHTML = `
         <span class="ms-race-icon">🏆</span>
         <div class="ms-race-title">${msState['__race__'] ? '✓ Race Day Complete — You Did It.' : 'Race Day — Hyrox Doubles Finish Line'}</div>
-        <div class="ms-race-sub">October 2025 · The one that makes everything worth it</div>`;
+        <div class="ms-race-sub">November 28, 2026 · The one that makes everything worth it</div>`;
       monthEl.appendChild(raceInline);
     }
 
