@@ -67,6 +67,17 @@
   }
   .meta-pill b { color: var(--accent-dark); font-weight: 500; }
 
+  .person-row { display: flex; gap: 8px; margin-top: 20px; }
+  .person-btn {
+    font-family: var(--sans); font-size: 14px; font-weight: 500;
+    padding: 9px 22px; border-radius: var(--radius);
+    border: 1px solid var(--border); background: var(--surface);
+    color: var(--muted); cursor: pointer; transition: all .15s;
+  }
+  .person-btn:hover { border-color: var(--border2); color: var(--text); }
+  .person-btn.active { background: var(--accent-dark); border-color: var(--accent-dark); color: #fff; }
+  .person-btn .pb-sub { display: block; font-family: var(--mono); font-size: 9px; font-weight: 400; opacity: .75; margin-top: 1px; }
+
   .section-label { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.08em; margin: 26px 0 10px; }
 
   .week-row { display: grid; grid-template-columns: repeat(14, minmax(0,1fr)); gap: 4px; }
@@ -214,16 +225,21 @@
 
 <header class="header">
   <h1 class="header-title">Hyrox Doubles, then a marathon<br>14-week plan</h1>
-  <p class="header-sub">Mon 14 Sep – Sun 20 Dec 2026. Two sessions with Jay, four runs and one Hyrox session each week. Hyrox is the A-race, targeting <strong style="font-weight:500">1:20:00</strong>; the marathon 18 days later is a completion goal.</p>
+  <p class="header-sub">Mon 14 Sep – Sun 20 Dec 2026. Two sessions with Jay, four runs and one Hyrox session each week. Hyrox is the A-race, targeting <strong style="font-weight:500">1:30:00</strong>; the marathon 18 days later is a completion goal.</p>
+
+  <div class="person-row">
+    <button class="person-btn active" id="tab-prat" onclick="setPerson('prat')">Prat<span class="pb-sub">Hyrox + marathon</span></button>
+    <button class="person-btn" id="tab-louise" onclick="setPerson('louise')">Louise<span class="pb-sub">Hyrox only</span></button>
+  </div>
 
   <div class="countdowns" id="countdowns"></div>
 
-  <div class="meta-row">
+  <div class="meta-row" id="metaRow">
     <span class="meta-pill">10K: <b>Sun 27 Sep</b></span>
     <span class="meta-pill">Hyrox Doubles: <b>Fri 27 Nov</b></span>
     <span class="meta-pill">Marathon: <b>Tue 15 Dec</b></span>
-    <span class="meta-pill">Hyrox target: <b>1:20:00</b></span>
-    <span class="meta-pill">Hyrox run pace: <b>6:20</b></span>
+    <span class="meta-pill">Hyrox target: <b>1:30:00</b></span>
+    <span class="meta-pill">Pair run pace: <b>7:05</b></span>
     <span class="meta-pill">Easy pace: <b>7:00–7:20</b></span>
     <span class="meta-pill">Marathon pace: <b>6:50</b></span>
     <span class="meta-pill">Peak long run: <b>32 km · 15 Nov</b></span>
@@ -259,15 +275,15 @@
 </details>
 
 <details class="ref">
-  <summary>Hyrox split model — what 1:20:00 actually requires</summary>
+  <summary>Hyrox split model — the 1:30 target, and what 1:25 would take</summary>
   <table class="st-table">
-    <thead><tr><th>Segment</th><th>1:20 split</th><th>Elapsed</th><th>1:30 split</th><th>Elapsed</th></tr></thead>
+    <thead><tr><th>Segment</th><th>1:30 target</th><th>Elapsed</th><th>1:25 stretch</th><th>Elapsed</th></tr></thead>
     <tbody id="modelBody"></tbody>
   </table>
-  <p class="note"><b>The binding constraint is the running, not the stations.</b> 1:20 allocates 51:00 to the eight kilometres — an average of 6:22/km on legs that have just come off a station. Your flat 10K race pace is currently around 6:00/km, so race running would sit only about 20 s/km off an all-out 10K, repeated eight times. Station work (25:30) and transitions (3:30) are realistic for a well-drilled Open Doubles pair. <b>In doubles both partners run every kilometre</b>, so 6:20/km has to be comfortable for both of you, not just the faster one. Two checkpoints decide which column you are in: the 10K on 27 Sep, and the full simulation on 8 Nov.</p>
+  <p class="note"><b>1:30 allocates 57:10 to the eight kilometres</b> — an average of 7:09/km on legs coming off a station — with 30:10 of shared station work and 2:40 of transitions. That is anchored to Louise\u2019s current 7:00/km flat 10K, because in doubles both partners run every kilometre, so the pair\u2019s run pace is set by the slower runner, not the faster one. <b>The 1:25 column is the realistic stretch</b>, and it comes from two things: an uneven station split in Prat\u2019s favour on sled push, sled pull and wall balls, worth 15–25 s/km to Louise\u2019s running, plus her own 10K plan moving her toward 6:45/km. <b>1:20 is not on this table any more</b> — it would need 6:22/km from both of you, faster than Louise\u2019s current all-out flat 10K, which is not a ten-week gap. Two checkpoints tell you which column you are racing: the 10K on 27 Sep, and the full simulation on 8 Nov.</p>
 </details>
 
-<details class="ref">
+<details class="ref" id="maraRef">
   <summary>Marathon race-day reference — fuelling and pacing</summary>
   <table class="st-table">
     <thead><tr><th>Item</th><th>Plan</th></tr></thead>
@@ -290,10 +306,10 @@ const PACES = [
   ['Recovery', '7:15–7:30', 'Friday short run, day after a long run or a simulation'],
   ['Easy / Zone 2', '7:00–7:20', 'Wednesday run and the bulk of every long run'],
   ['Marathon pace', '6:50', 'Closing kilometres of long runs from week 5, and the marathon itself'],
-  ['Hyrox race pace', '6:20', 'The eight race kilometres. Every simulation run from week 6 is held here'],
+  ['Hyrox pair race pace', '7:05', 'The eight race kilometres at the 1:30 target. Shared Saturday runs are held here'],
   ['Tempo', '6:15–6:25', 'Thursday continuous efforts'],
   ['10K effort', '5:55–6:05', 'Thursday 1 km repeats and the 27 Sep race'],
-  ['Hyrox speed', '5:30–5:45', '400 m repeats. Top-end work so that 6:20 feels controlled rather than maximal'],
+  ['Hyrox speed', '5:30–5:45', '400 m repeats. Top-end work that buys you capacity for a heavier station share'],
   ['Strides', 'Fast, relaxed', '100–200 m efforts, full recovery, never a workout on their own'],
 ];
 
@@ -308,29 +324,131 @@ const MARA_REF = [
   ['Kit', 'The shoes and socks you wore for the 32 km on 15 Nov. Anti-chafe everywhere.'],
 ];
 
-// Hyrox Doubles split models: [segment, 1:20 split, 1:20 cumulative, 1:30 split, 1:30 cumulative]
+// Hyrox Doubles split models: [segment, 1:30 target split, elapsed, 1:25 stretch split, elapsed]
 const RACE_MODEL = [
-  ['Run 1',                  '6:10', '6:10',    '6:45', '6:45'],
-  ['SkiErg 1000 m',          '4:00', '10:10',   '4:30', '11:15'],
-  ['Run 2',                  '6:20', '16:30',   '7:00', '18:15'],
-  ['Sled push 50 m',         '2:15', '18:45',   '2:45', '21:00'],
-  ['Run 3',                  '6:20', '25:05',   '7:05', '28:05'],
-  ['Sled pull 50 m',         '2:45', '27:50',   '3:20', '31:25'],
-  ['Run 4',                  '6:25', '34:15',   '7:10', '38:35'],
-  ['Burpee broad jump 80 m', '3:30', '37:45',   '4:15', '42:50'],
-  ['Run 5',                  '6:25', '44:10',   '7:15', '50:05'],
-  ['Row 1000 m',             '3:45', '47:55',   '4:10', '54:15'],
-  ['Run 6',                  '6:25', '54:20',   '7:15', '1:01:30'],
-  ['Farmers carry 200 m',    '1:45', '56:05',   '2:05', '1:03:35'],
-  ['Run 7',                  '6:25', '1:02:30', '7:20', '1:10:55'],
-  ['Sandbag lunge 100 m',    '3:15', '1:05:45', '3:55', '1:14:50'],
-  ['Run 8',                  '6:30', '1:12:15', '7:20', '1:22:10'],
-  ['Wall balls × 100',       '4:15', '1:16:30', '5:10', '1:27:20'],
-  ['Transitions (8)',        '3:30', '1:20:00', '2:40', '1:30:00'],
+  ['Run 1',                  '6:45', '6:45',    '6:35', '6:35'],
+  ['SkiErg 1000 m',          '4:30', '11:15',   '4:10', '10:45'],
+  ['Run 2',                  '7:00', '18:15',   '6:45', '17:30'],
+  ['Sled push 50 m',         '2:45', '21:00',   '2:25', '19:55'],
+  ['Run 3',                  '7:05', '28:05',   '6:50', '26:45'],
+  ['Sled pull 50 m',         '3:20', '31:25',   '2:55', '29:40'],
+  ['Run 4',                  '7:10', '38:35',   '6:55', '36:35'],
+  ['Burpee broad jump 80 m', '4:15', '42:50',   '3:40', '40:15'],
+  ['Run 5',                  '7:15', '50:05',   '6:55', '47:10'],
+  ['Row 1000 m',             '4:10', '54:15',   '3:55', '51:05'],
+  ['Run 6',                  '7:15', '1:01:30', '6:55', '58:00'],
+  ['Farmers carry 200 m',    '2:05', '1:03:35', '1:50', '59:50'],
+  ['Run 7',                  '7:20', '1:10:55', '7:00', '1:06:50'],
+  ['Sandbag lunge 100 m',    '3:55', '1:14:50', '3:25', '1:10:15'],
+  ['Run 8',                  '7:20', '1:22:10', '7:05', '1:17:20'],
+  ['Wall balls × 100',       '5:10', '1:27:20', '4:20', '1:21:40'],
+  ['Transitions (8)',        '2:40', '1:30:00', '3:20', '1:25:00'],
 ];
 
 // Target run pace inside each Saturday session
-const HY_PACE = { 1:'6:35', 2:'easy only', 3:'6:30', 4:'n/a', 5:'6:25', 6:'6:20', 7:'6:20', 8:'6:20', 9:'easy only', 10:'6:20', 11:'n/a', 12:'n/a' };
+const HY_PACE = { 1:'7:20', 2:'easy only', 3:'7:15', 4:'n/a', 5:'7:10', 6:'7:05', 7:'7:05', 8:'7:05', 9:'easy only', 10:'7:05', 11:'n/a', 12:'n/a' };
+
+// ═══════════ Louise — Hyrox only, 3 sessions a week ═══════════
+// Her running is governed by her own 10K plan and is deliberately not prescribed here.
+const PHASES_L = {
+  lb1:  { name: 'Foundation', desc: 'Learn every station and build a base of strength you can repeat. Higher reps at moderate effort (RPE 6–7). Nothing is timed yet — the aim is that no movement feels unfamiliar by week 5.', reps: 'RPE 6–7' },
+  lb2:  { name: 'Station strength', desc: 'Load goes up, reps come down (RPE 7–8). The half simulation lands in week 6 and the full one in week 8, so you learn what the race actually feels like with eleven weeks still on the clock.', reps: 'RPE 7–8' },
+  lb3:  { name: 'Race specific', desc: 'Lower volume, race intensity. Every session is about arriving at the next run less tired, which is the single biggest lever you have on the pair\u2019s finish time.', reps: 'RPE 8, low volume' },
+  ltap: { name: 'Taper', desc: 'Volume halves, intensity stays. Two sets per exercise, nothing to failure, nothing new.', reps: '2 sets, easy' },
+  lrace:{ name: 'Race week', desc: 'Activation only. Race is Friday 27 November.', reps: 'Activation' },
+  ldone:{ name: 'Season complete', desc: 'Hyrox is done. Your training here ends — what you do next is a fresh conversation.', reps: '—' },
+};
+
+const WEEKS_L = [
+  { n:1,  ph:'lb1', load:'lb1', note:'Week one is a survey, not a test. Log a weight for everything even if it feels light — those numbers are what weeks 5 onward are built on.' },
+  { n:2,  ph:'lb1', load:'lb1', note:'10K race on Sunday. Move Tuesday\u2019s session to Monday if you prefer, and keep Saturday light.' },
+  { n:3,  ph:'lb1', load:'lb1', note:null },
+  { n:4,  ph:'lb1', load:'ldl', note:'Deload. Same movements, about two thirds of the load, three sets.' },
+  { n:5,  ph:'lb2', load:'lb2', note:null },
+  { n:6,  ph:'lb2', load:'lb2', note:'Half Hyrox simulation on Saturday. Expect it to be hard — that is information, not a verdict.' },
+  { n:7,  ph:'lb2', load:'lb2', note:null },
+  { n:8,  ph:'lb2', load:'ldl', note:'Lifting deloads so Saturday\u2019s full simulation is a genuine benchmark. Record your time and station splits.' },
+  { n:9,  ph:'lb3', load:'lb3', note:null },
+  { n:10, ph:'ltap', load:'ltp', note:null },
+  { n:11, ph:'lrace', load:'lact', note:'Hyrox Doubles on Friday 27 November.' },
+  { n:12, ph:'ldone', load:'none', note:null },
+  { n:13, ph:'ldone', load:'none', note:null },
+  { n:14, ph:'ldone', load:'none', note:null },
+];
+
+// Her prescriptions are by reps and effort, not kilos — log the load you actually use.
+const LIFTS_L = {
+  legs: {
+    title: 'Legs, lunges and carries',
+    goal: 'The four stations that cost the most time for most pairs: wall balls, sandbag lunges, sled push and farmers carry. All four are legs and grip, so they get their own day.',
+    duration: '50–60 min',
+    notice: 'Prescriptions are reps and effort, not kilos. RPE 7 means you could have done two or three more reps. Log the weight you used so you have something to beat next week.',
+    ex: [
+      { name:'Warm-up', note:'5 min bike, then 2 rounds of 10 air squats, 10 glute bridges, 10 leg swings per side and ankle rocks.', tip:true, all:'2 rounds' },
+      { name:'Goblet or barbell squat', tag:'Wall balls', note:'This is your wall ball squat. Depth is what gets no-repped on race day, so train full depth from week one.',
+        lb1:'3 × 12 @ RPE 6–7', lb2:'4 × 10 @ RPE 7–8', lb3:'4 × 8 @ RPE 8' },
+      { name:'Sandbag or DB lunge walk', tag:'Station 7', note:'20 m per set, unbroken. Direct preparation for the 100 m sandbag lunge — the station that ends most first-timers\u2019 races.',
+        lb1:'3 × 20 m, light', lb2:'4 × 20 m, heavier', lb3:'4 × 20 m @ race weight' },
+      { name:'Sled push', tag:'Station 2', note:'If there is no sled, substitute leg press or a heavy incline treadmill push at 15% for 45 s. Short choppy steps, low body position.',
+        lb1:'4 × 25 m, moderate', lb2:'5 × 25 m, heavy', lb3:'4 × 25 m @ race weight' },
+      { name:'Farmers carry', tag:'Station 6', note:'Heaviest you can hold unbroken for the distance. Grip is the most common and most fixable failure point in this race.',
+        lb1:'4 × 50 m', lb2:'4 × 75 m', lb3:'4 × 100 m @ 2 × 24 kg' },
+      { name:'Wall balls', tag:'Station 8', note:'Full squat, ball above the line, every rep. Rest 60 s. Unbroken sets of 20 are worth more than a fast set of 30 followed by a stall.',
+        lb1:'4 × 15', lb2:'4 × 20', lb3:'4 × 25' },
+      { name:'Core', note:'Dead bug 2 × 10 per side, then plank 3 × 40 s. Keeps your posture intact under the sandbag.', tip:true, all:'As written' },
+    ]
+  },
+  ergs: {
+    title: 'Pull, press and ergs',
+    goal: 'Ski, row and sled pull are all pulling movements, and together they are roughly a quarter of the race. Erg splits are also the easiest progress to see week to week.',
+    duration: '50–55 min',
+    notice: 'Log your 250 m ski and row splits every week. Those two numbers are the clearest evidence of whether this is working.',
+    ex: [
+      { name:'Warm-up', note:'5 min easy ski erg, then band pull-aparts 2 × 15 and shoulder dislocates 2 × 10.', tip:true, all:'2 rounds' },
+      { name:'SkiErg intervals', tag:'Station 1', note:'Hips and lats drive it, not arms. Note your average 250 m split each week — that is the number to beat.',
+        lb1:'4 × 250 m, 60 s rest', lb2:'5 × 250 m, 45 s rest', lb3:'4 × 500 m, 60 s rest' },
+      { name:'Row intervals', tag:'Station 5', note:'Legs, then back, then arms. Drive with the legs and the split looks after itself.',
+        lb1:'4 × 250 m, 60 s rest', lb2:'5 × 250 m, 45 s rest', lb3:'4 × 500 m, 60 s rest' },
+      { name:'Assisted pull-up or lat pulldown', tag:'Station 3', note:'The sled pull is a pulling station. Build this and the sled stops being the wall it is for most people.',
+        lb1:'3 × 10 @ RPE 7', lb2:'4 × 8 @ RPE 7–8', lb3:'4 × 6 @ RPE 8' },
+      { name:'Seated cable row', tag:'Station 3', note:'Drive the elbows back, squeeze at the end. Same pattern as hauling the sled rope.',
+        lb1:'3 × 12', lb2:'4 × 10', lb3:'4 × 8' },
+      { name:'DB shoulder press', note:'Overhead strength holds your posture together late in the race, especially on the ski.',
+        lb1:'3 × 10 @ RPE 6–7', lb2:'3 × 8 @ RPE 7–8', lb3:'3 × 8 @ RPE 8' },
+      { name:'Burpee broad jump', tag:'Station 4', note:'10 m per set, technique only. Step up rather than jump up if you want to save the legs — it is barely slower and far less taxing.',
+        lb1:'4 × 10 m', lb2:'4 × 15 m', lb3:'3 × 20 m' },
+    ]
+  }
+};
+
+const DEFAULT_DAYS_L = [
+  { k:'mon', kind:'own',   type:'Own run plan' },
+  { k:'tue', kind:'liftL', ref:'legs', type:'Legs & carries' },
+  { k:'wed', kind:'own',   type:'Own run plan' },
+  { k:'thu', kind:'liftL', ref:'ergs', type:'Pull & ergs' },
+  { k:'fri', kind:'rest',  type:'Rest' },
+  { k:'sat', kind:'hyrox', type:'Hyrox · shared' },
+  { k:'sun', kind:'own',   type:'Own run plan' },
+];
+
+const DAY_OVERRIDES_L = {
+  2: [null,null,null,null,null,null, { k:'sun', kind:'race', ref:'10k', type:'10K race' }],
+  11: [
+    { k:'mon', kind:'liftL', ref:'legs', type:'Activation' },
+    { k:'tue', kind:'rest',  type:'Rest' },
+    { k:'wed', kind:'own',   type:'Shakeout run' },
+    { k:'thu', kind:'rest',  type:'Rest · kit' },
+    { k:'fri', kind:'race',  ref:'hyrox', type:'HYROX' },
+    { k:'sat', kind:'hyrox', type:'Recovery' },
+    { k:'sun', kind:'rest',  type:'Rest' },
+  ],
+  12: [0,1,2,3,4,5,6].map(i => ({ k:['mon','tue','wed','thu','fri','sat','sun'][i], kind:'done', type:'Season done' })),
+  13: [0,1,2,3,4,5,6].map(i => ({ k:['mon','tue','wed','thu','fri','sat','sun'][i], kind:'done', type:'Season done' })),
+  14: [0,1,2,3,4,5,6].map(i => ({ k:['mon','tue','wed','thu','fri','sat','sun'][i], kind:'done', type:'Season done' })),
+};
+
+// Louise-specific guidance for the shared Saturday session
+const SAT_SPLIT = 'Prat takes the heavier share of the station work — roughly 60/40 in his favour on sled push, sled pull and wall balls. Your job is to arrive at each run as fresh as the split allows, because your run pace is what sets the pair\u2019s finish time.';
 
 const PHASES = {
   p1:       { name: 'Base and strength re-entry', desc: 'Rebuild lifting volume after the break and lay down easy running mileage. Reps 8–12 on the pyramids. Week 2 tapers into the 10K, week 4 is a planned deload.', reps: '8–12 reps' },
@@ -465,7 +583,7 @@ const HYROX = {
       ['Finish','10 min mobility, then rest']],
     note:'Under 40 minutes total. If in doubt, do less.' },
   3: { title:'Compromised running', sub:'The core Hyrox skill: running well on tired legs.',
-    blocks:[['4 rounds','1 km run at 6:20–6:35, then one station'],
+    blocks:[['4 rounds','1 km run at 7:10–7:20, then one station'],
       ['Stations','SkiErg 500 m / sled push 50 m / row 500 m / wall balls × 50 split'],
       ['Rest','90 s between rounds, no more'],
       ['Finish','Easy 400 m jog']],
@@ -622,9 +740,24 @@ function setsFor(ex, load) {
   return { rows: base.slice(0,2).map(r => ({ w: scaleW(r[0], .40), r: 12 })) };
 }
 
+function isL() { return state.person === 'louise'; }
+function weeksArr() { return isL() ? WEEKS_L : WEEKS; }
+function phasesObj() { return isL() ? PHASES_L : PHASES; }
+
 function daysOf(n) {
-  const ov = DAY_OVERRIDES[n];
-  return DEFAULT_DAYS.map((d, i) => (ov && ov[i]) ? ov[i] : d);
+  const base = isL() ? DEFAULT_DAYS_L : DEFAULT_DAYS;
+  const ov = (isL() ? DAY_OVERRIDES_L : DAY_OVERRIDES)[n];
+  return base.map((d, i) => (ov && ov[i]) ? ov[i] : d);
+}
+
+// Louise's prescriptions scale down for deload / taper / activation
+function prescFor(ex, load) {
+  if (ex.all) return ex.all;
+  if (ex.lb1 && (load === 'lb1' || load === 'lb2' || load === 'lb3')) return ex[load] || ex.lb1;
+  if (load === 'ldl')  return (ex.lb1 || '') + ' — at two thirds load';
+  if (load === 'ltp')  return 'Half the sets of week 9, same effort';
+  if (load === 'lact') return '2 sets, light — activation only';
+  return '—';
 }
 
 // ─────────── Log ───────────
@@ -658,7 +791,7 @@ function getLog(k) { return LOG[k] || ''; }
 
 // ─────────── State ───────────
 const today = new Date();
-let state = { week: 1, day: 0, opt: 0 };
+let state = { person: 'prat', week: 1, day: 0, opt: 0 };
 
 (function initWeek() {
   const off = daysBetween(START, today);
@@ -674,17 +807,18 @@ function renderCountdowns() {
   const items = [
     { n: daysBetween(today, RACE_10K), label: '10K · Sun 27 Sep', cls: '' },
     { n: daysBetween(today, RACE_HYROX), label: 'Hyrox Doubles · Fri 27 Nov', cls: 'hyrox' },
-    { n: daysBetween(today, RACE_MARA), label: 'Marathon · Tue 15 Dec', cls: 'mara' },
   ];
+  if (!isL()) items.push({ n: daysBetween(today, RACE_MARA), label: 'Marathon · Tue 15 Dec', cls: 'mara' });
   const off = daysBetween(START, today);
   const curW = off < 0 ? 0 : Math.min(Math.floor(off / 7) + 1, NWEEKS);
+  const nw = weeksArr().length;
   document.getElementById('countdowns').innerHTML = items.map(i => `
     <div class="cd ${i.cls}">
       <div class="cd-num">${i.n > 0 ? i.n : (i.n === 0 ? 'Today' : 'Done')} <span class="cd-unit">${i.n > 0 ? (i.n === 1 ? 'day' : 'days') : ''}</span></div>
       <div class="cd-label">${i.label}</div>
     </div>`).join('') + `
     <div class="cd">
-      <div class="cd-num">${curW || '–'}<span class="cd-unit"> of 14</span></div>
+      <div class="cd-num">${curW || '–'}<span class="cd-unit"> of ${nw}</span></div>
       <div class="cd-label">${curW ? 'Current week' : 'Starts 14 Sep'}</div>
     </div>`;
 }
@@ -692,7 +826,7 @@ function renderCountdowns() {
 function renderWeeks() {
   const off = daysBetween(START, today);
   const nowW = off >= 0 ? Math.floor(off / 7) + 1 : 0;
-  document.getElementById('weekRow').innerHTML = WEEKS.map(w => `
+  document.getElementById('weekRow').innerHTML = weeksArr().map(w => `
     <button class="week-btn ${w.n===state.week?'active':''} ${w.n===nowW?'now':''}" data-ph="${w.ph}" onclick="setWeek(${w.n})">
       <span class="wk-n">W${w.n}</span>
       <span class="wk-d">${fmt(weekStart(w.n))}</span>
@@ -701,7 +835,7 @@ function renderWeeks() {
 }
 
 function renderBanner() {
-  const w = WEEKS[state.week - 1], p = PHASES[w.ph];
+  const w = weeksArr()[state.week - 1], p = phasesObj()[w.ph];
   const el = document.getElementById('phaseBanner');
   el.dataset.ph = w.ph;
   el.innerHTML = `
@@ -725,16 +859,22 @@ function renderDays() {
 }
 
 function renderPanel() {
-  const w = WEEKS[state.week - 1];
+  const w = weeksArr()[state.week - 1];
   const d = daysOf(state.week)[state.day];
   const panel = document.getElementById('panel');
 
+  if (d.kind === 'done') { panel.innerHTML = `<div class="card flat">
+    <div class="card-title">Season complete</div>
+    <div class="card-sub">Hyrox was 27 November. This plan ends there — no sessions scheduled.</div>
+    <div class="note"><b>Worth doing:</b> write down your station splits and the two things you would change. That is the starting point for whatever race comes next.</div></div>`; return; }
+  if (d.kind === 'own') { panel.innerHTML = renderOwn(d); return; }
+  if (d.kind === 'liftL') { panel.innerHTML = renderLouise(d, w); bindLogs(); return; }
   if (d.kind === 'rest') { panel.innerHTML = renderRest(d); return; }
   if (d.kind === 'race') { panel.innerHTML = d.ref === '10k' ? render10K() : (d.ref === 'hyrox' ? renderHyroxRace() : renderMarathon()); bindLogs(); return; }
   if (d.kind === 'run')  { panel.innerHTML = renderRun(d.ref); bindLogs(); return; }
   if (d.kind === 'hyrox'){ panel.innerHTML = renderHyrox(); bindLogs(); return; }
 
-  const s = LIFTS[d.ref], p = PHASES[w.ph];
+  const s = LIFTS[d.ref], p = phasesObj()[w.ph];
   let html = `<div class="session-head">
     <div><div class="session-title">${s.title}</div><div class="session-goal">${s.goal}</div></div>
     <div class="badges"><span class="badge hi">${s.duration}</span><span class="badge">Pyramid up</span><span class="badge">${p.reps}</span></div>
@@ -774,7 +914,7 @@ function renderTable(s, load, ref) {
     } else {
       html += `<div class="set-grid"><div class="set-line hdr"><span></span><span style="text-align:center">plan kg</span><span style="text-align:center">reps</span><span style="text-align:center">actual kg</span><span style="text-align:center">reps</span></div>`;
       sets.rows.forEach((r, j) => {
-        const key = `w${state.week}:${ref}:${state.opt}:${i}:${j}`;
+        const key = `${state.person}:w${state.week}:${ref}:${state.opt}:${i}:${j}`;
         const top = j === sets.rows.length - 1 && ['l1','l2','l3'].includes(load);
         html += `<div class="set-line"><span class="sl-label">S${j+1}</span>
           <span class="sl-plan ${top?'top':''}">${r.w}</span>
@@ -787,6 +927,48 @@ function renderTable(s, load, ref) {
     html += `</td></tr>`;
   });
   return html + `</tbody></table>`;
+}
+
+function renderOwn(d) {
+  return `<div class="card flat">
+    <div class="card-title">Your own running plan</div>
+    <div class="card-sub">Running is governed by your 10K plan, not this one. Follow whatever it prescribes for ${DAY_NAMES[d.k]}.</div>
+    <div class="note"><b>One thing to hold onto:</b> your run pace is the pair\u2019s limiter, so the running in your own plan matters more to the Hyrox result than anything on the gym days here. If something has to give in a heavy week, drop a gym session rather than a run.</div>
+  </div>`;
+}
+
+function renderLouise(d, w) {
+  const s = LIFTS_L[d.ref], p = PHASES_L[w.ph];
+  let html = `<div class="session-head">
+    <div><div class="session-title">${s.title}</div><div class="session-goal">${s.goal}</div></div>
+    <div class="badges"><span class="badge hi">${s.duration}</span><span class="badge">Solo session</span><span class="badge">${p.reps}</span></div>
+  </div>`;
+  if (w.note) html += `<div class="notice">${w.note}</div>`;
+  if (s.notice) html += `<div class="notice">${s.notice}</div>`;
+
+  html += `<table class="ex-table"><thead><tr><th>Exercise</th><th>Prescription</th><th style="text-align:right">Log</th></tr></thead><tbody>`;
+  s.ex.forEach((e, i) => {
+    const key = `${state.person}:w${state.week}:${d.ref}:${i}`;
+    html += `<tr>
+      <td style="width:42%"><span class="ex-name">${e.name}</span>${e.tag?`<span class="ex-tag">${e.tag}</span>`:''}
+        <div class="ex-note ${e.tip?'tip':''}">${e.note}</div></td>
+      <td><span class="simple">${prescFor(e, w.load)}</span></td>
+      <td style="text-align:right"><div class="log-row" style="margin-top:0;justify-content:flex-end">
+        <div class="log-field"><label>weight / split</label><input class="log" type="text" style="width:110px" data-k="${key}:kg" value="${getLog(key+':kg')}"></div>
+        <div class="log-field"><label>note</label><input class="log" type="text" style="width:110px" data-k="${key}:nt" value="${getLog(key+':nt')}"></div>
+      </div></td></tr>`;
+  });
+  html += `</tbody></table>`;
+  html += `<div class="note">${{
+    lb1: '<b>Progression:</b> add load or reps whenever a session felt like RPE 6 or easier. If you are unsure, add reps before weight.',
+    lb2: '<b>Progression:</b> increase load weekly on squat, lunge, sled and carries. Erg splits should drop by 2–3 s per 250 m every fortnight.',
+    lb3: '<b>Race intent:</b> everything at race weight and race distance now. Stop each set with something in reserve — Saturday is the priority.',
+    ldl: '<b>Deload:</b> two thirds load, three sets, no grinding. This is what lets the next block work.',
+    ltp: '<b>Taper:</b> half the sets, same effort. Nothing new and nothing heavy.',
+    lrace:'<b>Activation only:</b> two light sets to feel switched on. If you are unsure whether to do a set, skip it.',
+    ldone:'—',
+  }[w.load === 'ldl' ? 'ldl' : w.load === 'ltp' ? 'ltp' : w.ph] || ''}</div>`;
+  return html;
 }
 
 function progressNote(w) {
@@ -804,7 +986,7 @@ function progressNote(w) {
 function renderRun(ref) {
   const r = (RUNS[state.week] || {})[ref], m = RUN_META[ref];
   if (!r) return `<div class="card flat"><div class="card-title">No session</div><div class="card-sub">Nothing scheduled in this slot for week ${state.week}.</div></div>`;
-  const key = `w${state.week}:run:${ref}`;
+  const key = `${state.person}:w${state.week}:run:${ref}`;
   return `<div class="card ${m.cls}">
     <div class="card-title">${m.title}</div>
     <div class="card-sub">${m.sub}</div>
@@ -825,7 +1007,7 @@ function renderRun(ref) {
 function renderHyrox() {
   const h = HYROX[state.week];
   if (!h) return `<div class="card flat"><div class="card-title">Rest</div><div class="card-sub">No Hyrox session this week.</div></div>`;
-  const key = `w${state.week}:hyrox`, timed = state.week === 6 || state.week === 8;
+  const key = `${state.person}:w${state.week}:hyrox`, timed = state.week === 6 || state.week === 8;
   return `<div class="session-head">
       <div><div class="session-title">${h.title}</div><div class="session-goal">${h.sub}</div></div>
       <div class="badges"><span class="badge ${timed?'race':'hi'}">${timed?'Timed benchmark':'Saturday'}</span><span class="badge">Doubles format</span>${/^\d/.test(HY_PACE[state.week]||'')?`<span class="badge hi">Runs at ${HY_PACE[state.week]}/km</span>`:''}</div>
@@ -833,11 +1015,13 @@ function renderHyrox() {
     <div class="card ${timed?'hot':'warm'}">
       ${/^\d/.test(HY_PACE[state.week]||'')?`<div class="specs" style="margin-top:0">
         <div class="spec"><div class="spec-l">Target run pace</div><div class="spec-v">${HY_PACE[state.week]} <span class="spec-u">min/km</span></div></div>
-        <div class="spec"><div class="spec-l">Race pace reference</div><div class="spec-v">6:20 <span class="spec-u">for 1:20:00</span></div></div>
+        <div class="spec"><div class="spec-l">Pair race pace</div><div class="spec-v">7:05 <span class="spec-u">for 1:30:00</span></div></div>
         <div class="spec" style="min-width:190px"><div class="spec-l">Rule</div><div class="spec-v" style="font-size:13px">Last round no more than 15 s/km slower than the first</div></div>
-      </div>`:''}
+      </div>
+      ${!isL()?`<div class="note"><b>These runs are below your capacity, deliberately.</b> Saturday is run at pair pace, so your hard running belongs on Thursday. What you contribute here is station load — take the larger share of sled push, sled pull and wall balls so Louise reaches each run fresher.</div>`:''}`:''}
       <div class="block-list">${h.blocks.map(b=>`<div class="block"><div class="block-n">${b[0]}</div><div class="block-b">${b[1]}</div></div>`).join('')}</div>
       <div class="note">${h.note}</div>
+      ${isL()?`<div class="note"><b>Your share:</b> ${SAT_SPLIT}</div>`:''}
       <div class="log-row">
         ${timed?`<div class="log-field"><label>Total time</label><input class="log" type="text" data-k="${key}:time" value="${getLog(key+':time')}"></div>`:''}
         <div class="log-field"><label>Weakest station</label><input class="log" type="text" data-k="${key}:weak" value="${getLog(key+':weak')}"></div>
@@ -847,7 +1031,7 @@ function renderHyrox() {
 }
 
 function render10K() {
-  const key = 'race:10k';
+  const key = state.person + ':race:10k';
   return `<div class="session-head">
       <div><div class="session-title">10K race</div>
       <div class="session-goal">Sunday 27 September. A fitness test, not a season goal — it sets the pace reference for every tempo session that follows. Your 12 Sep 10 km at 7:00/km was Zone 2, so a race effort should come in near the hour.</div></div>
@@ -873,26 +1057,27 @@ function render10K() {
 }
 
 function renderHyroxRace() {
-  const key = 'race:hyrox';
+  const key = state.person + ':race:hyrox';
   return `<div class="session-head">
       <div><div class="session-title">Hyrox Doubles — race day</div>
       <div class="session-goal">Friday 27 November. Your A-race. Eleven weeks of work comes down to pacing the first two kilometres conservatively and not losing time on handovers.</div></div>
       <div class="badges"><span class="badge race">A-race</span><span class="badge">Doubles</span></div>
     </div>
     <div class="card hot">
-      <div class="card-title">Race day plan — target 1:20:00</div>
+      <div class="card-title">Race day plan — target 1:30:00</div>
       <div class="card-sub">Nothing new today — kit, shoes, fuel and warm-up are the ones you tested in week 8.</div>
       <div class="specs">
-        <div class="spec"><div class="spec-l">Running budget</div><div class="spec-v">51:00 <span class="spec-u">6:22/km avg</span></div></div>
-        <div class="spec"><div class="spec-l">Stations</div><div class="spec-v">25:30 <span class="spec-u">shared</span></div></div>
-        <div class="spec"><div class="spec-l">Transitions</div><div class="spec-v">3:30 <span class="spec-u">8 × 25 s</span></div></div>
-        <div class="spec"><div class="spec-l">Halfway check</div><div class="spec-v">37:45 <span class="spec-u">after burpees</span></div></div>
+        <div class="spec"><div class="spec-l">Running budget</div><div class="spec-v">57:10 <span class="spec-u">7:09/km avg</span></div></div>
+        <div class="spec"><div class="spec-l">Stations</div><div class="spec-v">30:10 <span class="spec-u">shared, uneven</span></div></div>
+        <div class="spec"><div class="spec-l">Transitions</div><div class="spec-v">2:40 <span class="spec-u">8 × 20 s</span></div></div>
+        <div class="spec"><div class="spec-l">Halfway check</div><div class="spec-v">42:50 <span class="spec-u">after burpees</span></div></div>
       </div>
       <div class="block-list">
         <div class="block"><div class="block-n">3 h before</div><div class="block-b">Familiar carb-based meal, normal coffee, steady hydration</div></div>
         <div class="block"><div class="block-n">45 min</div><div class="block-b">10 min easy jog, mobility, three strides, 20 easy wall balls to groove depth</div></div>
-        <div class="block"><div class="block-n">Run 1</div><div class="block-b">6:10/km and no faster. Every doubles pair goes out too hot and pays for it at the sandbag lunges</div></div>
-        <div class="block"><div class="block-n">Runs 2–8</div><div class="block-b">Hold 6:20–6:30/km. If you are past 44:10 elapsed leaving the row, you are racing the 1:30 model — adjust and finish strong rather than blowing up</div></div>
+        <div class="block"><div class="block-n">Run 1</div><div class="block-b">6:45/km and no faster. Every doubles pair goes out too hot and pays for it at the sandbag lunges</div></div>
+        <div class="block"><div class="block-n">Runs 2–8</div><div class="block-b">Hold 7:00–7:20/km together. Leaving the row inside 51:05 means 1:25 is live; past 54:15 means hold 1:30 and finish strong rather than blowing up</div></div>
+        <div class="block"><div class="block-n">Your share</div><div class="block-b">Take the larger portion of sled push, sled pull and wall balls. Every second Louise saves standing still is worth more than a second you save moving faster</div></div>
         <div class="block"><div class="block-n">Stations</div><div class="block-b">Call the handover early and loudly. Short frequent swaps beat heroic long blocks</div></div>
         <div class="block"><div class="block-n">Wall balls</div><div class="block-b">Full depth, ball above the line, every rep. No-reps at station 8 end races</div></div>
         <div class="block"><div class="block-n">After</div><div class="block-b">Eat and rehydrate within the hour. You have a marathon in 18 days — recovery starts on the day</div></div>
@@ -953,12 +1138,32 @@ function renderRefs() {
     `<tr><td><strong style="font-weight:500">${m[0]}</strong></td><td>${m[1]}</td></tr>`).join('');
 }
 
+function setPerson(pn) {
+  state.person = pn;
+  state.day = 0; state.opt = 0;
+  state.week = Math.min(state.week, weeksArr().length);
+  document.getElementById('tab-prat').classList.toggle('active', pn === 'prat');
+  document.getElementById('tab-louise').classList.toggle('active', pn === 'louise');
+  document.getElementById('maraRef').style.display = pn === 'louise' ? 'none' : '';
+  renderCountdowns(); renderMeta();
+  renderWeeks(); renderBanner(); renderDays(); renderPanel();
+}
+
+function renderMeta() {
+  document.getElementById('metaRow').innerHTML = isL()
+    ? ['10K: <b>Sun 27 Sep</b>','Hyrox Doubles: <b>Fri 27 Nov</b>','Pair target: <b>1:30:00</b>','Race run pace: <b>7:05</b>','Sessions: <b>3 per week</b>','Running: <b>own 10K plan</b>']
+        .map(t => `<span class="meta-pill">${t}</span>`).join('')
+    : ['10K: <b>Sun 27 Sep</b>','Hyrox Doubles: <b>Fri 27 Nov</b>','Marathon: <b>Tue 15 Dec</b>','Hyrox target: <b>1:30:00</b>','Pair run pace: <b>7:05</b>','Easy pace: <b>7:00–7:20</b>','Marathon pace: <b>6:50</b>','Peak long run: <b>32 km · 15 Nov</b>','Squat 5RM: <b>110 kg</b>']
+        .map(t => `<span class="meta-pill">${t}</span>`).join('');
+}
+
 function setWeek(n) { state.week = n; state.day = 0; state.opt = 0; renderWeeks(); renderBanner(); renderDays(); renderPanel(); }
 function setDay(i) { state.day = i; state.opt = 0; renderDays(); renderPanel(); }
 function setOpt(i) { state.opt = i; renderPanel(); }
 
 (async function init() {
   renderCountdowns();
+  renderMeta();
   renderRefs();
   await loadLog();
   renderWeeks(); renderBanner(); renderDays(); renderPanel();
