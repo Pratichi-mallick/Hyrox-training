@@ -3,27 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hyrox Doubles — Partner Training Plan</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Hyrox + Marathon — 14-week plan</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #0e0f0e;
-    --surface: #161714;
-    --surface2: #1e1f1c;
-    --border: rgba(255,255,255,0.07);
-    --border2: rgba(255,255,255,0.13);
-    --text: #e8e6e0;
-    --muted: #7a7870;
-    --accent: #c8f060;
-    --accent2: #8bdfb0;
-    --accent3: #f0c060;
-    --danger: #f07060;
-    --pink: #f080b0;
+    --bg: #F5F2EC;
+    --surface: #FFFFFF;
+    --surface2: #EFEBE3;
+    --border: rgba(26,26,24,0.11);
+    --border2: rgba(26,26,24,0.22);
+    --text: #1A1A18;
+    --muted: #6B6B67;
+    --accent: #3D6B4F;
+    --accent-light: #D1E5D8;
+    --accent-dark: #274535;
+    --warm: #C4714A;
+    --warm-light: #F0DDD4;
+    --warm-dark: #9B5336;
+    --blue: #3E5C78;
+    --blue-light: #D5DFE9;
     --mono: 'DM Mono', monospace;
     --sans: 'DM Sans', sans-serif;
-    --radius: 10px;
+    --serif: 'DM Serif Display', serif;
+    --radius: 6px;
   }
 
   body {
@@ -32,3013 +36,880 @@
     font-family: var(--sans);
     font-size: 14px;
     line-height: 1.6;
-    min-height: 100vh;
-    padding: 32px 20px 60px;
-    max-width: 860px;
+    padding: 28px 20px 70px;
+    max-width: 1140px;
     margin: 0 auto;
   }
 
-  /* ── Header ── */
-  .header { margin-bottom: 36px; }
-  .header-eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--pink);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 8px;
+  .header { margin-bottom: 26px; }
+  .header-title { font-family: var(--serif); font-size: 34px; font-weight: 400; line-height: 1.12; letter-spacing: -0.01em; }
+  .header-sub { font-size: 13px; color: var(--muted); margin-top: 8px; max-width: 640px; }
+
+  .countdowns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+  .cd {
+    background: var(--surface); border: 1px solid var(--border);
+    border-left: 3px solid var(--accent); border-radius: var(--radius);
+    padding: 12px 18px; min-width: 168px;
   }
-  .header-title {
-    font-size: 28px;
-    font-weight: 300;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    line-height: 1.2;
-  }
-  .header-title span { color: var(--pink); font-weight: 500; }
-  .header-meta {
-    margin-top: 12px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
+  .cd.hyrox { border-left-color: var(--warm-dark); }
+  .cd.mara  { border-left-color: var(--blue); }
+  .cd-num { font-family: var(--serif); font-size: 26px; line-height: 1; color: var(--accent-dark); }
+  .cd.hyrox .cd-num { color: var(--warm-dark); }
+  .cd.mara .cd-num { color: var(--blue); }
+  .cd-unit { font-size: 12px; color: var(--muted); font-family: var(--sans); }
+  .cd-label { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-top: 6px; }
+
+  .meta-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
   .meta-pill {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 4px 10px;
-    border-radius: 20px;
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 4px 10px; border-radius: 20px;
   }
-  .meta-pill b { color: var(--text); font-weight: 500; }
+  .meta-pill b { color: var(--accent-dark); font-weight: 500; }
 
-  /* ── Section label ── */
-  .section-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    margin-top: 28px;
-  }
-  .section-label:first-child { margin-top: 0; }
+  .section-label { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.08em; margin: 26px 0 10px; }
 
-  /* ── Block tabs ── */
-  .block-row {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-  .block-btn {
-    font-family: var(--mono);
-    font-size: 11px;
-    padding: 7px 14px;
-    border-radius: 6px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.18s;
-    letter-spacing: 0.04em;
-  }
-  .block-btn:hover { border-color: var(--border2); color: var(--text); }
-  .block-btn.b1.active { background: var(--pink); color: #0e0f0e; border-color: var(--pink); font-weight: 500; }
-  .block-btn.b2.active { background: var(--accent2); color: #0e0f0e; border-color: var(--accent2); font-weight: 500; }
-  .block-btn.b3.active { background: var(--accent3); color: #0e0f0e; border-color: var(--accent3); font-weight: 500; }
-  .block-btn.b4.active { background: var(--accent); color: #0e0f0e; border-color: var(--accent); font-weight: 500; }
-
-  /* ── Block banner ── */
-  .block-banner {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--pink);
-    border-radius: var(--radius);
-    padding: 14px 18px;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-  }
-  .block-banner.b2 { border-left-color: var(--accent2); }
-  .block-banner.b3 { border-left-color: var(--accent3); }
-  .block-banner.b4 { border-left-color: var(--accent); }
-  .bb-title { font-weight: 500; font-size: 13px; color: var(--text); margin-bottom: 3px; }
-  .bb-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
-  .bb-badge {
-    font-family: var(--mono);
-    font-size: 10px;
-    padding: 3px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-    flex-shrink: 0;
-    margin-top: 2px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--muted);
-  }
-
-  /* ── Week selector ── */
-  .week-row {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-  }
+  .week-row { display: grid; grid-template-columns: repeat(14, minmax(0,1fr)); gap: 4px; }
   .week-btn {
-    font-family: var(--mono);
-    font-size: 11px;
-    padding: 6px 12px;
-    height: 36px;
-    border-radius: 6px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.15s;
-    white-space: nowrap;
+    font-family: var(--mono); font-size: 11px; padding: 8px 1px 7px;
+    border-radius: var(--radius); border: 1px solid var(--border);
+    background: var(--surface); color: var(--muted); cursor: pointer;
+    transition: border-color .15s, background .15s; text-align: center; position: relative;
   }
-  .week-btn:hover { border-color: var(--border2); color: var(--text); }
-  .week-btn.active { background: var(--surface2); border-color: var(--border2); color: var(--text); }
+  .week-btn:hover { border-color: var(--border2); }
+  .week-btn .wk-n { display: block; color: var(--text); font-weight: 500; }
+  .week-btn .wk-d { display: block; font-size: 9px; margin-top: 2px; }
+  .week-btn .wk-bar { display: block; height: 3px; border-radius: 2px; margin-top: 6px; background: var(--border2); }
+  .week-btn[data-ph="p1"] .wk-bar { background: var(--accent-light); }
+  .week-btn[data-ph="p2"] .wk-bar { background: var(--accent); }
+  .week-btn[data-ph="p3"] .wk-bar { background: var(--warm); }
+  .week-btn[data-ph="taper"] .wk-bar { background: var(--warm-light); }
+  .week-btn[data-ph="race"] .wk-bar { background: var(--warm-dark); }
+  .week-btn[data-ph="bridge"] .wk-bar { background: var(--blue-light); }
+  .week-btn[data-ph="marathon"] .wk-bar { background: var(--blue); }
+  .week-btn.active { background: var(--accent-light); border-color: var(--accent); }
+  .week-btn.active .wk-n { color: var(--accent-dark); }
+  .week-btn.now::after { content:''; position:absolute; top:4px; right:4px; width:5px; height:5px; border-radius:50%; background: var(--warm-dark); }
 
-  /* ── Day tabs ── */
-  .day-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 24px;
+  .phase-banner {
+    background: var(--accent-light); border: 1px solid var(--border);
+    border-left: 3px solid var(--accent); border-radius: var(--radius);
+    padding: 14px 18px; margin-top: 18px;
+    display: flex; gap: 18px; align-items: flex-start; justify-content: space-between; flex-wrap: wrap;
   }
+  .phase-banner[data-ph="p3"], .phase-banner[data-ph="race"] { background: var(--warm-light); border-left-color: var(--warm-dark); }
+  .phase-banner[data-ph="taper"] { background: var(--warm-light); border-left-color: var(--warm); }
+  .phase-banner[data-ph="bridge"], .phase-banner[data-ph="marathon"] { background: var(--blue-light); border-left-color: var(--blue); }
+  .pb-title { font-weight: 500; font-size: 14px; }
+  .pb-desc { font-size: 12px; color: var(--muted); max-width: 640px; margin-top: 3px; }
+  .pb-badge { font-family: var(--mono); font-size: 10px; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 4px 9px; border-radius: 4px; white-space: nowrap; }
+
+  .day-row { display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 6px; }
   .day-btn {
-    padding: 12px 10px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--muted);
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.15s;
+    padding: 10px 6px; border-radius: var(--radius); border: 1px solid var(--border);
+    background: var(--surface); cursor: pointer; text-align: center; transition: border-color .15s, background .15s;
   }
   .day-btn:hover { border-color: var(--border2); }
-  .day-btn.active { border-color: var(--border2); background: var(--surface2); }
-  .day-btn.active .day-label { color: var(--text); }
-  .day-label { font-weight: 500; font-size: 13px; color: var(--text); display: block; margin-bottom: 3px; }
-  .day-type { font-family: var(--mono); font-size: 10px; color: var(--muted); display: block; line-height: 1.3; }
-  .day-dot { width: 6px; height: 6px; border-radius: 50%; margin: 5px auto 0; }
-  .day-btn.run .day-dot { background: var(--accent2); }
-  .day-btn.strength .day-dot { background: var(--pink); }
-  .day-btn.hyrox .day-dot { background: var(--accent3); }
-  .day-btn.combo .day-dot { background: var(--accent); }
+  .day-btn.active { background: var(--surface2); border-color: var(--border2); }
+  .day-btn.today { border-color: var(--warm-dark); }
+  .day-name { font-weight: 500; font-size: 12px; display: block; }
+  .day-date { font-family: var(--mono); font-size: 9px; color: var(--muted); display: block; }
+  .day-type { font-family: var(--mono); font-size: 10px; color: var(--muted); display: block; margin-top: 4px; line-height: 1.25; }
+  .day-dot { width: 6px; height: 6px; border-radius: 50%; margin: 5px auto 0; background: var(--muted); }
+  .day-btn[data-kind="lift"] .day-dot { background: var(--accent); }
+  .day-btn[data-kind="run"] .day-dot { background: var(--accent-light); border: 1px solid var(--accent); }
+  .day-btn[data-kind="hyrox"] .day-dot { background: var(--warm); }
+  .day-btn[data-kind="race"] .day-dot { background: var(--warm-dark); }
+  .day-btn[data-kind="rest"] .day-dot { background: var(--border2); }
 
-  /* ── Session panel ── */
-  .session-panel { animation: fadeIn 0.2s ease; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .session-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; flex-wrap: wrap; margin: 26px 0 16px; }
+  .session-title { font-family: var(--serif); font-size: 22px; line-height: 1.2; }
+  .session-goal { font-size: 12px; color: var(--muted); max-width: 580px; margin-top: 5px; }
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; }
+  .badge { font-family: var(--mono); font-size: 10px; padding: 4px 9px; border-radius: 5px; border: 1px solid var(--border); color: var(--muted); white-space: nowrap; background: var(--surface); }
+  .badge.hi { border-color: var(--accent); color: var(--accent-dark); background: var(--accent-light); }
+  .badge.race { border-color: var(--warm-dark); color: var(--warm-dark); background: var(--warm-light); }
+  .badge.mara { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
 
-  .session-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .session-title { font-size: 18px; font-weight: 300; letter-spacing: -0.01em; }
-  .session-goal { font-size: 12px; color: var(--muted); margin-top: 4px; max-width: 480px; line-height: 1.5; }
-  .session-badges { display: flex; gap: 6px; flex-wrap: wrap; }
-  .badge {
-    font-family: var(--mono);
-    font-size: 10px;
-    padding: 4px 9px;
-    border-radius: 5px;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    white-space: nowrap;
-  }
-  .badge.hi { border-color: var(--pink); color: var(--pink); }
-  .badge.together { border-color: var(--accent3); color: var(--accent3); }
+  .notice { background: var(--warm-light); border: 1px solid rgba(155,83,54,.28); border-radius: var(--radius); padding: 10px 14px; margin-bottom: 16px; font-size: 12px; color: var(--warm-dark); }
 
-  /* ── Workout block ── */
-  .workout-section { margin-bottom: 28px; }
-  .ws-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
+  .opt-row { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .opt-btn { font-family: var(--mono); font-size: 11px; padding: 7px 14px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); color: var(--muted); cursor: pointer; }
+  .opt-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-  /* ── Exercise list ── */
-  .ex-list { display: flex; flex-direction: column; gap: 0; }
-  .ex-item {
-    display: grid;
-    grid-template-columns: 28px 1fr auto;
-    gap: 0 12px;
-    padding: 11px 0;
-    border-bottom: 1px solid var(--border);
-    align-items: start;
-  }
-  .ex-item:last-child { border-bottom: none; }
-  .ex-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    padding-top: 1px;
-  }
-  .ex-name { font-weight: 500; font-size: 13px; color: var(--text); margin-bottom: 2px; }
-  .ex-note { font-size: 11px; color: var(--muted); line-height: 1.4; }
-  .ex-note.tip { color: var(--accent2); }
-  .ex-note.warn { color: var(--danger); }
-  .ex-sets {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    text-align: right;
-    white-space: nowrap;
-    padding-top: 2px;
-  }
-  .ex-sets b { color: var(--text); display: block; font-size: 12px; }
+  .ex-table { width: 100%; border-collapse: collapse; }
+  .ex-table thead tr { border-bottom: 2px solid var(--accent-light); }
+  .ex-table th { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: .06em; padding: 0 10px 9px 0; text-align: left; font-weight: 400; }
+  .ex-table tbody tr { border-bottom: 1px solid var(--border); }
+  .ex-table tbody tr:last-child { border-bottom: none; }
+  .ex-table td { padding: 12px 10px 12px 0; vertical-align: top; }
+  .ex-table td:last-child { padding-right: 0; }
+  .ex-name { font-weight: 500; font-size: 13px; }
+  .ex-note { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+  .ex-note.tip { color: var(--accent); }
+  .ex-tag { font-family: var(--mono); font-size: 9px; color: var(--muted); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; margin-left: 6px; vertical-align: 1px; }
 
-  /* ── Run card ── */
-  .run-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent2);
-    border-radius: var(--radius);
-    padding: 18px 22px;
-    margin-bottom: 16px;
-  }
-  .rc-title { font-weight: 500; font-size: 14px; margin-bottom: 4px; }
-  .rc-sub { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
-  .run-specs { display: flex; gap: 10px; flex-wrap: wrap; }
-  .run-spec {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 8px 14px;
-    min-width: 110px;
-  }
-  .rs-label { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-bottom: 3px; }
-  .rs-val { font-size: 14px; font-weight: 500; color: var(--text); }
-  .rs-unit { font-size: 11px; color: var(--muted); }
+  .set-grid { display: flex; flex-direction: column; gap: 5px; }
+  .set-line { display: grid; grid-template-columns: 26px 78px 44px 62px 52px; gap: 6px; align-items: center; font-family: var(--mono); font-size: 11px; }
+  .set-line.hdr { color: var(--muted); font-size: 9px; padding-bottom: 2px; }
+  .sl-label { color: var(--muted); }
+  .sl-plan { background: var(--surface2); border: 1px solid var(--border2); border-radius: 4px; padding: 2px 6px; text-align: center; }
+  .sl-plan.top { background: var(--accent-light); border-color: var(--accent); color: var(--accent-dark); }
+  .sl-reps { color: var(--muted); text-align: center; }
+  input.log { font-family: var(--mono); font-size: 11px; border: 1px solid var(--border); border-radius: 4px; padding: 3px 5px; width: 100%; background: var(--surface); color: var(--text); }
+  input.log:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  .simple { font-family: var(--mono); font-size: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 4px 10px; display: inline-block; }
 
-  /* ── Station card ── */
-  .station-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent3);
-    border-radius: var(--radius);
-    padding: 14px 18px;
-    margin-bottom: 10px;
-  }
-  .sc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-  .sc-name { font-weight: 500; font-size: 13px; }
-  .sc-target {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--accent3);
-    background: rgba(240,192,96,0.1);
-    border: 1px solid rgba(240,192,96,0.2);
-    padding: 2px 8px;
-    border-radius: 4px;
-  }
-  .sc-note { font-size: 12px; color: var(--muted); }
+  .card { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 12px; }
+  .card.warm { border-left-color: var(--warm); }
+  .card.hot { border-left-color: var(--warm-dark); background: var(--warm-light); }
+  .card.mara { border-left-color: var(--blue); background: var(--blue-light); }
+  .card.flat { border-left-color: var(--border2); background: var(--surface2); }
+  .card-title { font-size: 15px; font-weight: 500; }
+  .card-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .specs { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+  .spec { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 9px 14px; min-width: 108px; }
+  .card.hot .spec, .card.mara .spec { background: var(--surface); }
+  .spec-l { font-family: var(--mono); font-size: 10px; color: var(--muted); }
+  .spec-v { font-size: 15px; font-weight: 500; margin-top: 2px; }
+  .spec-u { font-size: 11px; color: var(--muted); font-weight: 400; }
 
-  /* ── Progress note ── */
-  .progress-note {
-    margin-top: 20px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 18px;
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-  .progress-note b { color: var(--text); font-weight: 500; }
+  .block-list { margin-top: 14px; }
+  .block { display: flex; gap: 12px; padding: 9px 0; border-top: 1px solid var(--border); font-size: 13px; }
+  .block:first-child { border-top: none; }
+  .block-n { font-family: var(--mono); font-size: 10px; color: var(--muted); min-width: 58px; padding-top: 3px; }
+  .block-b { flex: 1; }
 
-  /* ── Together badge ── */
-  .together-note {
-    background: rgba(240,192,96,0.06);
-    border: 1px solid rgba(240,192,96,0.15);
-    border-radius: var(--radius);
-    padding: 10px 16px;
-    margin-bottom: 18px;
-    font-size: 12px;
-    color: var(--accent3);
-    font-family: var(--mono);
-  }
+  .note { margin-top: 14px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 16px; font-size: 12px; color: var(--muted); }
+  .note b { color: var(--accent-dark); font-weight: 500; }
 
-  /* ── Phase overview table ── */
-  .overview-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
-  .overview-table th {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0 12px 10px 0;
-    text-align: left;
-    font-weight: 400;
-    border-bottom: 1px solid var(--border);
-  }
-  .overview-table td {
-    padding: 10px 12px 10px 0;
-    font-size: 12px;
-    border-bottom: 1px solid var(--border);
-    vertical-align: top;
-  }
-  .overview-table tr:last-child td { border-bottom: none; }
-  .overview-table td:first-child { font-family: var(--mono); font-size: 11px; color: var(--muted); white-space: nowrap; }
-  .overview-table td b { color: var(--text); }
+  .log-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; align-items: flex-end; }
+  .log-field { display: flex; flex-direction: column; gap: 4px; }
+  .log-field label { font-family: var(--mono); font-size: 10px; color: var(--muted); }
+  .log-field input { width: 130px; }
 
-  /* ── Colour dots for overview ── */
-  .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
-  .dot.run { background: var(--accent2); }
-  .dot.str { background: var(--pink); }
-  .dot.hyrox { background: var(--accent3); }
-  .dot.combo { background: var(--accent); }
+  .save-state { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); }
 
-  @media (max-width: 600px) {
-    body { padding: 18px 14px 50px; }
-    .day-row { grid-template-columns: repeat(3, 1fr); }
-  }
+  details.ref { margin-top: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; }
+  details.ref summary { cursor: pointer; font-weight: 500; font-size: 13px; }
+  details.ref summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .st-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 12px; }
+  .st-table th { font-family: var(--mono); font-size: 10px; color: var(--muted); text-align: left; padding: 0 8px 8px 0; font-weight: 400; }
+  .st-table td { padding: 7px 8px 7px 0; border-top: 1px solid var(--border); vertical-align: top; }
+  .st-table td.n { font-family: var(--mono); color: var(--muted); width: 26px; }
+  .st-table td.p { font-family: var(--mono); }
 
-  /* ── Top nav tabs ── */
-  .top-nav {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 36px;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0;
-  }
-  .top-nav-btn {
-    font-family: var(--mono);
-    font-size: 11px;
-    padding: 8px 18px;
-    border-radius: 6px 6px 0 0;
-    border: 1px solid transparent;
-    border-bottom: none;
-    background: transparent;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.18s;
-    letter-spacing: 0.06em;
-    margin-bottom: -1px;
-  }
-  .top-nav-btn:hover { color: var(--text); }
-  .top-nav-btn.active {
-    background: var(--surface);
-    border-color: var(--border);
-    border-bottom-color: var(--surface);
-    color: var(--pink);
-    font-weight: 500;
-  }
-
-  /* ── View panels ── */
-  .view { display: none; }
-  .view.active { display: block; }
-
-  /* ══════════════════════════════════════════
-     MILESTONE TRACKER STYLES
-  ══════════════════════════════════════════ */
-  .ms-intro {
-    margin-bottom: 32px;
-  }
-  .ms-subtitle {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.5;
-    margin-top: 6px;
-    max-width: 480px;
-  }
-  .ms-progress-wrap {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .ms-progress-track {
-    flex: 1;
-    height: 4px;
-    background: var(--surface2);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .ms-progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--pink), var(--accent3), var(--accent));
-    border-radius: 2px;
-    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    width: 0%;
-  }
-  .ms-progress-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    white-space: nowrap;
-  }
-  .ms-progress-label b { color: var(--text); }
-
-  .ms-section { margin-bottom: 32px; }
-  .ms-section-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  .ms-section-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .ms-section-title {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .ms-section-count {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    margin-left: auto;
-  }
-  .ms-section-count b { color: var(--text); }
-
-  .milestone-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 13px 14px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    margin-bottom: 7px;
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s, transform 0.15s;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .milestone-item:hover { border-color: var(--border2); transform: translateX(2px); }
-  .milestone-item:active { transform: translateX(2px) scale(0.99); }
-  .milestone-item.ms-done { background: var(--surface2); border-color: var(--border); }
-  .milestone-item.ms-done .mi-name { color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(255,255,255,0.2); }
-  .milestone-item.ms-done .mi-note { opacity: 0.4; }
-
-  .milestone-item.ms-running:hover  { border-color: rgba(139,223,176,0.4); }
-  .milestone-item.ms-running.ms-done  { border-left: 2px solid var(--accent2); }
-  .milestone-item.ms-strength:hover { border-color: rgba(240,128,176,0.4); }
-  .milestone-item.ms-strength.ms-done { border-left: 2px solid var(--pink); }
-  .milestone-item.ms-hyrox:hover    { border-color: rgba(240,192,96,0.4); }
-  .milestone-item.ms-hyrox.ms-done  { border-left: 2px solid var(--accent3); }
-  .milestone-item.ms-heart:hover    { border-color: rgba(200,240,96,0.4); }
-  .milestone-item.ms-heart.ms-done  { border-left: 2px solid var(--accent); }
-
-  .mi-check {
-    width: 20px; height: 20px;
-    border-radius: 5px;
-    border: 1.5px solid var(--border2);
-    flex-shrink: 0;
-    margin-top: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-    background: transparent;
-  }
-  .milestone-item.ms-running  .mi-check { border-color: rgba(139,223,176,0.4); }
-  .milestone-item.ms-strength .mi-check { border-color: rgba(240,128,176,0.4); }
-  .milestone-item.ms-hyrox    .mi-check { border-color: rgba(240,192,96,0.4); }
-  .milestone-item.ms-heart    .mi-check { border-color: rgba(200,240,96,0.4); }
-  .milestone-item.ms-done .mi-check { border-color: transparent; }
-  .milestone-item.ms-running.ms-done  .mi-check { background: var(--accent2); }
-  .milestone-item.ms-strength.ms-done .mi-check { background: var(--pink); }
-  .milestone-item.ms-hyrox.ms-done    .mi-check { background: var(--accent3); }
-  .milestone-item.ms-heart.ms-done    .mi-check { background: var(--accent); }
-
-  .mi-checkmark {
-    opacity: 0;
-    transform: scale(0) rotate(-10deg);
-    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-  .milestone-item.ms-done .mi-checkmark { opacity: 1; transform: scale(1) rotate(0deg); }
-
-  .mi-content { flex: 1; min-width: 0; }
-  .mi-name { font-weight: 500; font-size: 13px; color: var(--text); margin-bottom: 2px; transition: color 0.2s; }
-  .mi-note { font-size: 11px; color: var(--muted); line-height: 1.4; transition: opacity 0.2s; }
-  .mi-tag {
-    font-family: var(--mono);
-    font-size: 9px;
-    padding: 2px 7px;
-    border-radius: 3px;
-    white-space: nowrap;
-    flex-shrink: 0;
-    margin-top: 2px;
-    letter-spacing: 0.05em;
-  }
-  .ms-running  .mi-tag { background: rgba(139,223,176,0.12); color: var(--accent2); }
-  .ms-strength .mi-tag { background: rgba(240,128,176,0.12); color: var(--pink); }
-  .ms-hyrox    .mi-tag { background: rgba(240,192,96,0.12);  color: var(--accent3); }
-  .ms-heart    .mi-tag { background: rgba(200,240,96,0.12);  color: var(--accent); }
-
-  .ms-race-card {
-    margin-top: 36px;
-    border: 1px solid rgba(240,128,176,0.25);
-    border-radius: 12px;
-    background: linear-gradient(135deg, rgba(240,128,176,0.06), rgba(240,192,96,0.06));
-    padding: 24px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    user-select: none;
-  }
-  .ms-race-card:hover { border-color: rgba(240,128,176,0.5); transform: translateY(-1px); }
-  .ms-race-card.ms-done { border-color: var(--accent3); background: linear-gradient(135deg, rgba(240,128,176,0.1), rgba(240,192,96,0.1)); }
-  .ms-race-icon { font-size: 32px; margin-bottom: 8px; display: block; }
-  .ms-race-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 5px; }
-  .ms-race-card.ms-done .ms-race-title { color: var(--accent3); }
-  .ms-race-sub { font-size: 12px; color: var(--muted); }
-
-  .ms-footer {
-    margin-top: 36px;
-    padding-top: 16px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .ms-footer-note { font-family: var(--mono); font-size: 10px; color: var(--muted); }
-  .ms-reset-btn {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    background: transparent;
-    border: 1px solid var(--border);
-    padding: 5px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    letter-spacing: 0.05em;
-    transition: all 0.18s;
-  }
-  .ms-reset-btn:hover { border-color: var(--border2); color: var(--text); }
-
-  /* emoji burst */
-  .ms-burst {
-    position: fixed;
-    pointer-events: none;
-    font-size: 22px;
-    animation: msBurst 0.9s ease forwards;
-    z-index: 999;
-  }
-  @keyframes msBurst {
-    0%   { opacity: 1; transform: translateY(0) scale(1); }
-    100% { opacity: 0; transform: translateY(-80px) scale(1.4); }
-  }
-
-
-  /* ══════════════════════════════════════════
-     WARM + PLYO TAB STYLES
-  ══════════════════════════════════════════ */
-  .wp-intro { margin-bottom: 28px; }
-  .wp-subtitle {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.5;
-    margin-top: 6px;
-    max-width: 520px;
-  }
-
-  .wp-section-label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 14px;
-  }
-  .wp-section-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .wp-section-note {
-    margin-left: auto;
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 0.04em;
-    text-transform: none;
-    font-family: var(--mono);
-  }
-
-  .wp-cards { display: flex; flex-direction: column; gap: 10px; }
-
-  .wp-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent2);
-    border-radius: var(--radius);
-    padding: 14px 18px;
-  }
-  .wp-card-plyo {
-    border-left-color: var(--pink);
-  }
-  .wp-card-pulse {
-    border-left-color: var(--accent3);
-  }
-
-  .wp-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  .wp-zone {
-    font-weight: 500;
-    font-size: 13px;
-    color: var(--text);
-  }
-  .wp-sets {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--accent2);
-    background: rgba(139,223,176,0.1);
-    border: 1px solid rgba(139,223,176,0.2);
-    padding: 2px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-  }
-  .wp-card-plyo .wp-sets {
-    color: var(--pink);
-    background: rgba(240,128,176,0.1);
-    border-color: rgba(240,128,176,0.2);
-  }
-  .wp-card-pulse .wp-sets {
-    color: var(--accent3);
-    background: rgba(240,192,96,0.1);
-    border-color: rgba(240,192,96,0.2);
-  }
-
-  .wp-move-list { display: flex; flex-direction: column; gap: 8px; }
-  .wp-move { padding-top: 8px; border-top: 1px solid var(--border); }
-  .wp-move:first-child { padding-top: 0; border-top: none; }
-  .wp-move-name {
-    font-weight: 500;
-    font-size: 12px;
-    color: var(--text);
-    margin-bottom: 2px;
-  }
-  .wp-move-name.wp-tip { color: var(--accent2); }
-  .wp-move-note {
-    font-size: 11px;
-    color: var(--muted);
-    line-height: 1.5;
-  }
-  .wp-link { color: var(--accent3); font-style: italic; }
-
-  .wp-plyo-note {
-    background: rgba(240,128,176,0.06);
-    border: 1px solid rgba(240,128,176,0.15);
-    border-radius: var(--radius);
-    padding: 10px 16px;
-    margin-bottom: 14px;
-    font-size: 12px;
-    color: var(--pink);
-    font-family: var(--mono);
-    line-height: 1.5;
-  }
-
-  .wp-footer-note {
-    margin-top: 28px;
-    padding: 14px 18px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-
-
-  /* ── Warm-up inline rep styles ── */
-  .wp-zone-title {
-    font-weight: 500;
-    font-size: 13px;
-    color: var(--text);
-    margin-bottom: 10px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
-  .wp-move-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 12px;
-    margin-bottom: 3px;
-  }
-  .wp-rep-badge {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--accent2);
-    background: rgba(139,223,176,0.1);
-    border: 1px solid rgba(139,223,176,0.2);
-    padding: 2px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .wp-rep-plyo {
-    color: var(--pink);
-    background: rgba(240,128,176,0.1);
-    border-color: rgba(240,128,176,0.2);
-  }
-
-
-  /* ── Block and week date ranges ── */
-  .bb-date-range {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--accent2);
-    margin-top: 8px;
-    letter-spacing: 0.04em;
-  }
-  .week-date-range {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--accent2);
-    display: flex;
-    align-items: center;
-    padding: 0 4px;
-    white-space: nowrap;
-    letter-spacing: 0.04em;
-  }
-
-
-  /* ══ Month grouping ══ */
-  .ms-month {
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    margin-bottom: 20px;
-    overflow: hidden;
-    transition: border-color 0.3s;
-  }
-  .ms-month-complete {
-    border-color: rgba(200,240,96,0.3);
-  }
-  .ms-month-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px;
-    background: var(--surface2);
-    border-bottom: 1px solid var(--border);
-  }
-  .ms-month-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--text);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-  .ms-month-dates {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-  .ms-month-count {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 3px 10px;
-    border-radius: 20px;
-  }
-  .ms-count-done {
-    color: var(--accent);
-    border-color: rgba(200,240,96,0.3);
-    background: rgba(200,240,96,0.08);
-  }
-  .ms-month-list {
-    padding: 4px 12px 8px;
-  }
-  .ms-month-list .milestone-item {
-    margin-bottom: 6px;
-  }
-
-  /* ══ Gift box ══ */
-  .ms-gift-box {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 16px;
-    border-bottom: 1px solid var(--border);
-    transition: all 0.4s;
-  }
-  .ms-gift-locked {
-    background: var(--surface);
-    opacity: 0.6;
-  }
-  .ms-gift-unlocked {
-    background: linear-gradient(90deg, rgba(200,240,96,0.08), rgba(240,192,96,0.08));
-    border-bottom-color: rgba(200,240,96,0.2);
-  }
-  .ms-gift-emoji {
-    font-size: 22px;
-    flex-shrink: 0;
-  }
-  .ms-gift-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-  .ms-gift-reveal-name {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--accent);
-    margin-top: 2px;
-  }
-  .ms-gift-locked .ms-gift-emoji {
-    filter: grayscale(1);
-  }
-
-  /* ══ Popup overlay ══ */
-  .ms-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.75);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    padding: 20px;
-    animation: msFadeIn 0.2s ease;
-  }
-  @keyframes msFadeIn { from { opacity:0; } to { opacity:1; } }
-
-  .ms-popup {
-    background: var(--surface);
-    border: 1px solid var(--border2);
-    border-radius: 16px;
-    padding: 32px 28px;
-    max-width: 340px;
-    width: 100%;
-    text-align: center;
-    animation: msPopIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-  @keyframes msPopIn { from { opacity:0; transform:scale(0.85); } to { opacity:1; transform:scale(1); } }
-
-  .ms-cheat-popup { border-color: rgba(240,112,96,0.3); }
-  .ms-gift-popup  { border-color: rgba(200,240,96,0.3); }
-
-  .ms-popup-icon { font-size: 40px; margin-bottom: 12px; }
-  .ms-popup-title {
-    font-size: 17px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 10px;
-  }
-  .ms-popup-msg {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.5;
-    margin-bottom: 20px;
-  }
-  .ms-popup-btn {
-    font-family: var(--mono);
-    font-size: 12px;
-    padding: 10px 24px;
-    border-radius: 8px;
-    border: 1px solid var(--border2);
-    background: var(--surface2);
-    color: var(--text);
-    cursor: pointer;
-    transition: all 0.18s;
-    letter-spacing: 0.04em;
-  }
-  .ms-popup-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .ms-gift-btn {
-    background: linear-gradient(135deg, rgba(200,240,96,0.15), rgba(240,192,96,0.15));
-    border-color: rgba(200,240,96,0.4);
-    color: var(--accent);
-  }
-
-  .ms-gift-burst {
-    margin-bottom: 12px;
-  }
-  .ms-gift-icon {
-    font-size: 52px;
-    animation: msGiftBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s both;
-  }
-  @keyframes msGiftBounce { from { transform:scale(0) rotate(-10deg); } to { transform:scale(1) rotate(0deg); } }
-  .ms-gift-name {
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-
-
-  /* ── Weekly quote banner ── */
-  .quote-banner {
-    margin-bottom: 28px;
-    padding: 18px 22px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--accent2);
-    border-radius: var(--radius);
-    position: relative;
-    animation: fadeIn 0.4s ease;
-  }
-  .quote-eyebrow {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--accent2);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-  .quote-text {
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--text);
-    line-height: 1.65;
-    letter-spacing: -0.01em;
-  }
-  .quote-week {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    margin-top: 10px;
-  }
-  /* Block colour accent per phase */
-  .quote-b1 { border-left-color: var(--pink); }
-  .quote-b1 .quote-eyebrow { color: var(--pink); }
-  .quote-b2 { border-left-color: var(--accent2); }
-  .quote-b2 .quote-eyebrow { color: var(--accent2); }
-  .quote-b3 { border-left-color: var(--accent3); }
-  .quote-b3 .quote-eyebrow { color: var(--accent3); }
-  .quote-b4 { border-left-color: var(--accent); }
-  .quote-b4 .quote-eyebrow { color: var(--accent); }
-
-
-  /* ══ Check-in counter strip ══ */
-  .ci-strip {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 10px 16px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-  .ci-strip-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  .ci-strip-count {
-    font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--accent2);
-    white-space: nowrap;
-  }
-  .ci-strip-bar-track {
-    flex: 1;
-    height: 4px;
-    background: var(--surface2);
-    border-radius: 2px;
-    min-width: 80px;
-    overflow: hidden;
-  }
-  .ci-strip-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent2), var(--accent));
-    border-radius: 2px;
-    transition: width 0.4s ease;
-  }
-  .ci-strip-pct {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    white-space: nowrap;
-  }
-
-  /* ══ Block grid ══ */
-  .ci-block-grid {
-    margin-top: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .ci-block-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .ci-block-name {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    width: 72px;
-    flex-shrink: 0;
-  }
-  .ci-dots {
-    display: flex;
-    gap: 4px;
-    flex-wrap: wrap;
-    flex: 1;
-  }
-  .ci-dot {
-    width: 16px;
-    height: 16px;
-    border-radius: 3px;
-    border: 1px solid var(--border);
-    background: var(--surface2);
-    flex-shrink: 0;
-    position: relative;
-    cursor: default;
-    transition: all 0.15s;
-  }
-  .ci-dot.done {
-    background: var(--accent2);
-    border-color: var(--accent2);
-  }
-  .ci-dot.missed {
-    background: rgba(240,112,96,0.15);
-    border-color: rgba(240,112,96,0.3);
-  }
-  .ci-dot-label {
-    position: absolute;
-    bottom: -16px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: var(--mono);
-    font-size: 8px;
-    color: var(--muted);
-    white-space: nowrap;
-    pointer-events: none;
-  }
-  .ci-block-count {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    white-space: nowrap;
-  }
-
-  /* ══ Check-in button ══ */
-  .ci-btn-wrap {
-    margin-top: 20px;
-    padding-top: 18px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .ci-btn {
-    font-family: var(--mono);
-    font-size: 11px;
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: 1px solid var(--border2);
-    background: var(--surface2);
-    color: var(--text);
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.04em;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .ci-btn:hover { border-color: var(--accent2); color: var(--accent2); }
-  .ci-btn.logged {
-    background: rgba(139,223,176,0.12);
-    border-color: var(--accent2);
-    color: var(--accent2);
-  }
-  .ci-btn.logged:hover {
-    background: rgba(240,112,96,0.08);
-    border-color: rgba(240,112,96,0.4);
-    color: var(--danger);
-  }
-  .ci-btn-status {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-  }
-  .ci-btn-status.logged { color: var(--accent2); }
-
-  /* ══ Week pair dots ══ */
-  .ci-week-pair {
-    display: flex;
-    gap: 2px;
-  }
-  .ci-week-pair .ci-dot:first-child { border-radius: 3px 1px 1px 3px; }
-  .ci-week-pair .ci-dot:last-child  { border-radius: 1px 3px 3px 1px; }
-
+  @media (max-width: 860px) {
+    body { padding: 20px 14px 60px; }
+    .header-title { font-size: 26px; }
+    .week-row { grid-template-columns: repeat(7, minmax(0,1fr)); }
+    .day-row { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    .set-line { grid-template-columns: 24px 68px 36px 54px 46px; font-size: 10px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  @media print { .week-row, .day-row, .opt-row, .countdowns { display: none; } body { max-width: none; } }
 </style>
 </head>
 <body>
 
-<!-- ── Top nav ── -->
+<header class="header">
+  <h1 class="header-title">Hyrox Doubles, then a marathon<br>14-week plan</h1>
+  <p class="header-sub">Mon 14 Sep – Sun 20 Dec 2026. Two sessions with Jay, four runs and one Hyrox session each week. Hyrox is the A-race; the marathon 18 days later is a completion goal.</p>
 
-<!-- ── Weekly quote banner ── -->
-<div class="quote-banner" id="quoteBanner">
-  <div class="quote-eyebrow" id="quoteEyebrow"></div>
-  <div class="quote-text" id="quoteText"></div>
-  <div class="quote-week" id="quoteWeek"></div>
-</div>
+  <div class="countdowns" id="countdowns"></div>
 
-<nav class="top-nav">
-  <button class="top-nav-btn active" data-tab="warmup" onclick="switchView('warmup')">🔥 Warm-Up</button>
-  <button class="top-nav-btn" data-tab="plyo" onclick="switchView('plyo')">⚡ Plyo</button>
-  <button class="top-nav-btn" data-tab="plan" onclick="switchView('plan')">Training Plan</button>
-  <button class="top-nav-btn" data-tab="milestones" onclick="switchView('milestones')">🏅 Milestones</button>
-</nav>
-
-<!-- ── Warm-Up view ── -->
-<div class="view active" id="view-warmup">
-
-  <div class="wp-intro">
-    <div class="header-eyebrow">// before every session</div>
-    <h2 style="font-size:22px;font-weight:300;letter-spacing:-0.02em;line-height:1.2;">Head-to-Toe <span style="color:var(--accent2);font-weight:500;">Warm-Up</span></h2>
-    <p class="wp-subtitle">Complete every exercise in order before each session. Takes 8–10 minutes. Never skip it.</p>
+  <div class="meta-row">
+    <span class="meta-pill">10K: <b>Sun 27 Sep</b></span>
+    <span class="meta-pill">Hyrox Doubles: <b>Fri 27 Nov</b></span>
+    <span class="meta-pill">Marathon: <b>Tue 15 Dec</b></span>
+    <span class="meta-pill">Easy pace: <b>7:00–7:20</b></span>
+    <span class="meta-pill">Marathon pace: <b>6:50</b></span>
+    <span class="meta-pill">Peak long run: <b>32 km · 15 Nov</b></span>
+    <span class="meta-pill">Squat 5RM: <b>110 kg</b></span>
   </div>
+</header>
 
-  <div class="wp-cards">
-
-    <!-- Full Body -->
-    <div class="wp-card">
-      <div class="wp-zone-title">Full Body</div>
-      <div class="wp-move-list">
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Jumping Jacks</div>
-            <div class="wp-rep-badge">60 reps</div>
-          </div>
-          <div class="wp-move-note">Feet together, arms at sides. Jump feet out wide as arms swing overhead, then return. Steady rhythm. Raises heart rate and warms the whole body before anything else.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Neck -->
-    <div class="wp-card">
-      <div class="wp-zone-title">Neck Work</div>
-      <div class="wp-move-list">
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Side to Side</div>
-            <div class="wp-rep-badge">12 reps</div>
-          </div>
-          <div class="wp-move-note">Sitting or standing tall. Slowly keeping your head straight and steady, move from centre to the right, looking over your shoulder, return to centre, then left. Never force.</div>
-        </div>
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Up and Down</div>
-            <div class="wp-rep-badge">12 reps</div>
-          </div>
-          <div class="wp-move-note">Chin slowly drops to chest, then gently lifts to look up. Controlled movement — this is mobilisation, not a stretch.</div>
-        </div>
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Tilting Side to Side</div>
-            <div class="wp-rep-badge">12 reps</div>
-          </div>
-          <div class="wp-move-note">Keep chin level and tilt the whole head ear to shoulder, pausing briefly at each end. 12 reps total.</div>
-        </div>
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Neck Rotation Clockwise–Anticlockwise</div>
-            <div class="wp-rep-badge">6-6 reps</div>
-          </div>
-          <div class="wp-move-note">Slow full neck circles. 6 clockwise, 6 anticlockwise. If you feel any sharp pain, reduce the range.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Shoulders -->
-    <div class="wp-card">
-      <div class="wp-zone-title">Shoulder Work</div>
-      <div class="wp-move-list">
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Arm Swing / Rotation Clockwise–Anticlockwise</div>
-            <div class="wp-rep-badge">6-6 reps</div>
-          </div>
-          <div class="wp-move-note">Arms out to the sides. Big windmill circles forward for 6 reps, then backward for 6. Increase range gradually. Warms the rotator cuff before carries and overhead work.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Torso -->
-    <div class="wp-card">
-      <div class="wp-zone-title">Torso Work</div>
-      <div class="wp-move-list">
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Torso Side to Side Rotation L–R</div>
-            <div class="wp-rep-badge">6-6 reps</div>
-          </div>
-          <div class="wp-move-note">Feet shoulder-width, arms crossed or out. Rotate upper body left then right — hips stay square, only the torso turns. Mobilises the thoracic spine.</div>
-        </div>
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Torso Side to Side Reach L–R</div>
-            <div class="wp-rep-badge">6-6 reps</div>
-          </div>
-          <div class="wp-move-note">Standing tall, reach one arm up and over to the opposite side — a lateral side bend. 6 each side. Stretches the lats and obliques.</div>
-        </div>
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Torso Step and Reach L–R</div>
-            <div class="wp-rep-badge">6-6 reps</div>
-          </div>
-          <div class="wp-move-note">Step to the side with one foot as you reach the opposite arm overhead and across, creating a full lateral stretch through the body. Step back and alternate.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Hips -->
-    <div class="wp-card">
-      <div class="wp-zone-title">Hip Work</div>
-      <div class="wp-move-list">
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Hip Rotation Clockwise–Anticlockwise</div>
-            <div class="wp-rep-badge">6-6 reps</div>
-          </div>
-          <div class="wp-move-note">Hands on hips, feet shoulder-width. Draw big slow circles with your hips — like a hula hoop. 6 clockwise, 6 anticlockwise. Mobilises the hip joint before squats and lunges.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Glute + Leg -->
-    <div class="wp-card">
-      <div class="wp-zone-title">Glute + Leg Work</div>
-      <div class="wp-move-list">
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Forward Bending Hamstring Stretch — Forward-Backward</div>
-            <div class="wp-rep-badge">6-6 reps</div>
-          </div>
-          <div class="wp-move-note">Stand hip-width. Hinge at the hips, hands reaching toward the floor, then return. 6 reps forward, 6 as you step slightly back. Keep knees soft. Dynamic hamstring and glute activation.</div>
-        </div>
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Bodyweight Squat (slow + supported)</div>
-            <div class="wp-rep-badge">12 reps</div>
-          </div>
-          <div class="wp-move-note">Hold a wall if needed. Lower slowly (3 seconds down), pause at the bottom, rise. Focus on depth and keeping heels flat — this is mobility work, not strength work.</div>
-        </div>
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Bodyweight Lunge (slow + supported)</div>
-            <div class="wp-rep-badge">12 reps</div>
-          </div>
-          <div class="wp-move-note">Step forward, lower the back knee toward the floor slowly, return. Alternate legs. 12 reps total. Use a wall for balance. Prepares hip flexors and quads for running and lunge stations.</div>
-        </div>
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">World's Greatest Stretch (elbow-to-instep) L–R</div>
-            <div class="wp-rep-badge">6-6 reps</div>
-          </div>
-          <div class="wp-move-note">Step into a deep lunge. Drop your same-side elbow to the inside of your front foot. Hold 2s. Then rotate that arm up to the ceiling, following with your eyes. Return and switch. 6 each side. One of the best full-body mobility moves you can do.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Ankle -->
-    <div class="wp-card">
-      <div class="wp-zone-title">Ankle Work</div>
-      <div class="wp-move-list">
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Ankle Circles Clockwise–Anticlockwise</div>
-            <div class="wp-rep-badge">6-6 reps</div>
-          </div>
-          <div class="wp-move-note">Seated or standing on one foot. Draw slow full circles with the ankle. 6 clockwise, 6 anticlockwise per foot. Critical for running mechanics and calf raise form.</div>
-        </div>
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Tip Toe Walks (slow) Forward–Backward</div>
-            <div class="wp-rep-badge">6-6 reps × 2</div>
-          </div>
-          <div class="wp-move-note">Rise onto your toes and walk forward slowly for 6 steps, then backward for 6. 2 lengths. Activates the calves and trains ankle stability.</div>
-        </div>
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Heel Walks (slow) Forward–Backward</div>
-            <div class="wp-rep-badge">6-6 reps × 2</div>
-          </div>
-          <div class="wp-move-note">Lift your toes off the floor and walk forward on your heels for 6 steps, then backward for 6. 2 lengths. Strengthens the tibialis anterior — important for shin splint prevention when running.</div>
-        </div>
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Side Ankle Walks (slow) Forward–Backward</div>
-            <div class="wp-rep-badge">6-6 reps × 2</div>
-          </div>
-          <div class="wp-move-note">Walk sideways on the outer edges of your feet for 6 steps, then inner edges for 6. 2 lengths. Builds lateral ankle stability.</div>
-        </div>
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Heel to Toe Rocks</div>
-            <div class="wp-rep-badge">12 reps</div>
-          </div>
-          <div class="wp-move-note">Standing, rock your weight slowly forward onto your toes, then back onto your heels. Warms the full ankle range of motion before running or plyometrics.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Core + Back -->
-    <div class="wp-card wp-card-pulse">
-      <div class="wp-zone-title">Core + Back Work</div>
-      <div class="wp-move-list">
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Core Engagement Practice</div>
-            <div class="wp-rep-badge">12 reps × 2</div>
-          </div>
-          <div class="wp-move-note">Lie on your back, knees bent. Breathe in to expand your ribcage 360°. As you exhale, brace your core as if bracing for a punch — ribcage down, lower back gently pressing toward the floor. Hold 3–5 seconds. This teaches you how to maintain a stable spine under load — the foundation for every exercise in this programme.</div>
-        </div>
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name wp-tip">Dead Bug</div>
-            <div class="wp-rep-badge">12 reps × 2</div>
-          </div>
-          <div class="wp-move-note">On your back, arms pointing to ceiling, knees at 90°. Maintaining your core brace, slowly lower your right arm and left leg toward the floor — pause just above — return. Alternate sides. Non-negotiable before every session.</div>
-        </div>
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name wp-tip">Glute Bridges</div>
-            <div class="wp-rep-badge">12 reps × 2</div>
-          </div>
-          <div class="wp-move-note">On your back, feet flat, hip-width. Drive through your heels to lift your hips until your body forms a straight line from shoulders to knees. Squeeze hard at the top for 1 second, lower slowly. Activates glutes before squats, lunges and runs.</div>
-        </div>
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">Mountain Climbers (slow)</div>
-            <div class="wp-rep-badge">12 reps × 2</div>
-          </div>
-          <div class="wp-move-note">In a plank position, hands under shoulders. Slowly drive one knee toward your chest, return, then the other. Keep hips level — do not let them rise. This is slow and controlled — not the cardio version.</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="wp-footer-note">
-    💡 This warm-up runs head to toe on purpose — ankles and feet last, core last of all, so you are fully warm before the most demanding activation work. Feel your body and do any other stretching as necessary! Soreness is just your body's way of saying it's growing!
-  </div>
-
-</div>
-
-<!-- ── Plyo view ── -->
-<div class="view" id="view-plyo">
-
-  <div class="wp-intro">
-    <div class="header-eyebrow">// after warm-up only</div>
-    <h2 style="font-size:22px;font-weight:300;letter-spacing:-0.02em;line-height:1.2;">Beginner <span style="color:var(--pink);font-weight:500;">Plyometrics</span></h2>
-    <p class="wp-subtitle">Complete all exercises each session. Optional ones at the bottom if time permits. Rest 60s between sets. Always finish the full warm-up first.</p>
-  </div>
-
-  <div class="wp-plyo-note">
-    ⚡ Never skip the warm-up and jump straight to these. Cold muscles and explosive movement do not mix.
-  </div>
-
-  <div class="wp-cards">
-
-    <div class="wp-card wp-card-plyo">
-      <div class="wp-zone-title" style="color:var(--pink)">Pogo Jumps</div>
-      <div class="wp-move-list">
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">How to</div>
-            <div class="wp-rep-badge wp-rep-plyo">2 × 24 reps</div>
-          </div>
-          <div class="wp-move-note">Stand feet hip-width, arms slightly out for balance. Bounce on the balls of your feet in a rapid, small, rhythmic jump — like a pogo stick. Keep your ankles stiff and ground contact time as short as possible. Land softly through the ball of the foot. Builds ankle stiffness and calf power for running.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="wp-card wp-card-plyo">
-      <div class="wp-zone-title" style="color:var(--pink)">Pogo Side to Side Jumps</div>
-      <div class="wp-move-list">
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">How to</div>
-            <div class="wp-rep-badge wp-rep-plyo">2 × 24 reps</div>
-          </div>
-          <div class="wp-move-note">Same pogo bouncing action but lateral — hop side to side over an imaginary line. Both feet land and leave together. Keep hops small and quick. Land with a soft knee and stable ankle. Builds lateral ankle stability and reactive power.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="wp-card wp-card-plyo">
-      <div class="wp-zone-title" style="color:var(--pink)">Pogo Front and Back Jumps</div>
-      <div class="wp-move-list">
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">How to</div>
-            <div class="wp-rep-badge wp-rep-plyo">2 × 24 reps</div>
-          </div>
-          <div class="wp-move-note">Pogo bouncing action forward and backward over an imaginary line. Both feet together, quick small hops. Stay on the balls of your feet throughout. Directly relevant to the burpee broad jump push-off and landing.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="wp-card wp-card-plyo">
-      <div class="wp-zone-title" style="color:var(--pink)">Single Leg Taps with Weight Plate</div>
-      <div class="wp-move-list">
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">How to</div>
-            <div class="wp-rep-badge wp-rep-plyo">2 × 24 reps</div>
-          </div>
-          <div class="wp-move-note">Place a small weight plate (2.5–5 kg) flat on the floor. Balance on one leg. Tap the top of the plate with the ball of your free foot — quick light taps. Keep a soft bend in the standing knee. Hold something for balance at first. Trains single-leg balance and proprioception under load.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="wp-card wp-card-plyo">
-      <div class="wp-zone-title" style="color:var(--pink)">Single Leg Step-Up with Weight Plate</div>
-      <div class="wp-move-list">
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">How to</div>
-            <div class="wp-rep-badge wp-rep-plyo">2 × 24 reps</div>
-          </div>
-          <div class="wp-move-note">Hold a weight plate (5 kg) at chest or sides. Step onto a low box with one foot, drive through that heel to stand tall at the top, step back down. 24 reps per leg or alternating. Builds single-leg strength for running and the sled drive.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="wp-card wp-card-plyo">
-      <div class="wp-zone-title" style="color:var(--pink)">Broad Jump</div>
-      <div class="wp-move-list">
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">How to</div>
-            <div class="wp-rep-badge wp-rep-plyo">2 × 12 reps</div>
-          </div>
-          <div class="wp-move-note">Feet hip-width. Bend knees, swing arms back, then explode forward — jump as far as you can. Land with soft knees and hips, absorbing through both legs. Walk back and reset. <span class="wp-link">Direct prep for the Hyrox burpee broad jump station.</span> Focus on the landing — absorb first, distance second.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="wp-card wp-card-plyo">
-      <div class="wp-zone-title" style="color:var(--pink)">Calf Raise with Yoga Block</div>
-      <div class="wp-move-list">
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">How to</div>
-            <div class="wp-rep-badge wp-rep-plyo">2 × 12 reps</div>
-          </div>
-          <div class="wp-move-note">Stand with the balls of your feet on the edge of a yoga block (or step), heels hanging off. Lower your heels below the block for a full stretch, then rise onto your toes as high as possible. Hold 1s at the top. Lower slowly (3 seconds). Builds calf strength and Achilles resilience for running.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="wp-card wp-card-plyo" style="opacity:0.8;">
-      <div class="wp-zone-title" style="color:var(--pink)">Box Step-Up <span style="font-weight:300;font-size:11px;color:var(--muted);">— optional if time permits</span></div>
-      <div class="wp-move-list">
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">How to</div>
-            <div class="wp-rep-badge wp-rep-plyo">2 × 12 reps</div>
-          </div>
-          <div class="wp-move-note">Step onto a low box with one foot, drive through that heel to bring your full body up, step back down. Alternate legs. Keep torso upright. Builds single-leg power and stability — relevant to running stride and sled push drive.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="wp-card wp-card-plyo" style="opacity:0.8;">
-      <div class="wp-zone-title" style="color:var(--pink)">Lateral Bound <span style="font-weight:300;font-size:11px;color:var(--muted);">— optional if time permits</span></div>
-      <div class="wp-move-list">
-        <div class="wp-move">
-          <div class="wp-move-row">
-            <div class="wp-move-name">How to</div>
-            <div class="wp-rep-badge wp-rep-plyo">2 × 12 reps</div>
-          </div>
-          <div class="wp-move-note">Stand on one foot. Push sideways off that foot and land on the opposite foot — like a skater. Pause and balance before the next rep. Focus on a stable landing before increasing width. Builds lateral power and ankle stability.</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="wp-footer-note">
-    💡 The pogo jumps train ankle stiffness and reactive power — qualities that directly reduce fatigue when running between Hyrox stations. Do these consistently and you will feel the difference on race day.
-  </div>
-
-</div>
-
-<!-- ── Training plan view ── -->
-<div class="view" id="view-plan">
-
-<div class="ci-strip" id="ciStrip">
-  <div class="ci-strip-label">Sessions</div>
-  <div class="ci-strip-count" id="ciCount">0 / 72</div>
-  <div class="ci-strip-bar-track"><div class="ci-strip-bar-fill" id="ciBar" style="width:0%"></div></div>
-  <div class="ci-strip-pct" id="ciPct">0%</div>
-</div>
-
-<div class="header">
-  <div class="header-eyebrow">// hyrox doubles — partner plan</div>
-  <h1 class="header-title">6-Month Build to<br><span>Hyrox Doubles</span> — October</h1>
-  <div class="header-meta">
-    <div class="meta-pill">Athlete: <b>Partner</b></div>
-    <div class="meta-pill">Start: <b>1 Jun 2026</b></div>
-    <div class="meta-pill">Event: <b>November 28, 2026</b></div>
-    <div class="meta-pill">Format: <b>Doubles</b></div>
-    <div class="meta-pill">Days/wk: <b>3</b></div>
-    <div class="meta-pill">Baseline run: <b>1–2 km</b></div>
-  </div>
-</div>
-
-<!-- Block selector -->
-<div class="section-label">Training Block</div>
-<div class="block-row">
-  <button class="block-btn b1 active" onclick="setBlock('b1')">Block 1 — Foundation (Wk 1–6)</button>
-  <button class="block-btn b2" onclick="setBlock('b2')">Block 2 — Build (Wk 7–12)</button>
-  <button class="block-btn b3" onclick="setBlock('b3')">Block 3 — Station Specific (Wk 13–18)</button>
-  <button class="block-btn b4" onclick="setBlock('b4')">Block 4 — Race Prep (Wk 19–24)</button>
-</div>
-
-<div class="block-banner b1" id="blockBanner"></div>
-
-<!-- Week selector -->
 <div class="section-label">Week</div>
 <div class="week-row" id="weekRow"></div>
+<div class="phase-banner" id="phaseBanner"></div>
 
-<!-- Day selector -->
-<div class="section-label">Session</div>
+<div class="section-label">Day</div>
 <div class="day-row" id="dayRow"></div>
 
-<!-- Content -->
-<div id="sessionPanel"></div>
+<div id="panel"></div>
+
+<details class="ref">
+  <summary>Pace reference — all sessions are prescribed from these</summary>
+  <table class="st-table">
+    <thead><tr><th>Zone</th><th>Pace</th><th>Where it is used</th></tr></thead>
+    <tbody id="paceBody"></tbody>
+  </table>
+  <p class="note"><b>How these were set:</b> 10 km at 7:00/km as a Zone 2 effort on 12 Sep is the anchor. The 34 km at 6:19/km in March shows higher prior fitness, so these paces should feel conservative now and get easier through the block. Re-test with the 10K on 27 Sep and adjust everything by the same margin.</p>
+</details>
+
+<details class="ref">
+  <summary>Hyrox Doubles reference — stations and split rules</summary>
+  <table class="st-table">
+    <thead><tr><th></th><th>Station</th><th>Open Doubles standard</th><th>How you split it</th></tr></thead>
+    <tbody id="stationBody"></tbody>
+  </table>
+  <p class="note">Eight 1 km runs, each followed by one station. Both partners run every kilometre; station work is shared. Practise the handover itself — transitions are where doubles pairs lose the most time.</p>
+</details>
+
+<details class="ref">
+  <summary>Marathon race-day reference — fuelling and pacing</summary>
+  <table class="st-table">
+    <thead><tr><th>Item</th><th>Plan</th></tr></thead>
+    <tbody id="maraBody"></tbody>
+  </table>
+  <p class="note"><b>Honest expectation:</b> with Hyrox as the A-race you get two long runs over 26 km instead of the usual four or five. 4:50 is realistic if the first half is disciplined; 5:10–5:20 with walk breaks after 32 km is the more likely outcome if it is warm or the first 10 km goes out fast. Both are a finish.</p>
+</details>
+
+<p class="save-state" id="saveState">Log fields save as you type.</p>
 
 <script>
+// ─────────── Config ───────────
+const START = new Date(2026, 8, 14);       // Mon 14 Sep 2026
+const RACE_10K = new Date(2026, 8, 27);    // Sun 27 Sep
+const RACE_HYROX = new Date(2026, 10, 27); // Fri 27 Nov
+const RACE_MARA = new Date(2026, 11, 15);  // Tue 15 Dec
+const NWEEKS = 14;
 
-const BLOCKS = {
-  b1: {
-    name: 'Block 1 — Foundation',
-    weeks: ['Wk 1–2','Wk 3–4','Wk 5–6'],
-    weekKeys: [1,2,3],
-    desc: 'You start ahead of most beginners — 3 km running, event-weight carries and lunges already in the bag. Block 1 pushes running to 8 km, introduces wall balls, sled and burpee broad jumps, and builds the aerobic engine for race day. Rest 60–90s between sets.',
-    badge: 'Wk 1–6',
-    cls: 'b1',
-    focus: 'Accelerated base',
-  },
-  b2: {
-    name: 'Block 2 — Build',
-    weeks: ['Wk 7–8','Wk 9–10','Wk 11–12'],
-    weekKeys: [4,5,6],
-    desc: 'Running climbs to 12 km. All 8 Hyrox stations introduced at or near race weight. Half-Hyrox simulations begin. SkiErg and row targets tighten — 400 m under 2:00, 500 m row under 2:30. Strength sessions get heavier.',
-    badge: 'Wk 7–12',
-    cls: 'b2',
-    focus: 'Station mastery',
-  },
-  b3: {
-    name: 'Block 3 — Station Specific',
-    weeks: ['Wk 13–14','Wk 15–16','Wk 17–18'],
-    weekKeys: [7,8,9],
-    desc: 'Full Hyrox simulation sessions under race fatigue. Doubles strategy locked in with your partner. Running pace targets tighten to sub-6:30/km. Peak training load — this is where the race is won.',
-    badge: 'Wk 13–18',
-    cls: 'b3',
-    focus: 'Race simulation',
-  },
-  b4: {
-    name: 'Block 4 — Race Prep',
-    weeks: ['Wk 19–20','Wk 21–22','Wk 23–24'],
-    weekKeys: [10,11,12],
-    desc: 'Full mock doubles run-throughs in weeks 19–20. Taper begins week 21 — volume drops 40%, intensity stays. Race week is rest, sleep and nutrition only. Nov 28 is the target.',
-    badge: 'Wk 19–24',
-    cls: 'b4',
-    focus: 'Peak + Taper',
-  },
+const PACES = [
+  ['Recovery', '7:15–7:30', 'Friday short run, day after a long run or a simulation'],
+  ['Easy / Zone 2', '7:00–7:20', 'Wednesday run and the bulk of every long run'],
+  ['Marathon pace', '6:50', 'Closing kilometres of long runs from week 5, and the marathon itself'],
+  ['Tempo', '6:15–6:25', 'Thursday continuous efforts'],
+  ['10K effort', '5:55–6:05', 'Thursday 1 km repeats and the 27 Sep race'],
+  ['Strides', 'Fast, relaxed', '100–200 m efforts, full recovery, never a workout on their own'],
+];
+
+const MARA_REF = [
+  ['Target', '4:50 at 6:50/km even splits. Range 4:45–5:20.'],
+  ['First 5 km', '7:00–7:05/km — deliberately slower than goal pace. This is the whole race plan.'],
+  ['km 5–32', 'Settle at 6:50/km. Do not bank time.'],
+  ['km 32–42', 'Hold 6:50 if you can, or run–walk 4 min on, 1 min off. Both get you there.'],
+  ['Carbs', '60 g per hour from 45 minutes in. One gel every 35–40 min, started before you feel you need it.'],
+  ['Fluid', '400–600 ml per hour, with electrolytes. Singapore humidity makes this non-negotiable.'],
+  ['Pre-race', 'Familiar carb meal 3 hours before. Nothing new on race morning — everything tested on the 6 Dec long run.'],
+  ['Kit', 'The shoes and socks you wore for the 32 km on 15 Nov. Anti-chafe everywhere.'],
+];
+
+const PHASES = {
+  p1:       { name: 'Base and strength re-entry', desc: 'Rebuild lifting volume after the break and lay down easy running mileage. Reps 8–12 on the pyramids. Week 2 tapers into the 10K, week 4 is a planned deload.', reps: '8–12 reps' },
+  p2:       { name: 'Hyrox conditioning and mileage build', desc: 'Heavier lifting (5–8 reps) alongside the biggest running weeks of the block. Saturdays move from technique to race effort, and the half simulation lands in week 6.', reps: '5–8 reps' },
+  p3:       { name: 'Marathon peak, Hyrox sharpening', desc: 'Your longest run of the block is this Sunday, so Saturday is deliberately short. Lifting is low volume and explosive.', reps: '4–6 reps, explosive' },
+  taper:    { name: 'Hyrox taper', desc: 'Running volume drops about 40%, intensity stays. Two lifting sets per exercise at roughly 70% of week 9. Nothing new, nothing heavy.', reps: '2 sets, 70%' },
+  race:     { name: 'Hyrox race week', desc: 'Activation only. Race is Friday 27 November; Sunday is a recovery jog, not a session.', reps: 'Activation' },
+  bridge:   { name: 'Hyrox to marathon bridge', desc: 'Eighteen days between the two races. Week 12 restores one long run and one marathon-pace session; week 13 is a pure taper. No strength progression here — the marathon is now the only target.', reps: 'Light, 2 sets' },
+  marathon: { name: 'Marathon week', desc: 'Race is Tuesday 15 December. Monday is a shakeout, everything after the race is recovery by feel.', reps: 'No lifting' },
 };
 
-const SESSIONS = {
-  b1: {
-    days: [
-      { key: 'd1', label: 'Day 1', type: 'Run/Walk', cls: 'run' },
-      { key: 'd2', label: 'Day 2', type: 'Strength', cls: 'strength' },
-      { key: 'd3', label: 'Day 3', type: 'Run + Core', cls: 'combo' },
-    ],
-    content: {
-      d1: {
-        title: 'Run — Build Endurance',
-        goal: 'You already run 3 km. Block 1 pushes this to 8 km continuous by week 6. Each session adds distance — not speed. Zone 2 pace, conversational effort throughout.',
-        duration: '35–55 min',
-        together: false,
-        weeks: {
-          1: {
-            run: { title: 'Week 1–2 Protocol', sub: 'You can run 3 km already — push to 5 km continuous. Easy Zone 2 pace.', specs: [
-              { label: 'Distance', val: '4–5', unit: 'km continuous' },
-              { label: 'Pace', val: 'Zone 2', unit: 'conversational' },
-              { label: 'Target', val: '5 km', unit: 'by end Wk 2' },
-            ]},
-            note: 'No walk breaks from session 1. You have the base. Just slow the pace right down — you should be able to hold a full conversation. Distance over speed.',
-          },
-          2: {
-            run: { title: 'Week 3–4 Protocol', sub: 'Build from 5 to 7 km. Still Zone 2 — pace is secondary to distance.', specs: [
-              { label: 'Distance', val: '6–7', unit: 'km continuous' },
-              { label: 'Pace', val: 'Zone 2', unit: '~6:45–7:15/km' },
-              { label: 'Target', val: '7 km', unit: 'by end Wk 4' },
-            ]},
-            note: 'Add 1–1.5 km per session. If you feel strong, go further — there is no upper limit. Log your distance and how you felt after each run.',
-          },
-          3: {
-            run: { title: 'Week 5–6 Protocol', sub: 'Push to 8 km. Block 1 summit — your biggest aerobic leap.', specs: [
-              { label: 'Distance', val: '7–8', unit: 'km continuous' },
-              { label: 'Pace', val: 'Zone 2', unit: '~6:45/km' },
-              { label: 'Target', val: '8 km', unit: 'by end Wk 6' },
-            ]},
-            note: 'This is the Block 1 milestone run. Slow and continuous. Running 8 km means the Hyrox run distance is firmly within your range. Log your time.',
-          },
-        }
-      },
-      d2: {
-        title: 'Strength + Station Intro',
-        goal: 'You have the carry and lunge base. Block 1 introduces wall balls, burpee broad jumps and sled mechanics — the stations you have not yet trained. Movement quality first, then load.',
-        duration: '50 min',
-        together: false,
-        weeks: {
-          1: {
-            sections: [
-              {
-                label: 'Warm-up (5 min)',
-                exercises: [
-                  { name: 'Dead Bug', note: 'Core activation. Back protocol.', tip: true, sets: '2×10', reps: 'each side' },
-                  { name: 'Glute Bridge', note: 'Hip activation. Pause 1s at top.', sets: '2×15', reps: '' },
-                ]
-              },
-              {
-                label: 'Main Work',
-                exercises: [
-                  { name: 'Goblet Squat', note: 'Dumbbell at chest. Full depth. This is your wall ball prep.', sets: '3×12', reps: '@ 8–10 kg' },
-                  { name: 'Romanian Deadlift', note: 'Light weight, hip hinge pattern. Neutral spine.', sets: '3×12', reps: '@ 10–15 kg' },
-                  { name: 'DB Row (single arm)', note: 'Pull to hip, not shoulder. Farmers carry prep.', sets: '3×10', reps: '@ 8–10 kg / side' },
-                  { name: 'DB Overhead Press', note: 'Wall ball overhead prep. Control the descent.', sets: '3×10', reps: '@ 6–8 kg' },
-                  { name: 'Loaded Carry (dumbbell)', note: 'Walk 20 m holding dumbbells at sides. Farmers carry simulation.', warn: true, sets: '3×20m', reps: '@ 10 kg / hand' },
-                ]
-              },
-              {
-                label: 'Core / Finisher',
-                exercises: [
-                  { name: 'Plank Hold', note: 'Build to 45s. Back safe.', sets: '3×30s', reps: '' },
-                  { name: 'Hollow Body Hold', note: 'Lower back pressed into floor.', sets: '3×20s', reps: '' },
-                ]
-              }
-            ]
-          },
-          2: {
-            sections: [
-              {
-                label: 'Warm-up (5 min)',
-                exercises: [
-                  { name: 'Dead Bug', note: 'Core activation.', tip: true, sets: '2×10', reps: 'each side' },
-                  { name: 'Hip Hinge with PVC/broomstick', note: 'Practice the pattern before loading.', sets: '2×10', reps: '' },
-                ]
-              },
-              {
-                label: 'Main Work (Wk 3–4 — Add Load)',
-                exercises: [
-                  { name: 'Goblet Squat', note: 'Increase to 12–14 kg. Still prioritising depth.', sets: '4×10', reps: '@ 12–14 kg' },
-                  { name: 'Romanian Deadlift', note: 'Step up to barbell 20–30 kg. Belt optional.', sets: '3×10', reps: '@ 20–30 kg' },
-                  { name: 'DB Row (single arm)', note: 'Heavier. Row to hip bone.', sets: '3×10', reps: '@ 12–14 kg' },
-                  { name: 'DB Overhead Press', note: 'Increase load slightly.', sets: '3×10', reps: '@ 8–10 kg' },
-                  { name: 'Sandbag Hug Carry', note: 'Hug a sandbag (15–20 kg) and walk 20 m. Sandbag lunges prep.', warn: true, sets: '3×20m', reps: '@ 15–20 kg bag' },
-                ]
-              },
-              {
-                label: 'Core',
-                exercises: [
-                  { name: 'Plank Hold', note: 'Progress to 45–60s.', sets: '3×45s', reps: '' },
-                  { name: 'Side Plank', note: 'Lateral stability.', sets: '2×25s', reps: 'each side' },
-                ]
-              }
-            ]
-          },
-          3: {
-            sections: [
-              {
-                label: 'Warm-up',
-                exercises: [
-                  { name: 'Dead Bug + Bird Dog', note: 'Full back protocol.', tip: true, sets: '2×10', reps: 'each' },
-                ]
-              },
-              {
-                label: 'Main Work (Wk 5–6 — Build Endurance Strength)',
-                exercises: [
-                  { name: 'Goblet Squat', note: 'Higher reps for muscular endurance. Wall ball will be 4–6 kg in the race.', sets: '3×15', reps: '@ 12 kg' },
-                  { name: 'Romanian Deadlift', note: 'Moderate weight, focus on eccentric control.', sets: '3×12', reps: '@ 30–40 kg' },
-                  { name: 'Dumbbell Lunge (walking)', note: 'Direct sandbag lunge prep. Keep torso upright.', warn: true, sets: '3×12', reps: '@ 8 kg / hand' },
-                  { name: 'Farmers Walk', note: 'Heavier than block start. Grip training.', warn: true, sets: '4×25m', reps: '@ 14 kg / hand' },
-                  { name: 'Push-up', note: 'Burpee prep. On knees if needed — build to full.', sets: '3×10', reps: '' },
-                ]
-              },
-              {
-                label: 'Core',
-                exercises: [
-                  { name: 'Plank Hold', note: '60s target.', sets: '3×60s', reps: '' },
-                  { name: 'Russian Twist', note: 'Rotational strength.', sets: '3×20', reps: '' },
-                ]
-              }
-            ]
-          },
-        }
-      },
-      d3: {
-        title: 'Run + Hyrox Stations',
-        goal: 'Run first, then hit the stations while fatigued. Teaches your body to execute technique when tired — exactly what race day demands. SkiErg and row targets build each week.',
-        duration: '45 min',
-        together: false,
-        weeks: {
-          1: {
-            run: { title: 'Easy Run (Wk 1–2)', sub: 'Short, easy. Emphasis on form.', specs: [
-              { label: 'Distance', val: '2–3', unit: 'km easy' },
-              { label: 'Pace', val: 'Very easy', unit: 'nose-breathe' },
-            ]},
-            sections: [{
-              label: 'Post-Run Core (5 min)',
-              exercises: [
-                { name: 'Plank Hold', note: 'Hold as long as possible. Rest. Repeat.', sets: '3×max', reps: '' },
-                { name: 'Bird Dog', note: '10 reps / side. Slow and controlled.', tip: true, sets: '2×10', reps: '/side' },
-                { name: 'Glute Bridge', note: '15 reps. Squeeze hard at top.', sets: '2×15', reps: '' },
-              ]
-            }],
-            note: 'This session is low stress. The purpose is aerobic consistency — 3 sessions/week is the habit we\'re building.',
-          },
-          2: {
-            run: { title: 'Easy Run (Wk 3–4)', sub: 'Slightly longer. Stay easy.', specs: [
-              { label: 'Distance', val: '3–4', unit: 'km easy' },
-              { label: 'Pace', val: 'Zone 2', unit: '~7:00–7:30/km' },
-            ]},
-            sections: [{
-              label: 'Post-Run Circuit',
-              exercises: [
-                { name: 'Burpee (no jump)', note: 'Burpee broad jump prep. Step out if needed.', warn: true, sets: '3×8', reps: '' },
-                { name: 'Goblet Squat', note: 'Light. Post-run, focus on depth.', sets: '2×12', reps: '@ 8 kg' },
-                { name: 'Plank Hold', note: '45s hold.', sets: '3×45s', reps: '' },
-              ]
-            }],
-            note: 'Introducing burpee movement pattern early — it will become a key station. Step-out burpees are perfectly valid.',
-          },
-          3: {
-            run: { title: 'Easy Run (Wk 5–6)', sub: 'Now building toward 5 km on Day 1 — this session stays easy.', specs: [
-              { label: 'Distance', val: '4–5', unit: 'km easy' },
-              { label: 'Pace', val: 'Zone 2', unit: 'conversational' },
-            ]},
-            sections: [{
-              label: 'Post-Run Circuit',
-              exercises: [
-                { name: 'Burpee Broad Jump', note: 'Full Hyrox standard. Jump forward as far as possible. 6–8 reps at a time.', warn: true, sets: '3×8', reps: '' },
-                { name: 'Walking Lunge', note: 'Bodyweight. Tall torso. Knee not caving.', sets: '3×10', reps: '/leg' },
-                { name: 'Hollow Body Hold', note: '25s. Lower back must stay flat.', sets: '3×25s', reps: '' },
-              ]
-            }],
-            note: 'By end of Block 1 you should be running 4–5 km continuously. Block 2 will introduce the actual Hyrox stations under fatigue.',
-          },
-        }
-      },
-    }
-  },
+const WEEKS = [
+  { n:1,  ph:'p1', load:'l1', note:null },
+  { n:2,  ph:'p1', load:'l1', note:'10K race on Sunday. Tuesday lower stops at set 3 and Saturday is deliberately light — keep the legs fresh.' },
+  { n:3,  ph:'p1', load:'l1', note:null },
+  { n:4,  ph:'p1', load:'dl', note:'Deload week. 65% of your week 1–3 loads, three sets, no grinding. Running drops too.' },
+  { n:5,  ph:'p2', load:'l2', note:'Marathon-pace work starts: the last 4 km of Sunday\u2019s long run at 6:50/km.' },
+  { n:6,  ph:'p2', load:'l2', note:'Half Hyrox simulation on Saturday, so Sunday\u2019s long run is cut back to 14 km. Record the simulation time.' },
+  { n:7,  ph:'p2', load:'l2', note:'Biggest running week of the block — 26 km on Sunday with the last 6 km at marathon pace.' },
+  { n:8,  ph:'p2', load:'dl', note:'Lifting deloads so Saturday\u2019s full simulation is a true benchmark. Sunday is a cutback run.' },
+  { n:9,  ph:'p3', load:'l3', note:'Peak long run: 32 km on Sunday 15 November. Saturday Hyrox is 30 minutes of skills only — do not turn it into a session.' },
+  { n:10, ph:'taper', load:'tp', note:null },
+  { n:11, ph:'race', load:'act', note:'Hyrox Doubles on Friday 27 November. Thursday is rest and kit check.' },
+  { n:12, ph:'bridge', load:'br', note:'Recovery first, then rebuild. Skip Sunday\u2019s 22 km entirely if anything still hurts from the race — the marathon does not depend on it.' },
+  { n:13, ph:'bridge', load:'act', note:'Marathon taper. Thursday is your final marathon-pace rehearsal with race kit and race fuelling.' },
+  { n:14, ph:'marathon', load:'none', note:'Marathon on Tuesday 15 December.' },
+];
 
-  b2: {
-    days: [
-      { key: 'd1', label: 'Day 1', type: 'Long Run', cls: 'run' },
-      { key: 'd2', label: 'Day 2', type: 'Strength + Stations', cls: 'strength' },
-      { key: 'd3', label: 'Day 3', type: 'Hyrox Circuit', cls: 'hyrox' },
-    ],
-    content: {
-      d1: {
-        title: 'Long Run',
-        goal: 'Build to 8–10 km continuous by end of Block 2. This is your biggest aerobic development session. Easy pace is non-negotiable.',
-        duration: '50–65 min',
-        together: false,
-        weeks: {
-          4: {
-            run: { title: 'Week 7–8 Long Run', sub: 'First step up from Block 1. Run slow and complete the distance.', specs: [
-              { label: 'Distance', val: '6–7', unit: 'km' },
-              { label: 'Pace', val: '~7:00', unit: 'min/km' },
-              { label: 'HR Zone', val: 'Zone 2', unit: '130–145 bpm' },
-            ]},
-            note: 'If you need to take one 60s walk break, that\'s fine. Goal is completing the distance. Log how you felt.',
-          },
-          5: {
-            run: { title: 'Week 9–10 Long Run', sub: 'Pushing toward 8 km. This is where your Hyrox run base comes from.', specs: [
-              { label: 'Distance', val: '7–8', unit: 'km' },
-              { label: 'Pace', val: '~7:00–7:30', unit: 'min/km' },
-              { label: 'HR Zone', val: 'Zone 2', unit: 'conversational' },
-            ]},
-            note: 'Fuel with a light snack 90 min before. Hydrate well. In Hyrox doubles you\'ll each run ~4 km total — this builds a large buffer above race demand.',
-          },
-          6: {
-            run: { title: 'Week 11–12 Long Run', sub: 'First 10 km milestone. A huge confidence marker.', specs: [
-              { label: 'Distance', val: '9–10', unit: 'km' },
-              { label: 'Pace', val: '~7:00–7:30', unit: 'min/km' },
-              { label: 'HR Zone', val: 'Zone 2', unit: 'easy effort' },
-            ]},
-            note: 'Running 10 km means the Hyrox run (even accounting for station fatigue) is well within range. Celebrate this milestone.',
-          },
-        }
-      },
-      d2: {
-        title: 'Strength + Station Introduction',
-        goal: 'Progress compound strength while introducing Hyrox-specific loaded movements. Learn the movement, then load it.',
-        duration: '55 min',
-        together: false,
-        weeks: {
-          4: {
-            sections: [
-              {
-                label: 'Compound Strength (30 min)',
-                exercises: [
-                  { name: 'Goblet Squat / Box Squat', note: 'Step toward barbell squat. Box squat for depth confidence.', sets: '4×10', reps: '@ 14–16 kg' },
-                  { name: 'Romanian Deadlift', note: 'Building toward sled pull hip hinge pattern.', sets: '4×8', reps: '@ 35–45 kg' },
-                  { name: 'DB Row', note: 'Heavier. Full range.', sets: '3×10', reps: '@ 14–16 kg' },
-                ]
-              },
-              {
-                label: 'Station Work (15 min)',
-                exercises: [
-                  { name: 'Wall Ball', note: '4–6 kg medicine ball. Squat to parallel, throw to 9 ft (2.7 m) target. This IS the Hyrox movement.', warn: true, sets: '4×10', reps: '@ 4–6 kg' },
-                  { name: 'Farmers Carry', note: 'Hyrox standard is 16 kg/hand (women). Build toward it.', warn: true, sets: '3×30m', reps: '@ 12 kg / hand' },
-                ]
-              }
-            ]
-          },
-          5: {
-            sections: [
-              {
-                label: 'Compound Strength',
-                exercises: [
-                  { name: 'Barbell Back Squat (light)', note: 'First time under a bar if new to it. Belt on. 3 warm-up sets.', sets: '4×8', reps: '@ 30–40 kg' },
-                  { name: 'Romanian Deadlift', note: 'Heavier. Belt on top set.', sets: '4×8', reps: '@ 45–55 kg' },
-                  { name: 'DB Overhead Press', note: 'Wall ball throwing strength.', sets: '3×10', reps: '@ 10–12 kg' },
-                ]
-              },
-              {
-                label: 'Station Work',
-                exercises: [
-                  { name: 'Wall Ball', note: 'Same weight, higher reps. Pacing practice — don\'t sprint the first set.', warn: true, sets: '4×15', reps: '@ 4–6 kg' },
-                  { name: 'Sled Push Simulation', note: 'No sled? Heavy bag or loaded prowler. Or push a loaded barbell along the floor. Low hips, drive from legs.', warn: true, sets: '4×15m', reps: 'heavy' },
-                  { name: 'Farmers Carry', note: 'Build toward race weight.', warn: true, sets: '3×30m', reps: '@ 14 kg / hand' },
-                ]
-              }
-            ]
-          },
-          6: {
-            sections: [
-              {
-                label: 'Compound Strength',
-                exercises: [
-                  { name: 'Barbell Back Squat', note: 'Progressive load. Good form first.', sets: '4×6', reps: '@ 40–50 kg' },
-                  { name: 'Romanian Deadlift', note: 'Heaviest yet in the programme.', sets: '4×6', reps: '@ 55–65 kg' },
-                  { name: 'Push-up', note: 'Burpee and upper body strength. Full reps only.', sets: '4×10', reps: '' },
-                ]
-              },
-              {
-                label: 'Station Circuit (timed)',
-                exercises: [
-                  { name: '3 Rounds: Wall Ball × 10', note: 'Minimal rest between movements. Simulates station-to-station fatigue.', warn: true, sets: '→ Walk 30m', reps: '→ Farmers Carry 20m → Rest 90s' },
-                  { name: 'Sandbag Lunge', note: 'Hyrox standard is 10 kg sandbag on shoulder. Start lighter. Lunge forward, alternate legs.', warn: true, sets: '3×10m', reps: '@ 8–10 kg bag' },
-                ]
-              }
-            ]
-          },
-        }
-      },
-      d3: {
-        title: 'Hyrox-Specific Circuit',
-        goal: 'Practise Hyrox movements under cardiovascular fatigue. Run first, then hit the stations. This teaches your body what race day feels like.',
-        duration: '50 min',
-        together: true,
-        weeks: {
-          4: {
-            run: { title: '2 km Run → Stations', sub: 'Run at moderate pace, then go straight into station work.', specs: [
-              { label: 'Run', val: '2 km', unit: 'moderate pace' },
-              { label: 'Then', val: '3 stations', unit: 'below, 2 rounds' },
-            ]},
-            stations: [
-              { name: 'Burpee Broad Jump', target: '10 reps', note: 'Race standard. Jump as far as possible each rep. Rest if needed.' },
-              { name: 'Wall Ball', target: '15 reps', note: '4–6 kg. To a 9 ft mark on wall.' },
-              { name: 'Walking Lunge (no load)', target: '20 m', note: 'Form over speed. Knee soft behind toes.' },
-            ],
-            note: '★ This is a great session to do together — you can push sled for each other, judge wall ball height, and practice doubling up on reps.',
-          },
-          5: {
-            run: { title: '2 × 1 km with Stations', sub: 'Mini Hyrox simulation. Run 1 km, do stations, run 1 km more.', specs: [
-              { label: 'Format', val: '1km run', unit: '→ stations → 1km run' },
-              { label: 'Pace', val: 'Race effort', unit: 'not sprint' },
-            ]},
-            stations: [
-              { name: 'SkiErg (or Row)', target: '250 m', note: 'If no SkiErg, row 250 m instead. Pacing: steady, not sprint.' },
-              { name: 'Burpee Broad Jump', target: '12 reps', note: 'Continuous. Step back instead of jumping back if needed.' },
-              { name: 'Wall Ball', target: '15 reps', note: 'Unbroken if possible. Rest at top position, not bottom.' },
-              { name: 'Sandbag Lunge', target: '10 m', note: '@ 8 kg. Hyrox station practice.' },
-            ],
-            note: '★ Together session. Practice calling rep counts to each other — communication is part of doubles strategy.',
-          },
-          6: {
-            run: { title: '3 × 1 km with Stations', sub: 'Closest to race format in this block. Build race intuition.', specs: [
-              { label: 'Format', val: '3 × 1km', unit: '→ station after each' },
-              { label: 'Rest', val: '2 min', unit: 'between rounds' },
-            ]},
-            stations: [
-              { name: 'Sled Push (or simulation)', target: '15 m', note: 'Low hips. Drive through legs. Your partner can add weight for resistance.' },
-              { name: 'Farmers Carry', target: '30 m', note: '@ 14–16 kg/hand. Race weight for women is 16 kg.' },
-              { name: 'Burpee Broad Jump', target: '15 reps', note: 'Full standard. This is the one that gasses most people — practice pacing.' },
-              { name: 'Wall Ball', target: '20 reps', note: 'After a 1 km run. This is the real test.' },
-            ],
-            note: '★ Together session. Decide now how you want to split the 8 stations — does one of you take all the running while the other leads on stations, or do you alternate?',
-          },
-        }
-      },
-    }
+// ─────────── Lifting ───────────
+const LIFTS = {
+  upper: {
+    title: 'Upper body with Jay',
+    goal: 'Pull-up plus two back movements, one shoulder press plus two chest movements. Pulling volume sits deliberately ahead of pressing — it protects the shoulder under ski and row volume.',
+    duration: '70–75 min',
+    ex: [
+      { name:'Warm-up: band pull-apart, scap pull-up, dislocates', note:'Two rounds. This is the shoulder insurance for ski erg volume.', tip:true, simple:'2 × 15 each' },
+      { name:'Weighted pull-up', tag:'Pull', note:'Dead hang at the bottom, chin clearly over. Add weight only when every rep is clean.',
+        l1:[['BW',10],['BW+2.5 kg',8],['BW+5 kg',6],['BW+7.5 kg',5]],
+        l2:[['BW+2.5 kg',8],['BW+5 kg',6],['BW+7.5 kg',5],['BW+10 kg',5]],
+        l3:[['BW+5 kg',5],['BW+7.5 kg',4],['BW+10 kg',4]] },
+      { name:'Lat pulldown', tag:'Back 1', note:'Wide overhand grip, pull to the upper chest, full stretch at the top.',
+        l1:[['34 kg',12],['42 kg',10],['48 kg',8],['52 kg',8]],
+        l2:[['38 kg',8],['46 kg',6],['52 kg',6],['56 kg',5]],
+        l3:[['40 kg',6],['48 kg',6],['56 kg',5]] },
+      { name:'Single-arm cable row', tag:'Back 2', note:'Rotate the torso fully into the pull. Directly transferable to the sled pull.',
+        l1:[['20 kg',12],['26 kg',10],['30 kg',8],['32 kg',8]],
+        l2:[['24 kg',8],['28 kg',6],['32 kg',6],['36 kg',5]],
+        l3:[['24 kg',6],['32 kg',6],['36 kg',5]] },
+      { name:'Seated DB shoulder press', tag:'Shoulder', note:'Per dumbbell. Full range, no lockout pause at the top.',
+        l1:[['20 kg',12],['24 kg',10],['26 kg',8],['28 kg',8]],
+        l2:[['20 kg',8],['24 kg',6],['28 kg',6],['30 kg',5]],
+        l3:[['22 kg',6],['26 kg',6],['28 kg',5]] },
+      { name:'Barbell bench press', tag:'Chest 1', note:'Feet driven into the floor. Two-second descent, fast press.',
+        l1:[['50 kg',12],['60 kg',10],['70 kg',8],['75 kg',6]],
+        l2:[['55 kg',8],['65 kg',6],['75 kg',5],['80 kg',5]],
+        l3:[['55 kg',6],['70 kg',5],['75 kg',4]] },
+      { name:'Incline DB press', tag:'Chest 2', note:'Per dumbbell, 30–45° bench. Shoulder-friendly angle for the second press.',
+        l1:[['22 kg',12],['26 kg',10],['30 kg',8],['32 kg',6]],
+        l2:[['24 kg',8],['28 kg',6],['32 kg',6],['34 kg',5]],
+        l3:[['26 kg',6],['30 kg',5],['32 kg',5]] },
+      { name:'Face pull', note:'High reps, light load. Rear delt and external rotation — never skip this one.', tip:true, simple:'3 × 20 @ 16–20 kg' },
+    ]
   },
-
-  b3: {
-    days: [
-      { key: 'd1', label: 'Day 1', type: 'Tempo Run', cls: 'run' },
-      { key: 'd2', label: 'Day 2', type: 'Full Station Day', cls: 'hyrox' },
-      { key: 'd3', label: 'Day 3', type: 'Doubles Sim', cls: 'combo' },
-    ],
-    content: {
-      d1: {
-        title: 'Tempo Run',
-        goal: 'Lift running pace above race effort. Hyrox run pace is not slow — you need a comfortable 6:30–7:00/km under fatigue. Tempo runs build exactly this.',
-        duration: '35–45 min',
-        together: false,
-        weeks: {
-          7: {
-            run: { title: 'Week 13–14 Tempo', sub: 'First tempo efforts. Hard but controlled.', specs: [
-              { label: 'Format', val: '3 × 8 min', unit: 'tempo / 2 min walk' },
-              { label: 'Pace', val: '6:00–6:30', unit: 'min/km' },
-              { label: 'Effort', val: 'Zone 3–4', unit: 'hard to talk' },
-            ]},
-            note: 'Warm up 10 min easy first. If 6:00/km is too fast, run at "comfortably hard" — you should be able to say 3–4 words at most.',
-          },
-          8: {
-            run: { title: 'Week 15–16 Tempo', sub: 'Longer tempo blocks.', specs: [
-              { label: 'Format', val: '2 × 12 min', unit: 'tempo / 3 min walk' },
-              { label: 'Pace', val: '6:00–6:15', unit: 'min/km' },
-              { label: 'Effort', val: 'Zone 4', unit: 'hard' },
-            ]},
-            note: 'This is the hardest run session in the plan. It directly builds your ability to run fast between Hyrox stations.',
-          },
-          9: {
-            run: { title: 'Week 17–18 Tempo', sub: 'Race-pace run. Aim for continuous 5 km at target race pace.', specs: [
-              { label: 'Distance', val: '5 km', unit: 'continuous' },
-              { label: 'Pace', val: '6:15–6:45', unit: 'min/km' },
-              { label: 'Effort', val: 'Race feel', unit: 'sustainable hard' },
-            ]},
-            note: 'This is your benchmark run. If you can run 5 km at 6:30/km, your Hyrox run legs are ready. Log your time.',
-          },
-        }
-      },
-      d2: {
-        title: 'Full Station Day',
-        goal: 'Practise every priority station at or near race standard. Quality over quantity. Rest between sets — this is skill practice, not conditioning.',
-        duration: '55–60 min',
-        together: false,
-        weeks: {
-          7: {
-            sections: [{
-              label: 'Station Practice — Full Circuit',
-              exercises: [
-                { name: 'SkiErg', note: 'Race: 2 × 500 m in doubles. Practice 500 m for time. Record it.', warn: true, sets: '3×500m', reps: 'rest 3 min' },
-                { name: 'Sled Push', note: 'Race: 25 m per person in doubles. Go heavy — heavier than you think.', warn: true, sets: '4×25m', reps: 'heavy load' },
-                { name: 'Sled Pull', note: 'Race: 25 m per person. Backwards drag. Grip the rope firmly.', warn: true, sets: '4×25m', reps: 'heavy load' },
-                { name: 'Burpee Broad Jump', note: 'Race: 40 total (20 each). Practise sets of 10–15. Track your pace per rep.', warn: true, sets: '4×10', reps: 'race standard' },
-                { name: 'Wall Ball', note: 'Race: 150 total (75 each) in doubles. Practice sets of 20. Rest at top.', warn: true, sets: '4×20', reps: '@ race weight 4–6 kg' },
-              ]
-            }]
-          },
-          8: {
-            sections: [{
-              label: 'Station Practice — Loaded Carries Focus',
-              exercises: [
-                { name: 'Farmers Carry', note: 'Race: 80 m per person in doubles. Today: 4 × 40 m at race weight (16 kg/hand).', warn: true, sets: '4×40m', reps: '@ 16 kg / hand' },
-                { name: 'Sandbag Lunges', note: 'Race: 50 m per person in doubles. 10 kg sandbag on shoulder. Today: 3 × 20 m.', warn: true, sets: '3×20m', reps: '@ 10 kg sandbag' },
-                { name: 'Wall Ball', note: 'After carries — legs are tired. This is the key training stress.', warn: true, sets: '3×20', reps: '@ race weight' },
-                { name: 'Burpee Broad Jump', note: 'Post-carry. Gas tank test. How does form hold up?', warn: true, sets: '2×15', reps: '' },
-                { name: 'Rowing', note: 'Race: 2 × 500 m in doubles. Row 500 m for time. Record it.', sets: '3×500m', reps: 'rest 3 min' },
-              ]
-            }]
-          },
-          9: {
-            sections: [{
-              label: 'Full Station Run-Through (race order)',
-              exercises: [
-                { name: 'SkiErg 500 m → Rest 3 min', note: 'Station 1 in Hyrox. Set the tone early — controlled, not sprinting.', sets: '2 rounds', reps: '' },
-                { name: 'Sled Push 25 m → Sled Pull 25 m', note: 'Stations 2 & 3. Back to back with brief changeover.', warn: true, sets: '3 rounds', reps: '' },
-                { name: 'Burpee Broad Jump × 15', note: 'Station 5 in Hyrox. After the sled — lungs will burn. Keep moving.', warn: true, sets: '3 rounds', reps: '' },
-                { name: 'Farmers Carry 40 m → Wall Ball × 20', note: 'Stations 7 & 8. The final two. This is where races are won.', warn: true, sets: '3 rounds', reps: 'race weights' },
-                { name: 'Sandbag Lunge 20 m', note: 'Station 6. Shoulder rack position. Alternate legs.', warn: true, sets: '3 rounds', reps: '@ 10 kg' },
-              ]
-            }]
-          },
-        }
-      },
-      d3: {
-        title: 'Doubles Simulation',
-        goal: 'Train as a team. Practice splitting reps and transitions. Doubles is won by communication and strategy — not just fitness.',
-        duration: '60 min',
-        together: true,
-        weeks: {
-          7: {
-            run: { title: 'Mini Hyrox — 4 stations each (Wk 13–14)', sub: 'Simulate a doubles race by alternating who does each station.', specs: [
-              { label: 'Format', val: '1 km run', unit: '→ split station → swap' },
-              { label: 'Rounds', val: '4', unit: 'stations total' },
-            ]},
-            stations: [
-              { name: 'SkiErg — 250 m each', target: '500 m total', note: 'You do 250 m, partner does 250 m, minimal transition time.' },
-              { name: 'Burpee Broad Jump — 20 each', target: '40 total', note: 'One person goes, counts 20, tags partner who does 20. Practice tagging clean.' },
-              { name: 'Wall Ball — 35 each', target: '70 total', note: 'High rep set. Decide your splitting strategy now — do you go 5 at a time, 10 at a time?' },
-              { name: 'Farmers Carry — 40 m each', target: '80 m total', note: 'Each carry your section, hand off at the cone.' },
-            ],
-            note: '★ After this session: sit down and agree on your station split strategy for race day. Who does what, and in what order.',
-          },
-          8: {
-            run: { title: 'Half Hyrox Sim (Wk 15–16)', sub: 'Half race distance. 4 x 500 m runs (you split the 4 x 1 km loops), 4 stations.', specs: [
-              { label: 'Format', val: '4 × 500m run', unit: '+ 4 stations split' },
-              { label: 'Rest', val: 'None', unit: 'race simulation' },
-            ]},
-            stations: [
-              { name: 'Sled Push / Pull split', target: 'Each 25 m push + 25 m pull', note: 'Person A pushes while B rests. Then swap for the pull.' },
-              { name: 'Burpee Broad Jump split', target: '20 each', note: 'Practice not stopping between the transition. Go immediately when your partner tags you.' },
-              { name: 'Sandbag Lunges split', target: '25 m each', note: 'Set sandbag on shoulder, lunge forward. Partner waits at turnaround.' },
-              { name: 'Wall Ball split', target: '35 + 40 reps', note: 'Stronger partner takes the bigger set today. Try both ways over two weeks.' },
-            ],
-            note: '★ Together session. This is where strategy becomes second nature. Talk through every handoff — the clock keeps running during transitions.',
-          },
-          9: {
-            run: { title: 'Full Hyrox Mock — Doubles (Wk 17–18)', sub: 'Full race simulation at 80% intensity. All 8 stations, 8 x 1 km split.', specs: [
-              { label: 'Format', val: 'Full doubles', unit: 'race order' },
-              { label: 'Intensity', val: '80%', unit: 'not all out' },
-              { label: 'Target', val: 'Complete', unit: 'no skips' },
-            ]},
-            stations: [
-              { name: 'Stn 1: SkiErg — 1000 m total', target: '500 m each', note: 'Stations 1 of 8. Controlled pace.' },
-              { name: 'Stn 2: Sled Push — 50 m total', target: '25 m each', note: 'Go heavy.' },
-              { name: 'Stn 3: Sled Pull — 50 m total', target: '25 m each', note: 'Backward drag.' },
-              { name: 'Stn 4: Burpees — 40 total', target: '20 each', note: 'Pace yourselves.' },
-              { name: 'Stn 5: Row — 1000 m total', target: '500 m each', note: 'Or SkiErg if no rower.' },
-              { name: 'Stn 6: Farmers — 160 m total', target: '80 m each', note: '16 kg/hand target.' },
-              { name: 'Stn 7: Sandbag Lunges — 100 m total', target: '50 m each', note: '10 kg sandbag.' },
-              { name: 'Stn 8: Wall Ball — 150 total', target: '75 each', note: 'Race weight. Finish strong.' },
-            ],
-            note: '★ Log your total time. This is your benchmark. Block 4 will build on this. Celebrate finishing — you\'re ready for race day.',
-          },
-        }
-      },
-    }
-  },
-
-  b4: {
-    days: [
-      { key: 'd1', label: 'Day 1', type: 'Race Run', cls: 'run' },
-      { key: 'd2', label: 'Day 2', type: 'Peak / Taper', cls: 'hyrox' },
-      { key: 'd3', label: 'Day 3', type: 'Mock Race / Rest', cls: 'combo' },
-    ],
-    content: {
-      d1: {
-        title: 'Race Pace Run',
-        goal: 'Maintain run fitness with race-pace efforts. Volume drops but intensity stays. Trust the base you\'ve built.',
-        duration: '35–40 min',
-        together: false,
-        weeks: {
-          10: {
-            run: { title: 'Week 19–20 — Race Pace Run', sub: 'Race pace, lower volume. Confidence-building run.', specs: [
-              { label: 'Distance', val: '5–6', unit: 'km' },
-              { label: 'Pace', val: '6:15–6:45', unit: 'min/km' },
-              { label: 'Feel', val: 'Controlled', unit: 'race effort' },
-            ]},
-            note: 'In doubles Hyrox, each of you will run approximately 4 km total (8 × 1 km loops split between you). This run is well above race demand. You are ready.',
-          },
-          11: {
-            run: { title: 'Week 21–22 — Taper Run', sub: 'Volume reduces. Keep legs moving, don\'t rest too much.', specs: [
-              { label: 'Distance', val: '4–5', unit: 'km' },
-              { label: 'Pace', val: 'Easy to moderate', unit: 'feel good' },
-              { label: 'Feel', val: 'Fresh', unit: 'don\'t push' },
-            ]},
-            note: 'Tapering is hard mentally — you\'ll feel like you should be doing more. Trust the training. Freshness on race day is earned here.',
-          },
-          12: {
-            run: { title: 'Week 23–24 — Race Week', sub: 'Race week protocol. Short shakeout runs only.', specs: [
-              { label: 'Mon / Tue', val: '2–3 km', unit: 'easy shakeout' },
-              { label: 'Wed–Sat', val: 'Rest', unit: 'walk only' },
-              { label: 'Race day', val: 'GO', unit: '🏆' },
-            ]},
-            note: 'Race week: eat well (carbs), hydrate, sleep. No new exercises. No heavy lifting. Your job this week is to arrive on the start line feeling fresh and confident.',
-          },
-        }
-      },
-      d2: {
-        title: 'Peak Station Work / Taper',
-        goal: 'Weeks 19–20: peak station confidence. Weeks 21–22: reduce volume to 60%, maintain sharpness. Weeks 23–24: rest.',
-        duration: '45 min',
-        together: false,
-        weeks: {
-          10: {
-            sections: [{
-              label: 'Peak Station Confidence (Wk 19–20)',
-              exercises: [
-                { name: 'Wall Ball', note: 'Race standard. 3 × 25 unbroken if possible. This is your benchmark.', warn: true, sets: '3×25', reps: '@ race weight' },
-                { name: 'Farmers Carry', note: '@ 16 kg / hand. 3 × 40 m. You know this movement now.', warn: true, sets: '3×40m', reps: '@ 16 kg / hand' },
-                { name: 'Burpee Broad Jump', note: '3 × 15. Race pace. Time a set — target under 90s for 15 reps.', warn: true, sets: '3×15', reps: '' },
-                { name: 'Sandbag Lunge', note: 'Race weight. 2 × 25 m. Smooth rhythm.', warn: true, sets: '2×25m', reps: '@ 10 kg' },
-                { name: 'Sled Push + Pull', note: 'One final heavy sled session. Race weight. Two runs each.', warn: true, sets: '2×25m', reps: 'race weight' },
-              ]
-            }]
-          },
-          11: {
-            sections: [{
-              label: 'Taper — 60% Volume (Wk 21–22)',
-              exercises: [
-                { name: 'Wall Ball', note: 'Keep the movement sharp. Light day.', warn: true, sets: '2×20', reps: '@ race weight' },
-                { name: 'Farmers Carry', note: 'Feel the movement, don\'t crush yourself.', warn: true, sets: '2×30m', reps: '@ 16 kg / hand' },
-                { name: 'Burpee Broad Jump', note: '2 × 10. Stay sharp.', warn: true, sets: '2×10', reps: '' },
-                { name: 'Short row or SkiErg', note: '2 × 250 m. Easy effort. Greasing the groove.', sets: '2×250m', reps: 'easy' },
-              ]
-            }]
-          },
-          12: {
-            sections: [{
-              label: 'Race Week — Rest (Wk 23–24)',
-              exercises: [
-                { name: 'Mobility / Stretching only', note: '20 min gentle mobility. Hip flexors, hamstrings, shoulders. No loading.', tip: true, sets: '20 min', reps: '' },
-                { name: 'Walk 20 min', note: 'Keep blood moving. Don\'t sit completely still.', tip: true, sets: '1×', reps: 'easy walk' },
-              ]
-            }]
-          },
-        }
-      },
-      d3: {
-        title: 'Full Mock Race / Active Rest',
-        goal: 'Weeks 19–20: final full doubles mock race. Weeks 21+: active rest, race-day prep.',
-        duration: '60–75 min then reducing',
-        together: true,
-        weeks: {
-          10: {
-            run: { title: 'Final Mock Doubles Race (Wk 19–20)', sub: 'Go close to race intensity. This is the confidence session.', specs: [
-              { label: 'Format', val: 'Full doubles', unit: 'race order' },
-              { label: 'Intensity', val: '90–95%', unit: 'near race effort' },
-              { label: 'Goal', val: 'Beat', unit: 'Block 3 time' },
-            ]},
-            stations: [
-              { name: 'All 8 Hyrox stations', target: 'Race splits', note: 'Use your agreed doubles split strategy. Execute it cleanly.' },
-              { name: 'Run split: 4 × 1km each', target: 'Race pace', note: 'Your partner runs alternate loops. Both push pace.' },
-              { name: 'Transitions', target: 'Practice', note: 'Time your handoffs. Every wasted second in transition is free time to cut.' },
-            ],
-            note: '★ After this session: review your split sheet. Finalise who does what for race day. No more changes — lock it in.',
-          },
-          11: {
-            run: { title: 'Taper Week — Light Doubles Check-in (Wk 21–22)', sub: 'Stay sharp. Not a full sim — just keeping the feel.', specs: [
-              { label: 'Format', val: 'Half sim', unit: '4 stations only' },
-              { label: 'Intensity', val: '70%', unit: 'easy/moderate' },
-            ]},
-            stations: [
-              { name: 'Wall Ball × 30 (15 each)', target: 'Sharp reps', note: 'Light and controlled. Stay sharp.' },
-              { name: 'Burpee Broad Jump × 20 (10 each)', target: 'Good form', note: 'Technique focus. Don\'t sprint.' },
-              { name: 'Farmers Carry 40 m each', target: 'Race weight', note: 'Light warm-up carry. Keep grip strong.' },
-              { name: '500 m Run together', target: 'Easy pace', note: 'Finish with a relaxed 500 m together.' },
-            ],
-            note: '★ This is your last doubles session. Go easy. Talk through race day logistics — warm-up plan, fuelling, kit, who carries what.',
-          },
-          12: {
-            run: { title: 'Race Week — Rest (Wk 23–24)', sub: 'No structured session. Active recovery only.', specs: [
-              { label: 'Activity', val: 'Walk', unit: '20–30 min only' },
-              { label: 'Lifting', val: 'None', unit: 'zero loading' },
-              { label: 'Priority', val: 'Sleep', unit: 'and eat' },
-            ]},
-            stations: [],
-            note: '🏆 Race day checklist: packed kit bag, race nutrition (gels + water), arrive 90 min early for warm-up, agree final station splits with your partner, and go have fun. You\'ve done the work.',
-          },
-        }
-      },
-    }
-  },
+  lower: {
+    title: 'Lower body with Jay',
+    goal: 'Squat, single-leg lunge work and core. The lunge block is your sandbag lunge preparation — load it and progress it rather than treating it as a finisher.',
+    duration: '65–70 min',
+    notice: 'Running volume is now high. If Sunday\u2019s long run left you flat, cut the squat pyramid at set 3 rather than skipping the session. Belt on all top sets. Dead bug and bird dog before the first squat set, every time.',
+    options: ['Reverse / walking lunge', 'Bulgarian split squat'],
+    ex: [
+      { name:'Warm-up: dead bug, bird dog, ankle rocks', note:'Two rounds per side. Back protocol first, then ankle mobility.', tip:true, simple:'2 × 10 each side' },
+      { name:'Barbell back squat', tag:'Squat', note:'Three-second descent, drive up fast. Belt from the third set.',
+        l1:[['65 kg',12],['80 kg',10],['90 kg',8],['95 kg',6]],
+        l2:[['70 kg',8],['85 kg',6],['95 kg',5],['100 kg',5]],
+        l3:[['70 kg',6],['85 kg',5],['95 kg',4]] },
+      { name:'DB reverse lunge', tag:'Single leg', opt:0, note:'Per dumbbell, reps per leg. Long step back, torso upright.',
+        l1:[['16 kg',12],['20 kg',10],['24 kg',10]],
+        l2:[['20 kg',10],['24 kg',8],['28 kg',8]],
+        l3:[['22 kg',8],['26 kg',8],['30 kg',6]] },
+      { name:'Bulgarian split squat', tag:'Single leg', opt:1, note:'Per dumbbell, reps per leg. Rear foot elevated, front shin vertical. Start conservative.',
+        l1:[['12 kg',12],['16 kg',10],['20 kg',8]],
+        l2:[['16 kg',10],['20 kg',8],['24 kg',8]],
+        l3:[['18 kg',8],['22 kg',8],['26 kg',6]] },
+      { name:'Sandbag or barbell lunge walk', tag:'Hyrox', opt:1, note:'20 m per set, unbroken. The closest thing to station 7 you can do in the gym.', simple:'3 × 20 m @ 20–30 kg' },
+      { name:'Romanian deadlift', tag:'Optional', note:'Jay\u2019s call. Drop it in weeks 6, 8 and 9 — Saturday and Sunday need the hamstrings.',
+        l1:[['70 kg',12],['85 kg',10],['100 kg',8]],
+        l2:[['75 kg',8],['90 kg',6],['105 kg',6]],
+        l3:[['80 kg',6],['95 kg',5],['105 kg',5]] },
+      { name:'Calf raise, single leg', tag:'Durability', note:'Marathon insurance as much as ankle rehab. Full range, pause at the top.', tip:true, simple:'3 × 15 per leg' },
+      { name:'Core circuit', tag:'Core', note:'Three rounds, minimal rest: hanging leg raise × 12, Pallof press × 12 per side, weighted plank 45 s, ab wheel × 10.', tip:true, simple:'3 rounds' },
+    ]
+  }
 };
 
-// ── State ──
-let state = { block: 'b1', weekIdx: 0, day: 'd1' };
+// ─────────── Runs: easy (Wed), tempo (Thu), shake (Fri), long (Sun) ───────────
+const RUNS = {
+  1:  { easy:['6 km','7:00–7:15','Zone 2'], tempo:['5 km','6:20','after a 1.5 km warm-up'], shake:['5 km','7:15–7:30','recovery pace, keep it boring'], long:['14 km','7:00–7:20','all easy'] },
+  2:  { easy:['5 km','7:15','very easy'], tempo:['3 × 1 km','6:00','2 min jog between — race sharpener'], shake:['4 km','7:20','pre-race legs only'], long:null },
+  3:  { easy:['7 km','7:00','Zone 2'], tempo:['6 km','6:20','continuous'], shake:['5 km','7:15','recovery'], long:['18 km','7:00–7:20','all easy'] },
+  4:  { easy:['6 km','7:05','Zone 2'], tempo:['5 km + 6 × 200 m','6:20 / strides','deload week'], shake:['5 km','7:20','recovery'], long:['14 km','7:10','easy — deload'] },
+  5:  { easy:['7 km','7:00','Zone 2'], tempo:['8 km','6:25','continuous'], shake:['5 km','7:15','recovery'], long:['22 km','7:00–7:20','last 4 km at 6:50'] },
+  6:  { easy:['7 km','7:00','Zone 2'], tempo:['2 × 3 km','6:15','3 min jog between'], shake:['4 km','7:20','easy — simulation tomorrow'], long:['14 km','7:10','cutback after the half simulation'] },
+  7:  { easy:['8 km','7:00','Zone 2'], tempo:['10 km','6:30','6 km at marathon effort inside it'], shake:['5 km','7:15','recovery'], long:['26 km','7:00–7:20','last 6 km at 6:50'] },
+  8:  { easy:['7 km','7:00','Zone 2'], tempo:['8 km','6:20','continuous'], shake:['4 km','7:20','easy — full simulation tomorrow'], long:['14 km','7:10','cutback'] },
+  9:  { easy:['7 km','7:00','Zone 2'], tempo:['6 km with 4 × 1 km','6:00','90 s jog between'], shake:['4 km','7:25','very easy — 32 km on Sunday'], long:['32 km','7:05–7:25','longest run of the block, last 5 km at 6:50'] },
+  10: { easy:['6 km','7:00','Zone 2'], tempo:['5 km','6:20','taper — short and sharp'], shake:['4 km','7:15','recovery'], long:['14 km','7:10','easy, no hills'] },
+  11: { easy:['4 km','7:15','shakeout with 4 × 100 m strides'], tempo:null, shake:null, long:['8 km','7:30','post-race jog on Sunday'] },
+  12: { easy:['6 km','7:15','easy — by feel after the race'], tempo:['8 km','6:50','4 km at marathon pace inside it'], shake:['5 km','7:20','recovery'], long:['22 km','7:05–7:25','last 4 km at 6:50 — full race-kit rehearsal'] },
+  13: { easy:['6 km','7:10','easy'], tempo:['6 km','6:50','3 km at marathon pace, race kit and gels'], shake:['4 km','7:25','recovery'], long:['12 km','7:10','final long run, all easy'] },
+  14: { easy:['4 km','7:20','easy, only if the legs want it'], tempo:null, shake:['4 km','7:15','shakeout with 3 × 100 m strides'], long:['6 km','7:30','easy, by feel'] },
+};
 
-// ── Helpers ──
-function blockData() { return BLOCKS[state.block]; }
-function sessionData() { return SESSIONS[state.block].content[state.day]; }
-function weekKey() { return blockData().weekKeys[state.weekIdx]; }
+const RUN_META = {
+  easy:  { title:'Easy run', sub:'Aerobic maintenance between two lifting days. Conversational the whole way — if you cannot hold a sentence, slow down.', cls:'' },
+  tempo: { title:'Quality run', sub:'The week\u2019s hard run. Warm up 1.5 km, then hold the prescribed pace.', cls:'warm' },
+  shake: { title:'Short recovery run', sub:'The fourth run, added for marathon volume. Its only job is easy mileage before Saturday — if you are wrecked, walk it or skip it.', cls:'' },
+  long:  { title:'Long run', sub:'The most important session of the marathon build. Fuel the night before, eat something light 90 minutes ahead, and practise gels on anything over 18 km.', cls:'' },
+};
 
-// ── Setters ──
-function setBlock(b) {
-  state.block = b;
-  state.weekIdx = 0;
-  state.day = 'd1';
-  document.querySelectorAll('.block-btn').forEach(btn => btn.classList.remove('active'));
-  document.querySelector(`.block-btn.${b}`).classList.add('active');
-  renderAll();
+// ─────────── Saturday Hyrox ───────────
+const HYROX = {
+  1: { title:'Station familiarisation', sub:'Learn the movements and the doubles handover. No timing, no scoring.',
+    blocks:[['Warm-up','10 min easy row plus dynamic mobility'],
+      ['4 rounds','500 m run, then one station: SkiErg 250 m / sled push 25 m / burpee broad jump 20 m / wall balls × 20'],
+      ['Focus','Handover mechanics — who starts, how you call the swap, where you stand'],
+      ['Finish','5 min easy bike, then hip and ankle mobility']],
+    note:'Technique over intensity. Film one set of burpee broad jumps and one of wall balls — form breaks first on those two.' },
+  2: { title:'Pre-race skills (light)', sub:'Deliberately easy. The 10K is tomorrow.',
+    blocks:[['Warm-up','8 min easy ski erg'],
+      ['2 rounds','400 m easy run, SkiErg 500 m, wall balls × 20 split with partner'],
+      ['Skip','No sled, no lunges, no burpees — nothing that loads the legs'],
+      ['Finish','10 min mobility, then rest']],
+    note:'Under 40 minutes total. If in doubt, do less.' },
+  3: { title:'Compromised running', sub:'The core Hyrox skill: running well on tired legs.',
+    blocks:[['4 rounds','1 km run at 6:20–6:35, then one station'],
+      ['Stations','SkiErg 500 m / sled push 50 m / row 500 m / wall balls × 50 split'],
+      ['Rest','90 s between rounds, no more'],
+      ['Finish','Easy 400 m jog']],
+    note:'Hold the run pace on round 4 as well as round 1. More than 20 s/km of fade means you started too fast.' },
+  4: { title:'Technique and carries (deload)', sub:'Low load, high quality.',
+    blocks:[['Warm-up','10 min easy row'],
+      ['Burpee broad jump','4 × 20 m, full reset each rep, long rest'],
+      ['Farmers carry','4 × 100 m at 2 × 24 kg, grip focus'],
+      ['Sandbag lunge','4 × 50 m at 20 kg, unbroken'],
+      ['Finish','15 min mobility']],
+    note:'Keep heart rate moderate. This week lets the last three weeks of lifting and running land.' },
+  5: { title:'Hyrox conditioning', sub:'Six run-and-station rounds at roughly 80% of race effort.',
+    blocks:[['6 rounds','1 km run, then one station'],
+      ['Stations','SkiErg 1000 m / sled push 50 m / sled pull 50 m / burpee broad jump 80 m / row 1000 m / wall balls × 100 split'],
+      ['Doubles','Split every station properly — practise the real division of work'],
+      ['Rest','60–90 s between rounds']],
+    note:'First session that looks like the race. Note which station drops your run pace most — that is your priority for week 7.' },
+  6: { title:'Half Hyrox simulation', sub:'Timed. Four runs, four stations, race format.',
+    blocks:[['Warm-up','Full race warm-up protocol, 15 min'],
+      ['Simulation','4 × (1 km run + station): SkiErg 1000 m, sled push 50 m, sled pull 50 m, burpee broad jump 80 m'],
+      ['Format','Race splits, race kit, race fuelling'],
+      ['Record','Total time, split per station, and where you lost time on handovers']],
+    note:'Race kit and race shoes. Log the time below — you will compare it to week 8.' },
+  7: { title:'Station blocks', sub:'Build tolerance on the three longest stations. Sunday is 26 km, so keep the runs controlled.',
+    blocks:[['3 rounds','1 km run, then a station block'],
+      ['Block A','SkiErg 1000 m'],
+      ['Block B','Wall balls × 100, split with partner'],
+      ['Block C','Row 1000 m'],
+      ['Finish','1 km run at race pace']],
+    note:'Wall balls are the biggest source of no-reps in doubles. Full squat depth, ball above the line, every rep.' },
+  8: { title:'Full Hyrox simulation', sub:'Timed. All eight stations. Your dress rehearsal.',
+    blocks:[['Warm-up','Full race protocol, 15 min'],
+      ['Simulation','8 × (1 km run + station) in race order, doubles format'],
+      ['Test','Kit, shoes, fuelling, hydration, handover calls — everything you will use on 27 November'],
+      ['Record','Total time plus each station split']],
+    note:'Whatever goes wrong today is a gift — you still have three weeks to fix it. Change nothing after this session.' },
+  9: { title:'Skills only, 30 minutes', sub:'Short on purpose. Sunday is your 32 km peak long run.',
+    blocks:[['Warm-up','8 min easy row'],
+      ['Skills','Sled push 2 × 25 m at race weight, burpee broad jump 2 × 20 m, wall balls 2 × 25'],
+      ['Handovers','5 min of transition practice, no load'],
+      ['Finish','Mobility, then eat and rest']],
+    note:'Resist the urge to make this a session. If it goes over 35 minutes you have compromised tomorrow.' },
+  10: { title:'Race-pace sharpener (taper)', sub:'Short, sharp, well inside your limits.',
+    blocks:[['3 rounds','1 km at race pace, then one station at race intensity'],
+      ['Stations','SkiErg 500 m / sled push 25 m / wall balls × 40 split'],
+      ['Focus','Transitions and handover calls only'],
+      ['Finish','Easy 5 min, full mobility']],
+    note:'You should leave feeling you could do it twice again. That is the point of a taper.' },
+  11: { title:'Active recovery', sub:'The race was Friday. Today is a walk, not a session.',
+    blocks:[['Walk','30–40 min easy, outdoors'],
+      ['Mobility','Hips, ankles, thoracic spine, 15 min'],
+      ['Optional','5 min easy ski erg if you feel stiff']],
+    note:'Write down your race splits and three things to change while it is fresh. The marathon is 18 days away — recovery is now the whole job.' },
+  12: { title:'Optional easy session', sub:'Hyrox is done. Only do this if you want to, and never the day before the 22 km.',
+    blocks:[['Warm-up','10 min easy row or bike'],
+      ['Mixed','20 min of anything you enjoy at low intensity'],
+      ['Finish','Mobility']],
+    note:'Skipping this entirely is the better choice if Sunday\u2019s 22 km matters to you.' },
+};
+
+// ─────────── Day layouts ───────────
+const DEFAULT_DAYS = [
+  { k:'mon', kind:'lift', ref:'upper', type:'Upper · Jay' },
+  { k:'tue', kind:'lift', ref:'lower', type:'Lower · Jay' },
+  { k:'wed', kind:'run',  ref:'easy',  type:'Easy run' },
+  { k:'thu', kind:'run',  ref:'tempo', type:'Quality run' },
+  { k:'fri', kind:'run',  ref:'shake', type:'Short run' },
+  { k:'sat', kind:'hyrox', type:'Hyrox prep' },
+  { k:'sun', kind:'run',  ref:'long',  type:'Long run' },
+];
+
+const DAY_OVERRIDES = {
+  2: [null,null,null,null,null,null, { k:'sun', kind:'race', ref:'10k', type:'10K race' }],
+  11: [
+    { k:'mon', kind:'lift', ref:'upper', type:'Activation' },
+    { k:'tue', kind:'lift', ref:'lower', type:'Activation' },
+    { k:'wed', kind:'run',  ref:'easy',  type:'Shakeout' },
+    { k:'thu', kind:'rest', type:'Rest · kit' },
+    { k:'fri', kind:'race', ref:'hyrox', type:'HYROX' },
+    { k:'sat', kind:'hyrox', type:'Recovery' },
+    { k:'sun', kind:'run',  ref:'long',  type:'Easy jog' },
+  ],
+  12: [
+    { k:'mon', kind:'rest', type:'Rest' },
+    { k:'tue', kind:'lift', ref:'upper', type:'Light upper' },
+    { k:'wed', kind:'run',  ref:'easy',  type:'Easy run' },
+    { k:'thu', kind:'run',  ref:'tempo', type:'Marathon pace' },
+    { k:'fri', kind:'run',  ref:'shake', type:'Short run' },
+    { k:'sat', kind:'hyrox', type:'Optional' },
+    { k:'sun', kind:'run',  ref:'long',  type:'22 km' },
+  ],
+  13: [
+    { k:'mon', kind:'lift', ref:'upper', type:'Light upper' },
+    { k:'tue', kind:'lift', ref:'lower', type:'Light lower' },
+    { k:'wed', kind:'run',  ref:'easy',  type:'Easy run' },
+    { k:'thu', kind:'run',  ref:'tempo', type:'MP rehearsal' },
+    { k:'fri', kind:'run',  ref:'shake', type:'Short run' },
+    { k:'sat', kind:'rest', type:'Rest' },
+    { k:'sun', kind:'run',  ref:'long',  type:'Final 12 km' },
+  ],
+  14: [
+    { k:'mon', kind:'run',  ref:'shake', type:'Shakeout' },
+    { k:'tue', kind:'race', ref:'mara',  type:'MARATHON' },
+    { k:'wed', kind:'rest', type:'Rest' },
+    { k:'thu', kind:'rest', type:'Walk only' },
+    { k:'fri', kind:'run',  ref:'easy',  type:'Easy, optional' },
+    { k:'sat', kind:'rest', type:'Rest' },
+    { k:'sun', kind:'run',  ref:'long',  type:'Easy run' },
+  ],
+};
+
+const STATIONS = [
+  ['1000 m SkiErg','1000 m total','Split as you like — most pairs do 500/500 or 250 m blocks'],
+  ['50 m sled push','152 kg, men\u2019s open','One partner pushes 25 m, swap at the turn'],
+  ['50 m sled pull','103 kg, men\u2019s open','Split 25/25 or alternate pulls'],
+  ['80 m burpee broad jump','80 m total','Alternate every 10–20 m — pacing matters most here'],
+  ['1000 m row','1000 m total','500/500, or 250 m blocks if grip is fading'],
+  ['200 m farmers carry','2 × 24 kg','100 m each, or swap at every turn'],
+  ['100 m sandbag lunge','20 kg','50 m each — unbroken beats fast'],
+  ['100 wall balls','6 kg to a 3 m target','Alternate in blocks of 10–20. No-reps are the main risk'],
+];
+
+// ─────────── Helpers ───────────
+const DAY_NAMES = { mon:'Mon', tue:'Tue', wed:'Wed', thu:'Thu', fri:'Fri', sat:'Sat', sun:'Sun' };
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+function addDays(d, n) { const x = new Date(d); x.setDate(x.getDate() + n); return x; }
+function fmt(d) { return d.getDate() + ' ' + MONTHS[d.getMonth()]; }
+function sameDay(a, b) { return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate(); }
+function weekStart(n) { return addDays(START, (n-1) * 7); }
+function dayDate(n, i) { return addDays(weekStart(n), i); }
+function daysBetween(a, b) { return Math.round((b - new Date(a.getFullYear(), a.getMonth(), a.getDate())) / 86400000); }
+function round25(v) { return Math.round(v / 2.5) * 2.5; }
+
+function scaleW(w, pct) {
+  if (w === 'BW') return 'BW';
+  const m = String(w).match(/^BW\+([\d.]+)/);
+  if (m) { const v = round25(parseFloat(m[1]) * pct); return v <= 0 ? 'BW' : 'BW+' + v + ' kg'; }
+  const n = parseFloat(w);
+  return isNaN(n) ? w : round25(n * pct) + ' kg';
 }
 
-function setWeekIdx(i) {
-  state.weekIdx = i;
-  document.querySelectorAll('.week-btn').forEach(b => b.classList.toggle('active', +b.dataset.i === i));
-  const dr = document.getElementById('weekDateRange');
-  if (dr) dr.textContent = '📅 ' + weekDateRange(i, state.block);
-  renderSession();
+function setsFor(ex, load) {
+  if (ex.simple) return { simple: ex.simple };
+  if (load === 'l1' || load === 'l2' || load === 'l3') {
+    const rows = ex[load] || ex.l2 || ex.l1;
+    return { rows: rows.map(r => ({ w: r[0], r: r[1] })) };
+  }
+  const base = ex.l1;
+  if (load === 'dl')  return { rows: base.slice(0,3).map(r => ({ w: scaleW(r[0], .65), r: 10 })) };
+  if (load === 'tp')  return { rows: (ex.l3 || ex.l2 || base).slice(0,2).map(r => ({ w: scaleW(r[0], .70), r: 5 })) };
+  if (load === 'br')  return { rows: base.slice(0,2).map(r => ({ w: scaleW(r[0], .55), r: 8 })) };
+  if (load === 'act') return { rows: base.slice(0,2).map(r => ({ w: scaleW(r[0], .50), r: 5 })) };
+  return { rows: base.slice(0,2).map(r => ({ w: scaleW(r[0], .40), r: 12 })) };
 }
 
-function setDay(d) {
-  state.day = d;
-  document.querySelectorAll('.day-btn').forEach(b => b.classList.toggle('active', b.dataset.d === d));
-  renderSession();
+function daysOf(n) {
+  const ov = DAY_OVERRIDES[n];
+  return DEFAULT_DAYS.map((d, i) => (ov && ov[i]) ? ov[i] : d);
 }
 
-// ── Render ──
-function renderAll() {
-  renderBlockBanner();
-  renderWeeks();
-  renderDays();
-  renderSession();
+// ─────────── Log ───────────
+let LOG = {}, storageOK = false, saveTimer = null;
+
+async function loadLog() {
+  try {
+    const res = await window.storage.get('hyroxmara:log');
+    LOG = res && res.value ? JSON.parse(res.value) : {};
+    storageOK = true;
+  } catch (e) {
+    try { await window.storage.set('hyroxmara:log', '{}'); storageOK = true; }
+    catch (e2) { storageOK = false; }
+    LOG = {};
+  }
+  document.getElementById('saveState').textContent = storageOK
+    ? 'Log fields save automatically and persist between visits.'
+    : 'Log fields are kept for this session only — persistent storage is unavailable here.';
 }
 
-// Date helpers — programme starts Monday 21 Apr 2025
-const PROG_START = new Date(2026, 5, 1); // 14 Apr 2026
-function weekStartDate(weekNumber) {
-  const d = new Date(PROG_START);
-  d.setDate(d.getDate() + (weekNumber - 1) * 7);
-  return d;
+function setLog(k, v) {
+  if (v === '') delete LOG[k]; else LOG[k] = v;
+  if (!storageOK) return;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(async () => {
+    try { await window.storage.set('hyroxmara:log', JSON.stringify(LOG)); }
+    catch (e) { document.getElementById('saveState').textContent = 'Could not save the last change.'; }
+  }, 400);
 }
-function weekEndDate(weekNumber) {
-  const d = weekStartDate(weekNumber);
-  d.setDate(d.getDate() + 6);
-  return d;
-}
-function fmtDate(d) {
-  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
-}
-function blockDateRange(blockKey) {
-  const weekMap = { b1:[1,6], b2:[4,8], b3:[7,12], b4:[10,15] };
-  // actual week numbers covered by each block
-  const blockWeeks = { b1:[1,2,3,4,5,6], b2:[4,5,6,7,8], b3:[7,8,9,10,11,12], b4:[10,11,12,13,14,15] };
-  // Use BLOCKS weekKeys
-  const wks = BLOCKS[blockKey].weekKeys;
-  // weekKeys are indices, convert to actual programme weeks
-  const weekNums = { b1:[1,2,3,4,5,6], b2:[7,8,9,10,11,12], b3:[13,14,15,16,17,18], b4:[19,20,21,22,23,24] };
-  const wkList = weekNums[blockKey];
-  const start = weekStartDate(wkList[0]);
-  const end = weekEndDate(wkList[wkList.length-1]);
-  return fmtDate(start) + ' – ' + fmtDate(end);
-}
-function weekDateRange(weekIdx, blockKey) {
-  const weekNums = { b1:[1,2,3,4,5,6], b2:[7,8,9,10,11,12], b3:[13,14,15,16,17,18], b4:[19,20,21,22,23,24] };
-  // weekIdx is 0-based index into the block's weeks array (groups of 2 weeks)
-  // Each weekIdx covers 2 actual programme weeks
-  const wkList = weekNums[blockKey];
-  // weekIdx 0 = first 2 weeks, 1 = next 2, 2 = last 2
-  const firstWk = wkList[weekIdx * 2];
-  const lastWk = wkList[weekIdx * 2 + 1] || firstWk;
-  const start = weekStartDate(firstWk);
-  const end = weekEndDate(lastWk);
-  return fmtDate(start) + ' – ' + fmtDate(end);
-}
+function getLog(k) { return LOG[k] || ''; }
 
-function renderBlockBanner() {
-  const bd = blockData();
-  const el = document.getElementById('blockBanner');
-  el.className = 'block-banner ' + state.block;
-  el.innerHTML = `
-    <div style="flex:1">
-      <div class="bb-title">${bd.name}</div>
-      <div class="bb-desc">${bd.desc}</div>
-      <div class="bb-date-range">📅 ${blockDateRange(state.block)}</div>
-    </div>
-    <div class="bb-badge">${bd.badge} · ${bd.focus}</div>
-  `;
+// ─────────── State ───────────
+const today = new Date();
+let state = { week: 1, day: 0, opt: 0 };
+
+(function initWeek() {
+  const off = daysBetween(START, today);
+  if (off >= 0) {
+    const w = Math.floor(off / 7) + 1;
+    state.week = Math.min(Math.max(w, 1), NWEEKS);
+    if (w >= 1 && w <= NWEEKS) state.day = off % 7;
+  }
+})();
+
+// ─────────── Render ───────────
+function renderCountdowns() {
+  const items = [
+    { n: daysBetween(today, RACE_10K), label: '10K · Sun 27 Sep', cls: '' },
+    { n: daysBetween(today, RACE_HYROX), label: 'Hyrox Doubles · Fri 27 Nov', cls: 'hyrox' },
+    { n: daysBetween(today, RACE_MARA), label: 'Marathon · Tue 15 Dec', cls: 'mara' },
+  ];
+  const off = daysBetween(START, today);
+  const curW = off < 0 ? 0 : Math.min(Math.floor(off / 7) + 1, NWEEKS);
+  document.getElementById('countdowns').innerHTML = items.map(i => `
+    <div class="cd ${i.cls}">
+      <div class="cd-num">${i.n > 0 ? i.n : (i.n === 0 ? 'Today' : 'Done')} <span class="cd-unit">${i.n > 0 ? (i.n === 1 ? 'day' : 'days') : ''}</span></div>
+      <div class="cd-label">${i.label}</div>
+    </div>`).join('') + `
+    <div class="cd">
+      <div class="cd-num">${curW || '–'}<span class="cd-unit"> of 14</span></div>
+      <div class="cd-label">${curW ? 'Current week' : 'Starts 14 Sep'}</div>
+    </div>`;
 }
 
 function renderWeeks() {
-  const bd = blockData();
-  const btns = bd.weeks.map((w, i) =>
-    `<button class="week-btn ${i===state.weekIdx?'active':''}" data-i="${i}" onclick="setWeekIdx(${i})">${w}</button>`
-  ).join('');
-  const dateRange = weekDateRange(state.weekIdx, state.block);
-  document.getElementById('weekRow').innerHTML = btns +
-    `<div class="week-date-range" id="weekDateRange">📅 ${dateRange}</div>`;
+  const off = daysBetween(START, today);
+  const nowW = off >= 0 ? Math.floor(off / 7) + 1 : 0;
+  document.getElementById('weekRow').innerHTML = WEEKS.map(w => `
+    <button class="week-btn ${w.n===state.week?'active':''} ${w.n===nowW?'now':''}" data-ph="${w.ph}" onclick="setWeek(${w.n})">
+      <span class="wk-n">W${w.n}</span>
+      <span class="wk-d">${fmt(weekStart(w.n))}</span>
+      <span class="wk-bar"></span>
+    </button>`).join('');
+}
+
+function renderBanner() {
+  const w = WEEKS[state.week - 1], p = PHASES[w.ph];
+  const el = document.getElementById('phaseBanner');
+  el.dataset.ph = w.ph;
+  el.innerHTML = `
+    <div>
+      <div class="pb-title">Week ${w.n} — ${p.name}</div>
+      <div class="pb-desc">${p.desc}</div>
+    </div>
+    <div class="pb-badge">${fmt(weekStart(w.n))} – ${fmt(addDays(weekStart(w.n), 6))} · ${p.reps}</div>`;
 }
 
 function renderDays() {
-  const days = SESSIONS[state.block].days;
-  document.getElementById('dayRow').innerHTML = days.map(d =>
-    `<div class="day-btn ${d.cls} ${d.key===state.day?'active':''}" data-d="${d.key}" onclick="setDay('${d.key}')">
-      <span class="day-label">${d.label}</span>
+  document.getElementById('dayRow').innerHTML = daysOf(state.week).map((d, i) => {
+    const dt = dayDate(state.week, i);
+    return `<button class="day-btn ${i===state.day?'active':''} ${sameDay(dt,today)?'today':''}" data-kind="${d.kind}" onclick="setDay(${i})">
+      <span class="day-name">${DAY_NAMES[d.k]}</span>
+      <span class="day-date">${fmt(dt)}</span>
       <span class="day-type">${d.type}</span>
-      <div class="day-dot"></div>
-    </div>`
-  ).join('');
-}
-
-function renderSession() {
-  const sd = sessionData();
-  const wk = weekKey();
-  const wdata = sd.weeks[wk];
-  const panel = document.getElementById('sessionPanel');
-
-  let html = `<div class="session-panel">`;
-  html += `<div class="session-header">
-    <div>
-      <div class="session-title">${sd.title}</div>
-      <div class="session-goal">${sd.goal}</div>
-    </div>
-    <div class="session-badges">
-      <div class="badge hi">${sd.duration}</div>
-      ${sd.together ? '<div class="badge together">★ Together</div>' : ''}
-    </div>
-  </div>`;
-
-  if (sd.together) {
-    html += `<div class="together-note">★ Together session — do this with your partner when schedules align. Communication and rep-splitting practice built in.</div>`;
-  }
-
-  // Run card
-  if (wdata.run) {
-    const r = wdata.run;
-    html += `<div class="run-card">
-      <div class="rc-title">${r.title}</div>
-      <div class="rc-sub">${r.sub}</div>
-      <div class="run-specs">${r.specs.map(s => `
-        <div class="run-spec">
-          <div class="rs-label">${s.label}</div>
-          <div class="rs-val">${s.val} <span class="rs-unit">${s.unit}</span></div>
-        </div>`).join('')}
-      </div>
-    </div>`;
-  }
-
-  // Stations
-  if (wdata.stations && wdata.stations.length > 0) {
-    html += `<div class="workout-section"><div class="ws-label">Hyrox Stations</div>`;
-    wdata.stations.forEach(st => {
-      html += `<div class="station-card">
-        <div class="sc-header">
-          <div class="sc-name">${st.name}</div>
-          <div class="sc-target">${st.target}</div>
-        </div>
-        <div class="sc-note">${st.note}</div>
-      </div>`;
-    });
-    html += `</div>`;
-  }
-
-  // Exercise sections
-  if (wdata.sections) {
-    wdata.sections.forEach(sec => {
-      html += `<div class="workout-section"><div class="ws-label">${sec.label}</div><div class="ex-list">`;
-      sec.exercises.forEach((ex, i) => {
-        html += `<div class="ex-item">
-          <div class="ex-num">${String(i+1).padStart(2,'0')}</div>
-          <div>
-            <div class="ex-name">${ex.name}</div>
-            <div class="ex-note ${ex.tip?'tip':''} ${ex.warn?'warn':''}">${ex.note}</div>
-          </div>
-          <div class="ex-sets"><b>${ex.sets}</b>${ex.reps ? ex.reps : ''}</div>
-        </div>`;
-      });
-      html += `</div></div>`;
-    });
-  }
-
-  // Note
-  if (wdata.note) {
-    html += `<div class="progress-note">${wdata.note}</div>`;
-  }
-
-  // Check-in button + block grid
-  html += ciRenderCheckin();
-
-  html += `</div>`;
-  panel.innerHTML = html;
-  ciUpdateStrip();
-}
-
-// ── Weekly Quote System ───────────────────────────────────────────
-const WEEKLY_QUOTES = [
-  { week: 1,  block: 'b1', label: 'Block 1 — Foundation', text: "Every rep today is a vote for the woman you're becoming. You don't need to be perfect. You just need to show up." },
-  { week: 2,  block: 'b1', label: 'Block 1 — Foundation', text: "We are cheering for each of your workouts, each night you didn't drink. But remember, success is built in these invisible, ordinary choices stacked over time." },
-  { week: 3,  block: 'b1', label: 'Block 1 — Foundation', text: "Action does not wait for self-esteem. It creates it." },
-  { week: 4,  block: 'b1', label: 'Block 1 — Foundation', text: "You ran when you didn't want to. You lifted when you were tired. You are already the person you're trying to become — you just haven't caught up to that truth yet." },
-  { week: 5,  block: 'b1', label: 'Block 1 — Foundation', text: "Fit, focused, and unstoppable — not someday. Look at what you've already done in five weeks." },
-  { week: 6,  block: 'b1', label: 'Block 1 — Foundation', text: "Six weeks in. The old version of you would have stopped by now. This version doesn't." },
-  { week: 7,  block: 'b2', label: 'Block 2 — Build', text: "Consistency is even rarer than talent and enthusiasm. You have all three." },
-  { week: 8,  block: 'b2', label: 'Block 2 — Build', text: "You are not training for a race. You are training for a life where hard things don't scare you." },
-  { week: 9,  block: 'b2', label: 'Block 2 — Build', text: "The woman who carries 24 kg without flinching carries everything else in her life the same way." },
-  { week: 10, block: 'b2', label: 'Block 2 — Build', text: "Consistency never looks impressive in the moment — only in the end." },
-  { week: 11, block: 'b2', label: 'Block 2 — Build', text: "Halfway there. And you look like someone who was never going to stop anyway." },
-  { week: 12, block: 'b2', label: 'Block 2 — Build', text: "Three months of showing up. That's not motivation. That's discipline. That's identity. That's you." },
-  { week: 13, block: 'b3', label: 'Block 3 — Station Specific', text: "Most people don't fail because they lack talent — they fail because they stop. Endurance in the small things nobody claps for. That's what you've been building." },
-  { week: 14, block: 'b3', label: 'Block 3 — Station Specific', text: "You run, you lift, you show up for your family, your work, your goals — all at once. That's not ordinary. Don't let anyone treat it like it is." },
-  { week: 15, block: 'b3', label: 'Block 3 — Station Specific', text: "The sled doesn't care about your mood. And neither do you anymore — you push it anyway. That's power." },
-  { week: 16, block: 'b3', label: 'Block 3 — Station Specific', text: "You are four months into doing something most people quit in week two. Let that sink in." },
-  { week: 17, block: 'b3', label: 'Block 3 — Station Specific', text: "Physically strong. Mentally sharp. Emotionally grounded. You are building all three at once — and it shows." },
-  { week: 18, block: 'b3', label: 'Block 3 — Station Specific', text: "You didn't just get fit. You got fearless." },
-  { week: 19, block: 'b4', label: 'Block 4 — Race Prep', text: "You've earned the right to believe in yourself completely. Do it." },
-  { week: 20, block: 'b4', label: 'Block 4 — Race Prep', text: "The race doesn't make you strong. It just gets to witness what you already are." },
-  { week: 21, block: 'b4', label: 'Block 4 — Race Prep', text: "One month out. You've run the kilometres, carried the weight, done the work. The rest is just showing up — which you've been doing for five months straight." },
-  { week: 22, block: 'b4', label: 'Block 4 — Race Prep', text: "You are ready. Not almost ready. Not nearly ready. Ready." },
-  { week: 23, block: 'b4', label: 'Block 4 — Race Prep', text: "Race week. You trained for this. You lived for this. All those early mornings and heavy sleds — they were always pointing here." },
-  { week: 24, block: 'b4', label: 'Block 4 — Race Prep', text: "Whatever happens on race day, this is already one of the best things you have ever done for yourself. We are so proud of you." },
-];
-
-function getCurrentQuote() {
-  const progStart = new Date(2026, 5, 1); // 1 Jun 2026
-  progStart.setHours(0, 0, 0, 0);
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const daysDiff = Math.floor((today - progStart) / (1000 * 60 * 60 * 24));
-  const weekNum = Math.min(Math.max(Math.floor(daysDiff / 7) + 1, 1), 24);
-  return WEEKLY_QUOTES.find(q => q.week === weekNum) || WEEKLY_QUOTES[0];
-}
-
-function renderQuoteBanner() {
-  const q = getCurrentQuote();
-  const banner = document.getElementById('quoteBanner');
-  const eyebrow = document.getElementById('quoteEyebrow');
-  const text = document.getElementById('quoteText');
-  const week = document.getElementById('quoteWeek');
-  if (!banner) return;
-  banner.className = 'quote-banner quote-' + q.block;
-  eyebrow.textContent = q.label;
-  text.textContent = q.text;
-  week.textContent = 'Week ' + q.week + ' of 24';
-}
-
-
-// ── Check-in System ───────────────────────────────────────────────────────
-const CI_KEY = 'hyrox_checkin_v1';
-const CI_BLOCKS = ['b1','b2','b3','b4'];
-const CI_DAYS   = ['d1','d2','d3'];
-const CI_PAIRS  = [0,1,2]; // 3 week-pairs per block
-// Each pair has 2 week slots: w0 and w1
-
-function ciKey(block, pairIdx, day, weekSlot) {
-  return `ci_${block}_${pairIdx}_${day}_w${weekSlot}`;
-}
-
-function ciLoadState() {
-  try { return JSON.parse(localStorage.getItem(CI_KEY)) || {}; } catch(e) { return {}; }
-}
-function ciSaveState(s) {
-  try { localStorage.setItem(CI_KEY, JSON.stringify(s)); } catch(e) {} 
-}
-let ciState = ciLoadState();
-
-// Map SESSIONS block weekKeys to week-pair indices and actual programme week numbers
-// Block weekKeys: b1=[1,2,3], b2=[4,5,6], b3=[7,8,9], b4=[10,11,12]
-// Each weekKey index = one pair of 2 actual weeks
-// Actual programme weeks: b1 covers wk1-6, b2 wk7-12, b3 wk13-18, b4 wk19-24
-const CI_PROG_WEEKS = {
-  b1: { 0:[1,2], 1:[3,4], 2:[5,6] },
-  b2: { 0:[7,8], 1:[9,10], 2:[11,12] },
-  b3: { 0:[13,14], 1:[15,16], 2:[17,18] },
-  b4: { 0:[19,20], 1:[21,22], 2:[23,24] },
-};
-
-// Is a given programme week in the past relative to today?
-function ciWeekIsPast(weekNum) {
-  const progStart = new Date(2026, 5, 1);
-  progStart.setHours(0,0,0,0);
-  const weekStart = new Date(progStart);
-  weekStart.setDate(weekStart.getDate() + (weekNum - 1) * 7);
-  const weekEnd = new Date(weekStart);
-  weekEnd.setDate(weekEnd.getDate() + 6);
-  weekEnd.setHours(23,59,59,999);
-  return Date.now() > weekEnd.getTime();
-}
-
-function ciTotalDone() {
-  return Object.values(ciState).filter(Boolean).length;
-}
-
-function ciBlockDone(block) {
-  let done = 0;
-  CI_PAIRS.forEach(p => CI_DAYS.forEach(d => [0,1].forEach(w => {
-    if (ciState[ciKey(block,p,d,w)]) done++;
-  })));
-  return done;
-}
-
-function ciUpdateStrip() {
-  const done = ciTotalDone();
-  const total = 72;
-  const pct = Math.round((done/total)*100);
-  const el = document.getElementById('ciCount');
-  const bar = document.getElementById('ciBar');
-  const pctEl = document.getElementById('ciPct');
-  if(el) el.textContent = done + ' / ' + total;
-  if(bar) bar.style.width = pct + '%';
-  if(pctEl) pctEl.textContent = pct + '%';
-}
-
-// Render the check-in button + block overview grid at the bottom of the session panel
-function ciRenderCheckin() {
-  const b = state.block;
-  const p = state.weekIdx;   // pair index 0,1,2
-  const d = state.day;
-
-  // Get the two programme week numbers for this pair
-  const weekNums = CI_PROG_WEEKS[b][p];
-
-  // Build the two week-slot buttons
-  const slots = [0,1].map(w => {
-    const key  = ciKey(b, p, d, w);
-    const done = !!ciState[key];
-    const wkNum = weekNums[w];
-    const past = ciWeekIsPast(wkNum);
-    const progStart = new Date(2026, 5, 1);
-    const wkStart = new Date(progStart);
-    wkStart.setDate(wkStart.getDate() + (wkNum-1)*7);
-    const wkLabel = wkStart.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
-    return { key, done, past, wkNum, wkLabel };
-  });
-
-  let html = `<div class="ci-btn-wrap">`;
-  html += `<div style="flex:1">`;
-  html += `<div style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;">Log this session</div>`;
-  html += `<div style="display:flex;gap:10px;flex-wrap:wrap;">`;
-
-  slots.forEach(slot => {
-    const btnCls = slot.done ? 'ci-btn logged' : 'ci-btn';
-    const icon   = slot.done ? '✓' : '○';
-    const label  = slot.done ? 'Logged · Wk ' + slot.wkNum : 'Wk ' + slot.wkNum + ' · ' + slot.wkLabel;
-    const hover  = slot.done ? 'Tap to undo' : '';
-    html += `<button class="${btnCls}" onclick="ciToggle('${slot.key}')" title="${hover}">
-      <span>${icon}</span> ${label}
+      <span class="day-dot"></span>
     </button>`;
-  });
+  }).join('');
+}
 
-  html += `</div></div>`;
+function renderPanel() {
+  const w = WEEKS[state.week - 1];
+  const d = daysOf(state.week)[state.day];
+  const panel = document.getElementById('panel');
 
-  // Mini block overview dots
-  html += `<div class="ci-block-grid">`;
-  CI_BLOCKS.forEach(blk => {
-    const blkLabels = {b1:'Block 1',b2:'Block 2',b3:'Block 3',b4:'Block 4'};
-    const done = ciBlockDone(blk);
-    html += `<div class="ci-block-row">`;
-    html += `<div class="ci-block-name">${blkLabels[blk]}</div>`;
-    html += `<div class="ci-dots">`;
-    CI_PAIRS.forEach(pairIdx => {
-      const weekNums = CI_PROG_WEEKS[blk][pairIdx];
-      html += `<div class="ci-week-pair">`;
-      [0,1].forEach(w => {
-        const key = ciKey(blk, pairIdx, 'd1', w); // use d1 as proxy — we show per-pair
-        // Actually show if ANY day in this block+pair+weekSlot is done
-        const anyDone = CI_DAYS.some(dd => !!ciState[ciKey(blk, pairIdx, dd, w)]);
-        const wkNum = weekNums[w];
-        const past = ciWeekIsPast(wkNum);
-        let dotCls = 'ci-dot';
-        if (anyDone) dotCls += ' done';
-        else if (past) dotCls += ' missed';
-        html += `<div class="${dotCls}" title="Wk ${wkNum}"></div>`;
+  if (d.kind === 'rest') { panel.innerHTML = renderRest(d); return; }
+  if (d.kind === 'race') { panel.innerHTML = d.ref === '10k' ? render10K() : (d.ref === 'hyrox' ? renderHyroxRace() : renderMarathon()); bindLogs(); return; }
+  if (d.kind === 'run')  { panel.innerHTML = renderRun(d.ref); bindLogs(); return; }
+  if (d.kind === 'hyrox'){ panel.innerHTML = renderHyrox(); bindLogs(); return; }
+
+  const s = LIFTS[d.ref], p = PHASES[w.ph];
+  let html = `<div class="session-head">
+    <div><div class="session-title">${s.title}</div><div class="session-goal">${s.goal}</div></div>
+    <div class="badges"><span class="badge hi">${s.duration}</span><span class="badge">Pyramid up</span><span class="badge">${p.reps}</span></div>
+  </div>`;
+  if (w.note) html += `<div class="notice">${w.note}</div>`;
+  if (s.notice) html += `<div class="notice">${s.notice}</div>`;
+  if (s.options) html += `<div class="opt-row">${s.options.map((o,i)=>`<button class="opt-btn ${i===state.opt?'active':''}" onclick="setOpt(${i})">${o}</button>`).join('')}</div>`;
+  html += renderTable(s, w.load, d.ref) + `<div class="note">${progressNote(w)}</div>`;
+  panel.innerHTML = html;
+  bindLogs();
+}
+
+function renderRest(d) {
+  if (state.week === 11 && d.k === 'thu') return `<div class="card flat">
+    <div class="card-title">Rest and kit check</div>
+    <div class="card-sub">Lay out race kit, shoes, grip and fuel today. Walk 20 minutes, eat normally, sleep early.</div>
+    <div class="note"><b>Priority:</b> sleep and carbohydrate. Tomorrow is the A-race.</div></div>`;
+  if (state.week === 14) return `<div class="card flat">
+    <div class="card-title">Recovery</div>
+    <div class="card-sub">Post-marathon. Walking, food, sleep. No running, no lifting, no plans.</div>
+    <div class="note"><b>Rule of thumb:</b> one easy day per mile raced before any hard effort. That takes you into January — which is the right time to plan what comes next.</div></div>`;
+  return `<div class="card flat">
+    <div class="card-title">Rest</div>
+    <div class="card-sub">Full rest. Optional: 15 minutes of mobility, or a 20–30 minute walk.</div>
+    <div class="note"><b>Priority:</b> sleep, protein at 158 g, hydration. This day is part of the programme, not a gap in it.</div></div>`;
+}
+
+function renderTable(s, load, ref) {
+  const ex = s.ex.filter(e => e.opt === undefined || e.opt === state.opt);
+  let html = `<table class="ex-table"><thead><tr><th>Exercise</th><th style="text-align:right">Planned and logged</th></tr></thead><tbody>`;
+  ex.forEach((e, i) => {
+    const sets = setsFor(e, load);
+    html += `<tr><td><span class="ex-name">${e.name}</span>${e.tag?`<span class="ex-tag">${e.tag}</span>`:''}
+      <div class="ex-note ${e.tip?'tip':''}">${e.note}</div></td><td style="text-align:right">`;
+    if (sets.simple) {
+      html += `<span class="simple">${sets.simple}</span>`;
+    } else {
+      html += `<div class="set-grid"><div class="set-line hdr"><span></span><span style="text-align:center">plan kg</span><span style="text-align:center">reps</span><span style="text-align:center">actual kg</span><span style="text-align:center">reps</span></div>`;
+      sets.rows.forEach((r, j) => {
+        const key = `w${state.week}:${ref}:${state.opt}:${i}:${j}`;
+        const top = j === sets.rows.length - 1 && ['l1','l2','l3'].includes(load);
+        html += `<div class="set-line"><span class="sl-label">S${j+1}</span>
+          <span class="sl-plan ${top?'top':''}">${r.w}</span>
+          <span class="sl-reps">× ${r.r}</span>
+          <input class="log" type="text" inputmode="decimal" aria-label="Actual weight set ${j+1}" data-k="${key}:kg" value="${getLog(key+':kg')}">
+          <input class="log" type="text" inputmode="numeric" aria-label="Actual reps set ${j+1}" data-k="${key}:rp" value="${getLog(key+':rp')}"></div>`;
       });
       html += `</div>`;
-      if (pairIdx < 2) html += `<div style="width:4px;"></div>`;
-    });
-    html += `</div>`;
-    html += `<div class="ci-block-count">${done}/18</div>`;
-    html += `</div>`;
+    }
+    html += `</td></tr>`;
   });
-  html += `</div>`;
-  html += `</div>`;
-  return html;
+  return html + `</tbody></table>`;
 }
 
-function ciToggle(key) {
-  ciState[key] = !ciState[key];
-  ciSaveState(ciState);
-  ciUpdateStrip();
-  renderSession(); // re-render to update button state
+function progressNote(w) {
+  return {
+    p1: '<b>Progression:</b> add 2.5 kg to the top set each week if every rep was clean. If you missed reps, repeat the same load.',
+    p2: '<b>Progression:</b> add 2.5 kg across all sets weekly. Rest 2–3 minutes on squat, bench and pull-up top sets. Running is the limiter now — if a lift feels heavy, it is fatigue, not weakness.',
+    p3: '<b>Intent over load:</b> same weights as late phase 2, moved fast. Stop every set two reps short of failure.',
+    taper: '<b>Taper rule:</b> two sets at roughly 70% of week 9, nothing to failure. You cannot get fitter this week, only more tired.',
+    race: '<b>Activation only:</b> two light sets to feel switched on. If you are unsure whether to do a set, do not do it.',
+    bridge: '<b>Bridge rule:</b> lifting is maintenance now. Two sets at about 55%, and no session should leave the legs sore — the marathon is the only target.',
+    marathon: '<b>No lifting this week.</b>',
+  }[w.ph];
 }
 
-renderQuoteBanner();
-renderAll();
-ciUpdateStrip();
-
-// ══════════════════════════════════════════
-// MILESTONE TRACKER
-// ══════════════════════════════════════════
-const MS_SECTIONS = [
-  {
-    id: 'running', cls: 'ms-running', dot: '#8bdfb0', color: '#8bdfb0', title: 'Running',
-    milestones: [
-      { id: 'r1', name: 'First 5 km continuous run', note: 'You can already do 3 km — this is your first big step up. Easy pace, no stopping.', tag: 'Wk 2', month: 1 },
-      { id: 'r2', name: 'First 8 km continuous run', note: 'Block 1 summit. Zone 2 pace throughout. This is where the aerobic engine really opens up.', tag: 'Wk 5–6', month: 1 },
-      { id: 'r3', name: 'First 10 km continuous run', note: 'Block 2 entry. You are now a runner. No asterisks.', tag: 'Wk 8', month: 2 },
-      { id: 'r4', name: '5 km at sub 6:30/km pace', note: 'Not a jog — a proper tempo effort. This is Hyrox run pace. Lock it in.', tag: 'Wk 10', month: 2 },
-      { id: 'r5', name: 'First 12 km continuous run', note: 'Almost half-marathon distance. Your Hyrox run endurance is now well above race demand.', tag: 'Wk 12', month: 3 },
-      { id: 'r6', name: '10 km at sub 6:45/km pace', note: 'Sustained race pace for 10 km. This is the aerobic benchmark that means race day running is no longer a worry.', tag: 'Wk 14', month: 3 },
-      { id: 'r7', name: '5 km at sub 6:00/km — run like a BOSS', note: 'Fast and controlled. This pace in training means race pace feels comfortable on the day.', tag: 'Wk 17', month: 4 },
-      { id: 'r8', name: 'First 15 km run', note: 'Block 4 peak. You are carrying a large buffer above race demand. Taper starts now.', tag: 'Wk 20', month: 5 },
-    ]
-  },
-  {
-    id: 'strength', cls: 'ms-strength', dot: '#f080b0', color: '#f080b0', title: 'Strength',
-    milestones: [
-      { id: 's1', name: 'First 20 wall balls unbroken at race weight (6 kg)', note: 'To a 9 ft mark. Rest at the top, not the bottom. This is the one that gasses most people — own it early.', tag: 'Wk 3', month: 1 },
-      { id: 's2', name: 'First 15 burpee broad jumps — full standard', note: 'No step-backs, full jump on every rep. The most exhausting Hyrox station for most athletes — start here.', tag: 'Wk 4', month: 1 },
-      { id: 's3', name: '40 m farmers carry at race weight (16 kg/hand)', note: 'You have 20 m already — double it. Grip strong, shoulders packed, chin up.', tag: 'Wk 5', month: 1 },
-      { id: 's4', name: 'Farmers carry at 24 kg/hand for 30 m', note: 'Above race weight. If you can carry heavy in training, race weight feels easy on the day.', tag: 'Wk 9', month: 2 },
-      { id: 's5', name: '30 sandbag lunges without putting it down', note: 'Race is 50 m per person in doubles. 30 reps non-stop is your training benchmark — event weight sandbag.', tag: 'Wk 11', month: 3 },
-      { id: 's6', name: '3 × 20 wall balls unbroken — back to back sets', note: 'Race standard is 75 wall balls per person in doubles. 3 sets of 20 with 60s rest proves you are ready.', tag: 'Wk 15', month: 4 },
-    ]
-  },
-  {
-    id: 'hyrox', cls: 'ms-hyrox', dot: '#f0c060', color: '#f0c060', title: 'Hyrox',
-    milestones: [
-      { id: 'h1', name: 'SkiErg 400 m under 2:00', note: 'You can do 400 m in 2:30 already — sub 2:00 is the race-competitive target. 30 seconds off your current time.', tag: 'Wk 4', month: 1 },
-      { id: 'h2', name: 'Row 500 m under 2:30', note: 'You can row 200 m in 2:30 — now extend to 500 m at the same effort. Race split for doubles is 500 m each.', tag: 'Wk 6', month: 1 },
-      { id: 'h3', name: 'First half-Hyrox completed — carry + lunge stations', note: '4 × 1 km: 400 m SkiErg, 400 m Row, 40 m Farmers Carry (16 kg), 25 m Sandbag Lunge between each run.', tag: 'Wk 7', month: 2 },
-      { id: 'h4', name: 'First half-Hyrox completed — sled + burpee + wall ball', note: '4 × 1 km: Sled Push 40 m (80 kg), Sled Pull 40 m (60 kg), 15 Burpee Broad Jumps, 20 Wall Balls between each run.', tag: 'Wk 8', month: 2 },
-      { id: 'h5', name: 'Both half-Hyrox formats under 45 min each', note: 'Timed benchmarks. Log both times — these are your Block 2 anchors to beat in Block 3.', tag: 'Wk 11–12', month: 3 },
-      { id: 'h6', name: 'First full doubles simulation — all 8 stations', note: 'Full race format with your partner. Log your time. This is the most important training session of the programme.', tag: 'Wk 14', month: 3 },
-      { id: 'h7', name: 'Doubles simulation in under 2:15', note: 'Competitive doubles target for Singapore. Sub 2:15 means you are racing, not surviving.', tag: 'Wk 17', month: 4 },
-      { id: 'h8', name: 'Beat your Month 3 doubles time', note: 'Block 4 peak session. Proof that the taper is working and fitness has peaked.', tag: 'Wk 19–20', month: 5 },
-      { id: 'h9', name: 'Station split strategy locked in', note: 'Final decision — who does what, in what order. Written down. No more changes.', tag: 'Wk 20', month: 5 },
-    ]
-  },
-  {
-    id: 'heart', cls: 'ms-heart', dot: '#c8f060', color: '#c8f060', title: 'Mindset',
-    milestones: [
-      { id: 'm1', name: 'Three consecutive weeks of 3× training', note: 'The habit is the hardest part. Three weeks in, it becomes who you are.', tag: 'Wk 1–3', month: 1 },
-      { id: 'm2', name: 'Sled session — Pull 60 kg × 20 m + Push 80 kg × 20 m', note: 'Complete both in a single session without failing a set. Sled is the great humbler — own it.', tag: 'Wk 6', month: 2 },
-      { id: 'm3', name: "Looked back at week 1 and couldn't believe the gap", note: "Count your sessions. Add up the kilometres. Screenshot it. The number will surprise you.", tag: 'Wk 14–16', month: 3 },
-      { id: 'm4', name: 'A session completed the week of a hard life moment', note: 'Work stress, bad sleep, a difficult week — and you still showed up. That is the one that counts most.', tag: 'Any time', month: 4 },
-      { id: 'm5', name: "Standing on the start line of Hyrox Singapore", note: "Six months ago this was a goal. Today it is real. You earned this start line.", tag: 'Nov 28', month: 6 },
-    ]
-  },
-];
-
-
-const MONTH_META = [
-  { month: 1, label: 'Month 1', dates: '1 Jun – 28 Jun 2026', gift: '🤿', giftName: 'A Full Day of Diving', giftDesc: 'Your reward for showing up every session in Month 1. One full day of diving — earned.' },
-  { month: 2, label: 'Month 2', dates: '29 Jun – 26 Jul 2026', gift: '🍽️', giftName: 'A Dinner Date', giftDesc: 'Seven weeks of training done. Time to celebrate over a proper dinner — just the two of you.' },
-  { month: 3, label: 'Month 3', dates: '27 Jul – 23 Aug 2026', gift: '🕶️', giftName: 'New Sunglasses', giftDesc: 'Halfway through the programme. Halfway to race day. You deserve something new to run in.' },
-  { month: 4, label: 'Month 4', dates: '24 Aug – 20 Sep 2026', gift: '🌸', giftName: 'New Perfume', giftDesc: 'You have been showing up for months. Now something that is just for you.' },
-  { month: 5, label: 'Month 5', dates: '21 Sep – 18 Oct 2026', gift: '👜', giftName: 'New Bag', giftDesc: 'The hardest month of training is done. Race day is close. You have earned this.' },
-  { month: 6, label: 'Month 6', dates: '19 Oct – 15 Nov 2026', gift: '📿', giftName: 'New Necklace', giftDesc: 'You made it to race week. Every session, every mile, every station — this is what it was all for.' },
-];
-
-const MS_EMOJIS = ['🎉','⚡','🔥','✨','💪','🌟','🏃‍♀️','🙌'];
-const MS_KEY = 'hyrox_milestones_v1';
-
-function msLoadState() { try { return JSON.parse(localStorage.getItem(MS_KEY)) || {}; } catch(e) { return {}; } }
-function msSaveState(s) { try { localStorage.setItem(MS_KEY, JSON.stringify(s)); } catch(e) {} }
-let msState = msLoadState();
-
-function msAllMilestones() { return MS_SECTIONS.flatMap(s => s.milestones); }
-
-// Returns true if today's date is within the month's date window
-// Months are sequential 4-week blocks starting from programme start
-function msIsMonthUnlocked(monthNum) {
-  // Returns true only if today falls WITHIN the month's training window
-  // Use date-only strings to avoid timezone/time-component issues
-  const PROG_START_MS = new Date(2026, 5, 1);
-  const monthStart = new Date(PROG_START_MS);
-  monthStart.setDate(monthStart.getDate() + (monthNum - 1) * 28);
-  monthStart.setHours(0, 0, 0, 0);
-  const monthEnd = new Date(monthStart);
-  monthEnd.setDate(monthEnd.getDate() + 27);
-  monthEnd.setHours(23, 59, 59, 999); // end of the last day, not start
-  const now = Date.now();
-  return now >= monthStart.getTime() && now <= monthEnd.getTime();
-}
-
-function msIsCurrentMonth(monthNum) {
-  const PROG_START_MS = new Date(2026, 5, 1);
-  const monthStart = new Date(PROG_START_MS);
-  monthStart.setDate(monthStart.getDate() + (monthNum - 1) * 28);
-  const monthEnd = new Date(monthStart);
-  monthEnd.setDate(monthEnd.getDate() + 27);
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  return today >= monthStart && today <= monthEnd;
-}
-
-function msMonthMilestones(monthNum) {
-  if (monthNum === 6) return []; // race day only
-  return msAllMilestones().filter(m => m.month === monthNum);
-}
-
-function msMonthComplete(monthNum) {
-  if (monthNum === 6) return !!msState['__race__'];
-  return msMonthMilestones(monthNum).every(m => !!msState[m.id]);
-}
-
-function msUpdateProgress() {
-  const all = msAllMilestones();
-  const total = all.length + 1;
-  const done = all.filter(m => msState[m.id]).length + (msState['__race__'] ? 1 : 0);
-  const pct = Math.round((done / total) * 100);
-  const fill = document.getElementById('msProgressFill');
-  const lbl = document.getElementById('msDoneCount');
-  const tot = document.getElementById('msTotalCount');
-  if (fill) fill.style.width = pct + '%';
-  if (lbl) lbl.textContent = done;
-  if (tot) tot.textContent = total;
-}
-
-function msSpawnBurst(x, y) {
-  const emojis = ['🎉','⚡','🔥','✨','💪','🌟','🏃‍♀️','🙌'];
-  const emoji = emojis[Math.floor(Math.random() * emojis.length)];
-  const el = document.createElement('div');
-  el.className = 'ms-burst';
-  el.textContent = emoji;
-  el.style.left = (x - 12) + 'px';
-  el.style.top = (y - 12) + 'px';
-  document.body.appendChild(el);
-  setTimeout(() => el.remove(), 900);
-}
-
-function msToggle(id, monthNum, event) {
-  const nowChecked = !msState[id]; // capture BEFORE mutation
-  msState[id] = nowChecked;
-  msSaveState(msState);
-  msRender();
-  msUpdateProgress();
-  if (nowChecked && event) {
-    msSpawnBurst(event.clientX, event.clientY);
-    // Check if this completion finishes the month — use captured monthNum
-    const capturedMonth = monthNum;
-    setTimeout(() => msCheckMonthComplete(capturedMonth), 400);
-  }
-}
-
-function msCheckMonthComplete(monthNum) {
-  if (!msMonthComplete(monthNum)) return;
-  // msIsMonthUnlocked now correctly returns true ONLY if today is within the month window
-  if (!msIsMonthUnlocked(monthNum)) {
-    // Month is complete but today is not within that month — they're cheating
-    msShowCheatPopup();
-    return;
-  }
-  msShowGift(monthNum);
-}
-
-function msShowCheatPopup() {
-  const overlay = document.createElement('div');
-  overlay.className = 'ms-overlay';
-  overlay.innerHTML = `
-    <div class="ms-popup ms-cheat-popup">
-      <div class="ms-popup-icon">🙈</div>
-      <div class="ms-popup-title">Not so fast!</div>
-      <div class="ms-popup-msg">Do not cheat to find your gift, have some patience!</div>
-      <button class="ms-popup-btn" onclick="this.closest('.ms-overlay').remove()">OK, I'll wait 😅</button>
-    </div>`;
-  document.body.appendChild(overlay);
-}
-
-function msShowGift(monthNum) {
-  // Only show if not already shown this session
-  const giftKey = '__gift_shown_' + monthNum + '__';
-  if (msState[giftKey]) return;
-  msState[giftKey] = true;
-  msSaveState(msState);
-
-  const meta = MONTH_META.find(m => m.month === monthNum);
-  if (!meta) return;
-
-  const overlay = document.createElement('div');
-  overlay.className = 'ms-overlay';
-  overlay.innerHTML = `
-    <div class="ms-popup ms-gift-popup">
-      <div class="ms-gift-burst">
-        <div class="ms-gift-icon">${meta.gift}</div>
-      </div>
-      <div class="ms-popup-title">Month ${monthNum} Complete! 🎉</div>
-      <div class="ms-gift-name">${meta.giftName}</div>
-      <div class="ms-popup-msg">${meta.giftDesc}</div>
-      <button class="ms-popup-btn ms-gift-btn" onclick="this.closest('.ms-overlay').remove()">Thank you! 🥹</button>
-    </div>`;
-  document.body.appendChild(overlay);
-
-  // Big burst
-  for (let i = 0; i < 10; i++) {
-    setTimeout(() => {
-      msSpawnBurst(
-        window.innerWidth * 0.2 + Math.random() * window.innerWidth * 0.6,
-        window.innerHeight * 0.3 + Math.random() * 200
-      );
-    }, i * 100);
-  }
-}
-
-function msToggleRace() {
-  const was = !!msState['__race__'];
-  // Check if trying to complete race before month 6 starts
-  if (!was) {
-    const PROG_START_MS = new Date(2026, 5, 1);
-    const month6Start = new Date(PROG_START_MS);
-    month6Start.setDate(month6Start.getDate() + 5 * 28);
-    const today = new Date();
-    today.setHours(0,0,0,0);
-    if (today < month6Start) {
-      msShowCheatPopup();
-      return;
-    }
-  }
-  msState['__race__'] = !was;
-  msSaveState(msState);
-  const card = document.getElementById('msRaceCard');
-  card.classList.toggle('ms-done', !!msState['__race__']);
-  card.querySelector('.ms-race-title').textContent = msState['__race__']
-    ? '✓ Race Day Complete — You Did It.'
-    : 'Race Day — Hyrox Doubles Finish Line';
-  if (msState['__race__']) {
-    for (let i = 0; i < 8; i++) {
-      setTimeout(() => msSpawnBurst(
-        window.innerWidth * 0.2 + Math.random() * window.innerWidth * 0.6,
-        window.innerHeight * 0.3 + Math.random() * 200
-      ), i * 120);
-    }
-    setTimeout(() => msShowGift(6), 800);
-  }
-  msUpdateProgress();
-}
-
-function msReset() {
-  if (!confirm('Reset all milestones?')) return;
-  msState = {};
-  msSaveState(msState);
-  msRender();
-  msUpdateProgress();
-}
-
-function msRender() {
-  const container = document.getElementById('msContainer');
-  if (!container) return;
-  container.innerHTML = '';
-
-  // Group milestones by month
-  for (let monthNum = 1; monthNum <= 6; monthNum++) {
-    const meta = MONTH_META.find(m => m.month === monthNum);
-    const monthMs = monthNum < 6
-      ? msAllMilestones().filter(m => m.month === monthNum)
-      : []; // month 6 is race day only
-    const doneMsCount = monthMs.filter(m => msState[m.id]).length + (monthNum === 6 && msState['__race__'] ? 1 : 0);
-    const totalMs = monthNum < 6 ? monthMs.length : 1;
-    const allDone = msMonthComplete(monthNum);
-    const unlocked = msIsMonthUnlocked(monthNum);
-
-    const monthEl = document.createElement('div');
-    monthEl.className = 'ms-month' + (allDone && unlocked ? ' ms-month-complete' : '');
-
-    // Month header
-    monthEl.innerHTML = `
-      <div class="ms-month-header">
-        <div class="ms-month-info">
-          <div class="ms-month-label">${meta.label}</div>
-          <div class="ms-month-dates">${meta.dates}</div>
-        </div>
-        <div class="ms-month-count ${allDone && unlocked ? 'ms-count-done' : ''}">
-          ${doneMsCount} / ${totalMs}
-        </div>
-      </div>`;
-
-    // Gift reveal box
-    const giftEl = document.createElement('div');
-    if (allDone && unlocked) {
-      giftEl.className = 'ms-gift-box ms-gift-unlocked';
-      giftEl.innerHTML = `
-        <span class="ms-gift-emoji">${meta.gift}</span>
-        <div>
-          <div class="ms-gift-label">Gift Unlocked</div>
-          <div class="ms-gift-reveal-name">${meta.giftName}</div>
-        </div>`;
-    } else {
-      giftEl.className = 'ms-gift-box ms-gift-locked';
-      const PROG_START_RENDER = new Date(2026, 5, 1);
-      const mStart = new Date(PROG_START_RENDER);
-      mStart.setDate(mStart.getDate() + (monthNum - 1) * 28);
-      const today_r = new Date(); today_r.setHours(0,0,0,0);
-      const monthStarted = today_r >= mStart;
-      let lockMsg;
-      if (!monthStarted) {
-        lockMsg = 'Your gift will unlock when this month begins';
-      } else if (allDone && !unlocked) {
-        lockMsg = 'You completed this too early — gifts must be earned within the month!';
-      } else {
-        lockMsg = 'Complete all ' + totalMs + ' milestones this month to unlock';
-      }
-      giftEl.innerHTML = `<span class="ms-gift-emoji">🎁</span><div class="ms-gift-label">WAITING TO BE UNLOCKED!</div>`;
-    }
-    monthEl.appendChild(giftEl);
-
-    // Milestones for this month
-    if (monthNum < 6) {
-      const listEl = document.createElement('div');
-      listEl.className = 'ms-month-list';
-
-      // Group by section type within the month
-      const sectionGroups = {};
-      MS_SECTIONS.forEach(sec => {
-        const secMs = sec.milestones.filter(m => m.month === monthNum);
-        if (secMs.length > 0) sectionGroups[sec.id] = { sec, ms: secMs };
-      });
-
-      Object.values(sectionGroups).forEach(({ sec, ms }) => {
-        ms.forEach(m => {
-          const done = !!msState[m.id];
-          const item = document.createElement('div');
-          item.className = 'milestone-item ' + sec.cls + (done ? ' ms-done' : '');
-          item.innerHTML = `
-            <div class="mi-check">
-              <svg class="mi-checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none">
-                <path d="M1 4L4 7.5L10 1" stroke="#0e0f0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="mi-content">
-              <div class="mi-name">${m.name}</div>
-              <div class="mi-note">${m.note}</div>
-            </div>
-            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;">
-              <div class="mi-tag">${m.tag}</div>
-              <div class="mi-type-dot" style="width:6px;height:6px;border-radius:50%;background:${sec.dot};align-self:flex-end;"></div>
-            </div>`;
-          item.addEventListener('click', (e) => msToggle(m.id, monthNum, e));
-          listEl.appendChild(item);
-        });
-      });
-
-      monthEl.appendChild(listEl);
-    } else {
-      // Month 6 — race day card inline
-      const raceInline = document.createElement('div');
-      raceInline.className = 'ms-race-card' + (msState['__race__'] ? ' ms-done' : '');
-      raceInline.id = 'msRaceCard';
-      raceInline.onclick = msToggleRace;
-      raceInline.innerHTML = `
-        <span class="ms-race-icon">🏆</span>
-        <div class="ms-race-title">${msState['__race__'] ? '✓ Race Day Complete — You Did It.' : 'Race Day — Hyrox Doubles Finish Line'}</div>
-        <div class="ms-race-sub">November 28, 2026 · The one that makes everything worth it</div>`;
-      monthEl.appendChild(raceInline);
-    }
-
-    container.appendChild(monthEl);
-  }
-}
-
-function switchView(tab) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.querySelectorAll('.top-nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('view-' + tab).classList.add('active');
-  document.querySelector('.top-nav-btn[data-tab="' + tab + '"]').classList.add('active');
-  if (tab === 'milestones') { msRender(); msUpdateProgress(); }
-  if (tab === 'warmup' || tab === 'plyo') { /* no extra init needed */ }
-}
-
-</script>
-</div>
-
-<!-- ── Milestones view ── -->
-<div class="view" id="view-milestones">
-  <div class="ms-intro">
-    <div class="header-eyebrow">// your journey</div>
-    <h2 style="font-size:22px;font-weight:300;letter-spacing:-0.02em;line-height:1.2;">Milestone <span style="color:var(--pink);font-weight:500;">Tracker</span></h2>
-    <p class="ms-subtitle">Tap each milestone when you've earned it. Every tick is proof of what you're becoming.</p>
-    <div class="ms-progress-wrap">
-      <div class="ms-progress-track">
-        <div class="ms-progress-fill" id="msProgressFill"></div>
-      </div>
-      <div class="ms-progress-label"><b id="msDoneCount">0</b> / <span id="msTotalCount">0</span> achieved</div>
+function renderRun(ref) {
+  const r = (RUNS[state.week] || {})[ref], m = RUN_META[ref];
+  if (!r) return `<div class="card flat"><div class="card-title">No session</div><div class="card-sub">Nothing scheduled in this slot for week ${state.week}.</div></div>`;
+  const key = `w${state.week}:run:${ref}`;
+  return `<div class="card ${m.cls}">
+    <div class="card-title">${m.title}</div>
+    <div class="card-sub">${m.sub}</div>
+    <div class="specs">
+      <div class="spec"><div class="spec-l">Distance</div><div class="spec-v">${r[0]}</div></div>
+      <div class="spec"><div class="spec-l">Pace</div><div class="spec-v">${r[1]} <span class="spec-u">min/km</span></div></div>
+      <div class="spec" style="min-width:200px"><div class="spec-l">Session note</div><div class="spec-v" style="font-size:13px">${r[2]}</div></div>
     </div>
-  </div>
+    <div class="log-row">
+      <div class="log-field"><label>Actual distance</label><input class="log" type="text" data-k="${key}:dist" value="${getLog(key+':dist')}"></div>
+      <div class="log-field"><label>Actual pace</label><input class="log" type="text" data-k="${key}:pace" value="${getLog(key+':pace')}"></div>
+      <div class="log-field"><label>Avg HR</label><input class="log" type="text" data-k="${key}:hr" value="${getLog(key+':hr')}"></div>
+      <div class="log-field" style="flex:1;min-width:200px"><label>How it felt</label><input class="log" type="text" style="width:100%" data-k="${key}:feel" value="${getLog(key+':feel')}"></div>
+    </div>
+  </div>`;
+}
 
-  <div id="msContainer"></div>
+function renderHyrox() {
+  const h = HYROX[state.week];
+  if (!h) return `<div class="card flat"><div class="card-title">Rest</div><div class="card-sub">No Hyrox session this week.</div></div>`;
+  const key = `w${state.week}:hyrox`, timed = state.week === 6 || state.week === 8;
+  return `<div class="session-head">
+      <div><div class="session-title">${h.title}</div><div class="session-goal">${h.sub}</div></div>
+      <div class="badges"><span class="badge ${timed?'race':'hi'}">${timed?'Timed benchmark':'Saturday'}</span><span class="badge">Doubles format</span></div>
+    </div>
+    <div class="card ${timed?'hot':'warm'}">
+      <div class="block-list">${h.blocks.map(b=>`<div class="block"><div class="block-n">${b[0]}</div><div class="block-b">${b[1]}</div></div>`).join('')}</div>
+      <div class="note">${h.note}</div>
+      <div class="log-row">
+        ${timed?`<div class="log-field"><label>Total time</label><input class="log" type="text" data-k="${key}:time" value="${getLog(key+':time')}"></div>`:''}
+        <div class="log-field"><label>Weakest station</label><input class="log" type="text" data-k="${key}:weak" value="${getLog(key+':weak')}"></div>
+        <div class="log-field" style="flex:1;min-width:220px"><label>Notes for next week</label><input class="log" type="text" style="width:100%" data-k="${key}:notes" value="${getLog(key+':notes')}"></div>
+      </div>
+    </div>`;
+}
 
-  <div class="ms-footer">
-    <div class="ms-footer-note">Progress saves automatically in your browser</div>
-    <button class="ms-reset-btn" onclick="msReset()">Reset all</button>
-  </div>
-</div>
+function render10K() {
+  const key = 'race:10k';
+  return `<div class="session-head">
+      <div><div class="session-title">10K race</div>
+      <div class="session-goal">Sunday 27 September. A fitness test, not a season goal — it sets the pace reference for every tempo session that follows. Your 12 Sep 10 km at 7:00/km was Zone 2, so a race effort should come in near the hour.</div></div>
+      <div class="badges"><span class="badge race">Race day</span></div>
+    </div>
+    <div class="card hot">
+      <div class="card-title">Race plan</div>
+      <div class="card-sub">Target 1:00:00 at 6:00/km. Anything from 58 to 63 minutes is a useful data point.</div>
+      <div class="specs">
+        <div class="spec"><div class="spec-l">First 2 km</div><div class="spec-v">6:10 <span class="spec-u">min/km</span></div></div>
+        <div class="spec"><div class="spec-l">km 3–8</div><div class="spec-v">6:00 <span class="spec-u">min/km</span></div></div>
+        <div class="spec"><div class="spec-l">Last 2 km</div><div class="spec-v">5:50 <span class="spec-u">or faster</span></div></div>
+        <div class="spec"><div class="spec-l">Target</div><div class="spec-v">60 <span class="spec-u">minutes</span></div></div>
+      </div>
+      <div class="note"><b>After the race:</b> shift every pace zone in this plan by the same margin as your result. Finish under 58 and the marathon target moves to 4:40; over 63 and 5:10 is the honest number. <b>Logistics:</b> light carb meal 2.5 hours before, 15-minute warm-up with three strides, nothing new on the morning.</div>
+      <div class="log-row">
+        <div class="log-field"><label>Target time</label><input class="log" type="text" data-k="${key}:target" value="${getLog(key+':target')}"></div>
+        <div class="log-field"><label>Finish time</label><input class="log" type="text" data-k="${key}:actual" value="${getLog(key+':actual')}"></div>
+        <div class="log-field"><label>Avg pace</label><input class="log" type="text" data-k="${key}:pace" value="${getLog(key+':pace')}"></div>
+        <div class="log-field" style="flex:1;min-width:200px"><label>Notes</label><input class="log" type="text" style="width:100%" data-k="${key}:notes" value="${getLog(key+':notes')}"></div>
+      </div>
+    </div>`;
+}
 
+function renderHyroxRace() {
+  const key = 'race:hyrox';
+  return `<div class="session-head">
+      <div><div class="session-title">Hyrox Doubles — race day</div>
+      <div class="session-goal">Friday 27 November. Your A-race. Eleven weeks of work comes down to pacing the first two kilometres conservatively and not losing time on handovers.</div></div>
+      <div class="badges"><span class="badge race">A-race</span><span class="badge">Doubles</span></div>
+    </div>
+    <div class="card hot">
+      <div class="card-title">Race day plan</div>
+      <div class="card-sub">Nothing new today — kit, shoes, fuel and warm-up are the ones you tested in week 8.</div>
+      <div class="block-list">
+        <div class="block"><div class="block-n">3 h before</div><div class="block-b">Familiar carb-based meal, normal coffee, steady hydration</div></div>
+        <div class="block"><div class="block-n">45 min</div><div class="block-b">10 min easy jog, mobility, three strides, 20 easy wall balls to groove depth</div></div>
+        <div class="block"><div class="block-n">Run 1</div><div class="block-b">Deliberately 15–20 s/km slower than feels right. Every doubles pair goes out too hot</div></div>
+        <div class="block"><div class="block-n">Stations</div><div class="block-b">Call the handover early and loudly. Short frequent swaps beat heroic long blocks</div></div>
+        <div class="block"><div class="block-n">Wall balls</div><div class="block-b">Full depth, ball above the line, every rep. No-reps at station 8 end races</div></div>
+        <div class="block"><div class="block-n">After</div><div class="block-b">Eat and rehydrate within the hour. You have a marathon in 18 days — recovery starts on the day</div></div>
+      </div>
+      <div class="log-row">
+        <div class="log-field"><label>Target time</label><input class="log" type="text" data-k="${key}:target" value="${getLog(key+':target')}"></div>
+        <div class="log-field"><label>Finish time</label><input class="log" type="text" data-k="${key}:actual" value="${getLog(key+':actual')}"></div>
+        <div class="log-field" style="flex:1;min-width:240px"><label>Race notes</label><input class="log" type="text" style="width:100%" data-k="${key}:notes" value="${getLog(key+':notes')}"></div>
+      </div>
+    </div>`;
+}
 
+function renderMarathon() {
+  const key = 'race:mara';
+  return `<div class="session-head">
+      <div><div class="session-title">Marathon — race day</div>
+      <div class="session-goal">Tuesday 15 December, 42.195 km. Eighteen days after Hyrox, off two long runs over 26 km. The goal is to finish well, and the only way to do that is to start slowly.</div></div>
+      <div class="badges"><span class="badge mara">Race day</span><span class="badge">Target 4:50</span></div>
+    </div>
+    <div class="card mara">
+      <div class="card-title">Pacing plan</div>
+      <div class="card-sub">Even splits at 6:50/km gives 4:48. The first 5 km is where this race is won or lost.</div>
+      <div class="specs">
+        <div class="spec"><div class="spec-l">km 1–5</div><div class="spec-v">7:00 <span class="spec-u">min/km</span></div></div>
+        <div class="spec"><div class="spec-l">km 5–32</div><div class="spec-v">6:50 <span class="spec-u">min/km</span></div></div>
+        <div class="spec"><div class="spec-l">km 32–42</div><div class="spec-v">6:50 <span class="spec-u">or run–walk 4:1</span></div></div>
+        <div class="spec"><div class="spec-l">Finish</div><div class="spec-v">4:48 <span class="spec-u">projected</span></div></div>
+      </div>
+      <div class="block-list">
+        <div class="block"><div class="block-n">3 h before</div><div class="block-b">The same breakfast you used before the 22 km on 6 Dec. Nothing new</div></div>
+        <div class="block"><div class="block-n">Fuel</div><div class="block-b">60 g carbs per hour from 45 minutes in — a gel every 35–40 min, started before you want one</div></div>
+        <div class="block"><div class="block-n">Fluid</div><div class="block-b">400–600 ml per hour with electrolytes. Non-negotiable in Singapore humidity</div></div>
+        <div class="block"><div class="block-n">If it unravels</div><div class="block-b">Switch to 4 min running, 1 min walking immediately. It is faster than fading and it still gets you the medal</div></div>
+      </div>
+      <div class="log-row">
+        <div class="log-field"><label>Target time</label><input class="log" type="text" data-k="${key}:target" value="${getLog(key+':target')}"></div>
+        <div class="log-field"><label>Finish time</label><input class="log" type="text" data-k="${key}:actual" value="${getLog(key+':actual')}"></div>
+        <div class="log-field"><label>Halfway split</label><input class="log" type="text" data-k="${key}:half" value="${getLog(key+':half')}"></div>
+        <div class="log-field" style="flex:1;min-width:220px"><label>Race notes</label><input class="log" type="text" style="width:100%" data-k="${key}:notes" value="${getLog(key+':notes')}"></div>
+      </div>
+    </div>`;
+}
+
+function bindLogs() {
+  document.querySelectorAll('input.log').forEach(i => i.addEventListener('input', e => setLog(e.target.dataset.k, e.target.value)));
+}
+
+function renderRefs() {
+  document.getElementById('paceBody').innerHTML = PACES.map(p =>
+    `<tr><td><strong style="font-weight:500">${p[0]}</strong></td><td class="p">${p[1]}</td><td>${p[2]}</td></tr>`).join('');
+  document.getElementById('stationBody').innerHTML = STATIONS.map((s,i) =>
+    `<tr><td class="n">${i+1}</td><td><strong style="font-weight:500">${s[0]}</strong></td><td>${s[1]}</td><td>${s[2]}</td></tr>`).join('');
+  document.getElementById('maraBody').innerHTML = MARA_REF.map(m =>
+    `<tr><td><strong style="font-weight:500">${m[0]}</strong></td><td>${m[1]}</td></tr>`).join('');
+}
+
+function setWeek(n) { state.week = n; state.day = 0; state.opt = 0; renderWeeks(); renderBanner(); renderDays(); renderPanel(); }
+function setDay(i) { state.day = i; state.opt = 0; renderDays(); renderPanel(); }
+function setOpt(i) { state.opt = i; renderPanel(); }
+
+(async function init() {
+  renderCountdowns();
+  renderRefs();
+  await loadLog();
+  renderWeeks(); renderBanner(); renderDays(); renderPanel();
+})();
+</script>
 </body>
 </html>
